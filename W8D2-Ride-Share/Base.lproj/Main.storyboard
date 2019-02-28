@@ -92,10 +92,10 @@
             </objects>
             <point key="canvasLocation" x="-721" y="132"/>
         </scene>
-        <!--View Controller-->
+        <!--Rides Booked View Controller-->
         <scene sceneID="Xsu-Hc-84F">
             <objects>
-                <viewController id="1kQ-kt-bpc" sceneMemberID="viewController">
+                <viewController id="1kQ-kt-bpc" customClass="RidesBookedViewController" customModule="W8D2_Ride_Share" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="x7A-93-OHE">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -232,10 +232,10 @@
             </objects>
             <point key="canvasLocation" x="777" y="1510"/>
         </scene>
-        <!--View Controller-->
+        <!--Booked Ride Details View Controller-->
         <scene sceneID="HVl-My-pUA">
             <objects>
-                <viewController id="qw6-o4-Ytn" sceneMemberID="viewController">
+                <viewController id="qw6-o4-Ytn" customClass="BookedRideDetailsViewController" customModule="W8D2_Ride_Share" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Nsw-Qi-roz">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -420,10 +420,10 @@
             </objects>
             <point key="canvasLocation" x="1478" y="1510"/>
         </scene>
-        <!--View Controller-->
+        <!--Rides Offered View Controller-->
         <scene sceneID="kL1-w6-Vt9">
             <objects>
-                <viewController id="t5I-0t-Van" sceneMemberID="viewController">
+                <viewController id="t5I-0t-Van" customClass="RidesOfferedViewController" customModule="W8D2_Ride_Share" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Vmk-K4-Pah">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -534,10 +534,10 @@
             </objects>
             <point key="canvasLocation" x="777" y="2185"/>
         </scene>
-        <!--View Controller-->
+        <!--Offered Ride Details View Controller-->
         <scene sceneID="BKw-vY-X1W">
             <objects>
-                <viewController id="UQt-Vz-Adv" sceneMemberID="viewController">
+                <viewController id="UQt-Vz-Adv" customClass="OfferedRideDetailsViewController" customModule="W8D2_Ride_Share" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Aej-Bj-k0l">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -734,10 +734,10 @@
             </objects>
             <point key="canvasLocation" x="1478" y="2185"/>
         </scene>
-        <!--View Controller-->
+        <!--Find Ride View Controller-->
         <scene sceneID="vvN-2k-DAv">
             <objects>
-                <viewController id="gL2-Ny-mbN" sceneMemberID="viewController">
+                <viewController id="gL2-Ny-mbN" customClass="FindRideViewController" customModule="W8D2_Ride_Share" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="EQc-hg-2nU">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -872,10 +872,10 @@
             </objects>
             <point key="canvasLocation" x="778" y="132"/>
         </scene>
-        <!--View Controller-->
+        <!--Available Rides View Controller-->
         <scene sceneID="dJL-Lq-tTN">
             <objects>
-                <viewController id="QrE-Re-Gbd" sceneMemberID="viewController">
+                <viewController id="QrE-Re-Gbd" customClass="AvailableRidesViewController" customModule="W8D2_Ride_Share" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="e8B-pD-GB7">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1013,10 +1013,10 @@
             </objects>
             <point key="canvasLocation" x="1477.5999999999999" y="131.78410794602701"/>
         </scene>
-        <!--View Controller-->
+        <!--Ride Details View Controller-->
         <scene sceneID="1rl-dC-R8u">
             <objects>
-                <viewController id="dgT-5w-1ah" sceneMemberID="viewController">
+                <viewController id="dgT-5w-1ah" customClass="RideDetailsViewController" customModule="W8D2_Ride_Share" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cJq-C1-EIi">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1200,10 +1200,10 @@
             </objects>
             <point key="canvasLocation" x="2189.5999999999999" y="131.78410794602701"/>
         </scene>
-        <!--View Controller-->
+        <!--Book Ride Confirmation View Controller-->
         <scene sceneID="9Pd-4F-zAd">
             <objects>
-                <viewController id="zPa-DA-Xtw" sceneMemberID="viewController">
+                <viewController id="zPa-DA-Xtw" customClass="BookRideConfirmationViewController" customModule="W8D2_Ride_Share" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="dpn-LA-L0L">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1285,10 +1285,10 @@
             </objects>
             <point key="canvasLocation" x="2846" y="130"/>
         </scene>
-        <!--View Controller-->
+        <!--Menu View Controller-->
         <scene sceneID="Ph3-dk-Qj3">
             <objects>
-                <viewController id="DGe-o0-boh" sceneMemberID="viewController">
+                <viewController id="DGe-o0-boh" customClass="MenuViewController" customModule="W8D2_Ride_Share" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Apv-TV-Scy">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1338,10 +1338,10 @@
             </objects>
             <point key="canvasLocation" x="42" y="132"/>
         </scene>
-        <!--View Controller-->
+        <!--Offer Ride View Controller-->
         <scene sceneID="tCw-5c-86p">
             <objects>
-                <viewController id="Wb3-4H-icj" sceneMemberID="viewController">
+                <viewController id="Wb3-4H-icj" customClass="OfferRideViewController" customModule="W8D2_Ride_Share" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="WPs-0u-0kf">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1495,10 +1495,10 @@
             </objects>
             <point key="canvasLocation" x="778" y="825"/>
         </scene>
-        <!--View Controller-->
+        <!--Profile View Controller-->
         <scene sceneID="3nY-lG-QX2">
             <objects>
-                <viewController id="DUt-bZ-DX9" sceneMemberID="viewController">
+                <viewController id="DUt-bZ-DX9" customClass="ProfileViewController" customModule="W8D2_Ride_Share" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="RJP-Y2-10X">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1620,10 +1620,10 @@
             </objects>
             <point key="canvasLocation" x="777" y="2860"/>
         </scene>
-        <!--View Controller-->
+        <!--Offer Ride Details View Controller-->
         <scene sceneID="tie-y0-VC5">
             <objects>
-                <viewController id="K7Y-Eo-2HH" sceneMemberID="viewController">
+                <viewController id="K7Y-Eo-2HH" customClass="OfferRideDetailsViewController" customModule="W8D2_Ride_Share" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="lLb-0J-cWV">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1750,10 +1750,10 @@
             </objects>
             <point key="canvasLocation" x="1478" y="829"/>
         </scene>
-        <!--View Controller-->
+        <!--Offer Ride Confirmation View Controller-->
         <scene sceneID="Zv5-vF-2Iy">
             <objects>
-                <viewController id="29J-32-PEq" sceneMemberID="viewController">
+                <viewController id="29J-32-PEq" customClass="OfferRideConfirmationViewController" customModule="W8D2_Ride_Share" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="lMJ-bB-LCv">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
