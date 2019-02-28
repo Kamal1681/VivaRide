@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="K7Y-Eo-2HH">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -1407,10 +1407,10 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SVi-X7-8ET">
-                                <rect key="frame" x="305" y="40" width="50" height="50"/>
+                                <rect key="frame" x="315" y="30" width="40" height="40"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="50" id="dns-xs-rvo"/>
-                                    <constraint firstAttribute="height" constant="50" id="u4q-qG-dTe"/>
+                                    <constraint firstAttribute="width" constant="40" id="dns-xs-rvo"/>
+                                    <constraint firstAttribute="height" constant="40" id="u4q-qG-dTe"/>
                                 </constraints>
                                 <state key="normal" title="Profile" image="profileDefaultPhoto"/>
                             </button>
@@ -1420,7 +1420,7 @@
                             <constraint firstItem="Bbp-Dg-FZL" firstAttribute="trailing" secondItem="SVi-X7-8ET" secondAttribute="trailing" constant="20" id="AAl-QI-GRv"/>
                             <constraint firstItem="ypz-AP-sb3" firstAttribute="centerY" secondItem="Apv-TV-Scy" secondAttribute="centerY" id="CFD-YO-zJC"/>
                             <constraint firstItem="ypz-AP-sb3" firstAttribute="centerX" secondItem="Apv-TV-Scy" secondAttribute="centerX" id="VSS-5B-T9I"/>
-                            <constraint firstItem="SVi-X7-8ET" firstAttribute="top" secondItem="Bbp-Dg-FZL" secondAttribute="top" constant="20" id="Ytn-m0-k29"/>
+                            <constraint firstItem="SVi-X7-8ET" firstAttribute="top" secondItem="Bbp-Dg-FZL" secondAttribute="top" constant="10" id="Ytn-m0-k29"/>
                             <constraint firstItem="Bbp-Dg-FZL" firstAttribute="trailing" secondItem="ypz-AP-sb3" secondAttribute="trailing" constant="20" id="ZIa-06-QJs"/>
                             <constraint firstItem="ypz-AP-sb3" firstAttribute="leading" secondItem="Bbp-Dg-FZL" secondAttribute="leading" constant="20" id="gUn-3C-wgJ"/>
                         </constraints>
@@ -1493,22 +1493,30 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Wzm-OU-fWT">
-                                <rect key="frame" x="20" y="377" width="285" height="30"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" textContentType="location"/>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oOF-8b-xQP">
-                                <rect key="frame" x="315" y="377" width="40" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="40" id="pyb-c6-qHq"/>
-                                </constraints>
-                                <state key="normal" title="Add"/>
-                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="iYb-z5-qGz">
+                                <rect key="frame" x="20" y="377" width="335" height="30"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Wzm-OU-fWT">
+                                        <rect key="frame" x="0.0" y="0.0" width="285" height="30"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" textContentType="location"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oOF-8b-xQP">
+                                        <rect key="frame" x="295" y="0.0" width="40" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="40" id="pyb-c6-qHq"/>
+                                        </constraints>
+                                        <state key="normal" title="Add"/>
+                                    </button>
+                                </subviews>
+                            </stackView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Fb4-jn-fbt" userLabel="Stopovers Table View">
                                 <rect key="frame" x="20" y="417" width="335" height="190"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="190" id="C33-gI-Grp"/>
+                                </constraints>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="35" id="FdM-fR-fc1" customClass="StopoversTableViewCell" customModule="W8D2_Ride_Share" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="335" height="35"/>
@@ -1535,7 +1543,7 @@
                                 </prototypes>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dKK-B5-IG6">
-                                <rect key="frame" x="156.5" y="617" width="62" height="30"/>
+                                <rect key="frame" x="20" y="617" width="335" height="30"/>
                                 <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="15"/>
                                 <state key="normal" title="Continue"/>
                             </button>
@@ -1567,32 +1575,31 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="oOF-8b-xQP" firstAttribute="leading" secondItem="Wzm-OU-fWT" secondAttribute="trailing" constant="10" id="2C3-9g-a7q"/>
                             <constraint firstItem="HaD-hZ-fUd" firstAttribute="top" secondItem="WFf-sr-usj" secondAttribute="bottom" constant="10" id="4d3-BB-vvH"/>
                             <constraint firstItem="WFf-sr-usj" firstAttribute="top" secondItem="9m0-kS-exG" secondAttribute="bottom" constant="10" id="8lB-GN-0tl"/>
                             <constraint firstItem="KUO-6X-Utz" firstAttribute="top" secondItem="ygS-mu-NMR" secondAttribute="top" constant="10" id="9yA-0s-0hV"/>
+                            <constraint firstItem="dKK-B5-IG6" firstAttribute="leading" secondItem="ygS-mu-NMR" secondAttribute="leading" constant="20" id="BcQ-he-x3o"/>
                             <constraint firstItem="4W6-Sh-a4a" firstAttribute="leading" secondItem="ygS-mu-NMR" secondAttribute="leading" constant="20" id="EQQ-TH-gXt"/>
                             <constraint firstItem="ygS-mu-NMR" firstAttribute="trailing" secondItem="9m0-kS-exG" secondAttribute="trailing" constant="20" id="EdE-li-fDG"/>
+                            <constraint firstItem="iYb-z5-qGz" firstAttribute="leading" secondItem="ygS-mu-NMR" secondAttribute="leading" constant="20" id="Ee1-S1-0gn"/>
                             <constraint firstItem="WFf-sr-usj" firstAttribute="leading" secondItem="ygS-mu-NMR" secondAttribute="leading" constant="20" id="F5a-EI-oyV"/>
                             <constraint firstItem="ygS-mu-NMR" firstAttribute="trailing" secondItem="HaD-hZ-fUd" secondAttribute="trailing" constant="20" id="Jqm-N8-v9w"/>
                             <constraint firstItem="KUO-6X-Utz" firstAttribute="leading" secondItem="ygS-mu-NMR" secondAttribute="leading" constant="20" id="Mwl-Cw-ftn"/>
-                            <constraint firstItem="dKK-B5-IG6" firstAttribute="top" secondItem="Fb4-jn-fbt" secondAttribute="bottom" constant="10" id="SCn-dV-0Gu"/>
-                            <constraint firstItem="Fb4-jn-fbt" firstAttribute="top" secondItem="Wzm-OU-fWT" secondAttribute="bottom" constant="10" id="Tyl-ou-k9o"/>
-                            <constraint firstItem="ygS-mu-NMR" firstAttribute="bottom" secondItem="dKK-B5-IG6" secondAttribute="bottom" constant="20" id="X1x-ZA-exz"/>
+                            <constraint firstItem="Fb4-jn-fbt" firstAttribute="top" secondItem="iYb-z5-qGz" secondAttribute="bottom" constant="10" id="Yih-fv-y0z"/>
+                            <constraint firstItem="ygS-mu-NMR" firstAttribute="trailing" secondItem="iYb-z5-qGz" secondAttribute="trailing" constant="20" id="Zyl-YD-oc7"/>
                             <constraint firstItem="Fb4-jn-fbt" firstAttribute="leading" secondItem="ygS-mu-NMR" secondAttribute="leading" constant="20" id="baM-O8-2Sx"/>
-                            <constraint firstItem="Wzm-OU-fWT" firstAttribute="leading" secondItem="ygS-mu-NMR" secondAttribute="leading" constant="20" id="cth-ZT-Wbl"/>
                             <constraint firstItem="9m0-kS-exG" firstAttribute="top" secondItem="KUO-6X-Utz" secondAttribute="bottom" constant="5" id="dgX-LI-c5z"/>
                             <constraint firstItem="ygS-mu-NMR" firstAttribute="trailing" secondItem="Fb4-jn-fbt" secondAttribute="trailing" constant="20" id="fn1-Wc-eXY"/>
+                            <constraint firstItem="ygS-mu-NMR" firstAttribute="trailing" secondItem="dKK-B5-IG6" secondAttribute="trailing" constant="20" id="hUU-SH-rbS"/>
+                            <constraint firstItem="dKK-B5-IG6" firstAttribute="top" secondItem="Fb4-jn-fbt" secondAttribute="bottom" constant="10" id="kBi-2g-28U"/>
                             <constraint firstItem="HaD-hZ-fUd" firstAttribute="leading" secondItem="ygS-mu-NMR" secondAttribute="leading" constant="20" id="kvK-j1-vyi"/>
                             <constraint firstItem="4W6-Sh-a4a" firstAttribute="top" secondItem="HaD-hZ-fUd" secondAttribute="bottom" constant="10" id="nOq-V8-4hx"/>
-                            <constraint firstItem="oOF-8b-xQP" firstAttribute="top" secondItem="4W6-Sh-a4a" secondAttribute="bottom" constant="10" id="pBa-A5-Eyv"/>
                             <constraint firstItem="ygS-mu-NMR" firstAttribute="trailing" secondItem="4W6-Sh-a4a" secondAttribute="trailing" constant="20" id="qYI-N3-9fV"/>
                             <constraint firstItem="ygS-mu-NMR" firstAttribute="trailing" secondItem="KUO-6X-Utz" secondAttribute="trailing" constant="20" id="sbB-Ut-OE4"/>
                             <constraint firstItem="dKK-B5-IG6" firstAttribute="centerX" secondItem="WPs-0u-0kf" secondAttribute="centerX" id="tl8-s4-sRb"/>
-                            <constraint firstItem="ygS-mu-NMR" firstAttribute="trailing" secondItem="oOF-8b-xQP" secondAttribute="trailing" constant="20" id="u4h-uF-ONb"/>
+                            <constraint firstItem="iYb-z5-qGz" firstAttribute="top" secondItem="4W6-Sh-a4a" secondAttribute="bottom" constant="10" id="trp-Z5-5mt"/>
                             <constraint firstItem="ygS-mu-NMR" firstAttribute="trailing" secondItem="WFf-sr-usj" secondAttribute="trailing" constant="20" id="v2J-HZ-gQb"/>
                             <constraint firstItem="9m0-kS-exG" firstAttribute="leading" secondItem="ygS-mu-NMR" secondAttribute="leading" constant="20" id="xpd-vD-Bd7"/>
-                            <constraint firstItem="Wzm-OU-fWT" firstAttribute="top" secondItem="4W6-Sh-a4a" secondAttribute="bottom" constant="10" id="yg0-gN-00o"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ygS-mu-NMR"/>
                     </view>
