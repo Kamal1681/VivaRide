@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Wb3-4H-icj">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -10,16 +10,16 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Login View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="W8D2_Ride_Share" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="LoginViewController" customModule="W8D2_Ride_Share" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="T4n-dt-voI">
-                                <rect key="frame" x="20" y="248" width="335" height="171"/>
+                                <rect key="frame" x="20" y="228" width="335" height="211"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="E-mail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yBK-kp-zPG">
                                         <rect key="frame" x="0.0" y="0.0" width="335" height="20.5"/>
@@ -49,6 +49,19 @@
                                         <rect key="frame" x="0.0" y="141" width="335" height="30"/>
                                         <state key="normal" title="Sign in"/>
                                     </button>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="TF6-e7-PkJ">
+                                        <rect key="frame" x="0.0" y="181" width="335" height="30"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ckW-n4-S0y">
+                                                <rect key="frame" x="0.0" y="0.0" width="162.5" height="30"/>
+                                                <state key="normal" title="Sign up"/>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iaf-4h-Itc">
+                                                <rect key="frame" x="172.5" y="0.0" width="162.5" height="30"/>
+                                                <state key="normal" title="Fogot your password?"/>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="rzX-Qe-aZC" firstAttribute="leading" secondItem="T4n-dt-voI" secondAttribute="leading" id="BX1-y3-N1c"/>
@@ -57,35 +70,20 @@
                                     <constraint firstAttribute="trailing" secondItem="rzX-Qe-aZC" secondAttribute="trailing" id="U3o-ba-Ova"/>
                                     <constraint firstItem="mzi-q7-oUY" firstAttribute="leading" secondItem="T4n-dt-voI" secondAttribute="leading" id="Vdy-HN-wHE"/>
                                     <constraint firstAttribute="trailing" secondItem="o6u-Er-r77" secondAttribute="trailing" id="XH8-GU-b6b"/>
+                                    <constraint firstItem="TF6-e7-PkJ" firstAttribute="leading" secondItem="T4n-dt-voI" secondAttribute="leading" id="bcG-0o-mgK"/>
                                     <constraint firstItem="O6t-pp-Sm0" firstAttribute="leading" secondItem="T4n-dt-voI" secondAttribute="leading" id="e7I-GI-jdB"/>
                                     <constraint firstItem="o6u-Er-r77" firstAttribute="leading" secondItem="T4n-dt-voI" secondAttribute="leading" id="gW9-R8-S9f"/>
                                     <constraint firstItem="rzX-Qe-aZC" firstAttribute="leading" secondItem="T4n-dt-voI" secondAttribute="leading" id="hYw-yE-Iny"/>
                                     <constraint firstItem="yBK-kp-zPG" firstAttribute="leading" secondItem="T4n-dt-voI" secondAttribute="leading" id="nSI-9U-AjA"/>
+                                    <constraint firstAttribute="trailing" secondItem="TF6-e7-PkJ" secondAttribute="trailing" id="wxF-wz-XsN"/>
                                 </constraints>
-                            </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="TF6-e7-PkJ">
-                                <rect key="frame" x="20" y="429" width="335" height="30"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ckW-n4-S0y">
-                                        <rect key="frame" x="0.0" y="0.0" width="162.5" height="30"/>
-                                        <state key="normal" title="Sign up"/>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iaf-4h-Itc">
-                                        <rect key="frame" x="172.5" y="0.0" width="162.5" height="30"/>
-                                        <state key="normal" title="Fogot your password?"/>
-                                    </button>
-                                </subviews>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="T4n-dt-voI" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="1rR-yE-Dnn"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="TF6-e7-PkJ" secondAttribute="trailing" constant="20" id="3ug-CT-xnK"/>
-                            <constraint firstItem="TF6-e7-PkJ" firstAttribute="top" secondItem="T4n-dt-voI" secondAttribute="bottom" constant="10" id="J6W-yN-OPF"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="T4n-dt-voI" secondAttribute="trailing" constant="20" id="Oyz-t8-adl"/>
-                            <constraint firstItem="TF6-e7-PkJ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Ytw-ax-on1"/>
                             <constraint firstItem="T4n-dt-voI" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="b4K-OM-lWg"/>
-                            <constraint firstItem="TF6-e7-PkJ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="muM-7j-Mll"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -1210,7 +1208,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Book the ride" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OLi-Hf-BGj">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Book the ride - Confirmation" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OLi-Hf-BGj">
                                 <rect key="frame" x="20" y="40" width="335" height="25.5"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
                                 <nil key="textColor"/>
