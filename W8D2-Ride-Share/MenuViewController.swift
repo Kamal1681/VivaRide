@@ -8,14 +8,26 @@
 
 import UIKit
 
+// [START usermanagement_view_import]
+import Firebase
+// [END usermanagement_view_import]
+
 class MenuViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        //Firebase check for autentification
+        if Auth.auth().currentUser != nil {
+            print("User auth")
+        } else {
+            print("user not auth")
+            performSegue(withIdentifier: "goLoginVC", sender: nil)
+        }
+    }
 
     /*
     // MARK: - Navigation
