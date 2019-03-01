@@ -10,13 +10,26 @@ import UIKit
 
 class LoginViewController: UIViewController {
 
+    @IBOutlet weak var signInButton: UIButton!
+    @IBOutlet weak var signUpButton: UIButton!
+    @IBOutlet weak var fogotPassButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
     
-
+    @IBAction func signInButton(_ sender: UIButton) {
+    }
+    
+    @IBAction func signUpButton(_ sender: UIButton) {
+    }
+    
+    
+    @IBAction func fogotPassButton(_ sender: UIButton) {
+    }
+    
     /*
     // MARK: - Navigation
 

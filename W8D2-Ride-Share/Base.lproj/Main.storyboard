@@ -48,6 +48,9 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O6t-pp-Sm0">
                                         <rect key="frame" x="0.0" y="141" width="335" height="30"/>
                                         <state key="normal" title="Sign in"/>
+                                        <connections>
+                                            <action selector="signInButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="47Q-iC-uQl"/>
+                                        </connections>
                                     </button>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="TF6-e7-PkJ">
                                         <rect key="frame" x="0.0" y="181" width="335" height="30"/>
@@ -55,10 +58,16 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ckW-n4-S0y">
                                                 <rect key="frame" x="0.0" y="0.0" width="162.5" height="30"/>
                                                 <state key="normal" title="Sign up"/>
+                                                <connections>
+                                                    <action selector="signUpButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="z6e-4a-taQ"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iaf-4h-Itc">
                                                 <rect key="frame" x="172.5" y="0.0" width="162.5" height="30"/>
                                                 <state key="normal" title="Fogot your password?"/>
+                                                <connections>
+                                                    <action selector="fogotPassButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="kFd-96-zp0"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -87,6 +96,11 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="fogotPassButton" destination="Iaf-4h-Itc" id="xHk-w7-MHh"/>
+                        <outlet property="signInButton" destination="O6t-pp-Sm0" id="DJK-E6-9eP"/>
+                        <outlet property="signUpButton" destination="ckW-n4-S0y" id="RZe-BG-Lvi"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
