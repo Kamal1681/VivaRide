@@ -97,7 +97,9 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="emailField" destination="rzX-Qe-aZC" id="Shr-h7-CWU"/>
                         <outlet property="fogotPassButton" destination="Iaf-4h-Itc" id="xHk-w7-MHh"/>
+                        <outlet property="passwordField" destination="o6u-Er-r77" id="Mh8-jF-ATD"/>
                         <outlet property="signInButton" destination="O6t-pp-Sm0" id="DJK-E6-9eP"/>
                         <outlet property="signUpButton" destination="ckW-n4-S0y" id="RZe-BG-Lvi"/>
                     </connections>
@@ -782,7 +784,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Umj-Yw-vBG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1478" y="2185"/>
+            <point key="canvasLocation" x="1477.5999999999999" y="2184.5577211394307"/>
         </scene>
         <!--Find Ride View Controller-->
         <scene sceneID="vvN-2k-DAv">
@@ -1427,6 +1429,9 @@
                                     <constraint firstAttribute="height" constant="40" id="u4q-qG-dTe"/>
                                 </constraints>
                                 <state key="normal" title="Profile" image="profileDefaultPhoto"/>
+                                <connections>
+                                    <segue destination="DUt-bZ-DX9" kind="show" identifier="goToProfileVC" id="YEG-8F-eGd"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1441,7 +1446,7 @@
                         <viewLayoutGuide key="safeArea" id="Bbp-Dg-FZL"/>
                     </view>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="showDetail" identifier="goLoginVC" id="Aa9-e7-8Cv"/>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="goLoginVC" id="Aa9-e7-8Cv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iZ8-E1-wsS" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1633,8 +1638,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="profileDefaultPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="eO0-xY-o04">
-                                <rect key="frame" x="20" y="70.5" width="75" height="75"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profileDefaultPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="eO0-xY-o04">
+                                <rect key="frame" x="20" y="65" width="75" height="75"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="75" id="b9m-jH-Rq9"/>
                                     <constraint firstAttribute="width" constant="75" id="cPv-D8-J0J"/>
@@ -1694,8 +1699,8 @@
                                     </button>
                                 </subviews>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ak2-9L-vCE">
-                                <rect key="frame" x="20" y="150.5" width="75" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ak2-9L-vCE">
+                                <rect key="frame" x="20" y="145" width="75" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="75" id="via-3R-kf2"/>
                                 </constraints>
@@ -1711,6 +1716,9 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8zP-Ir-T1z">
                                         <rect key="frame" x="177.5" y="0.0" width="157.5" height="30"/>
                                         <state key="normal" title="Sign out"/>
+                                        <connections>
+                                            <action selector="signOutButtonDidTap:" destination="DUt-bZ-DX9" eventType="touchUpInside" id="HRq-cF-J0s"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -1724,6 +1732,9 @@
                                             <constraint firstAttribute="width" constant="30" id="ohL-tq-J60"/>
                                         </constraints>
                                         <state key="normal" title="Back" image="backButton"/>
+                                        <connections>
+                                            <action selector="backButton:" destination="DUt-bZ-DX9" eventType="touchUpInside" id="DV8-pN-iHT"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Profile" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vyh-CE-6g8">
                                         <rect key="frame" x="40" y="2.5" width="295" height="25.5"/>
@@ -1749,6 +1760,7 @@
                             <constraint firstItem="HgX-7h-zGq" firstAttribute="top" secondItem="y8J-4K-X1X" secondAttribute="bottom" constant="10" id="Wiu-VO-tXJ"/>
                             <constraint firstItem="g3q-TY-UxL" firstAttribute="trailing" secondItem="IJA-DV-W1d" secondAttribute="trailing" constant="20" id="Zeo-H0-oml"/>
                             <constraint firstItem="g3q-TY-UxL" firstAttribute="trailing" secondItem="7wU-CH-EP5" secondAttribute="trailing" constant="20" id="e9v-mw-IGI"/>
+                            <constraint firstItem="eO0-xY-o04" firstAttribute="top" secondItem="7wU-CH-EP5" secondAttribute="bottom" constant="5" id="kFc-Sv-nHv"/>
                             <constraint firstItem="7wU-CH-EP5" firstAttribute="leading" secondItem="g3q-TY-UxL" secondAttribute="leading" constant="20" id="oHH-72-hpn"/>
                             <constraint firstItem="IJA-DV-W1d" firstAttribute="top" secondItem="HgX-7h-zGq" secondAttribute="bottom" constant="10" id="ocg-tw-gi8"/>
                             <constraint firstItem="eO0-xY-o04" firstAttribute="leading" secondItem="g3q-TY-UxL" secondAttribute="leading" constant="20" id="xDK-mX-baG"/>
