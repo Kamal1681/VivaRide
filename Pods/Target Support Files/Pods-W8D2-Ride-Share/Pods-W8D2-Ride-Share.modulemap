@@ -1,6 +1,0 @@
-framework module Pods_W8D2_Ride_Share {
-  umbrella header "Pods-W8D2-Ride-Share-umbrella.h"
-
-  export *
-  module * { export * }
-}

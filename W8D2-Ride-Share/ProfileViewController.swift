@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class ProfileViewController: UIViewController {
 
@@ -16,7 +17,20 @@ class ProfileViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-
+    @IBAction func backButton(_ sender: UIButton) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func signOutButtonDidTap(_ sender: UIButton) {
+        let firebaseAuth = Auth.auth()
+        do {
+            try firebaseAuth.signOut()
+        } catch let signOutError as NSError {
+            print ("Error signing out: %@", signOutError)
+        }
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     /*
     // MARK: - Navigation
 
