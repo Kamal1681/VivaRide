@@ -11,5 +11,6 @@ target 'W8D2-Ride-Share' do
 	pod 'Firebase/Database'
 	pod 'Firebase/Auth'
 	pod 'GoogleMaps'
+  pod 'GooglePlaces'
 
 end
