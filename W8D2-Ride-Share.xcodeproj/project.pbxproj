@@ -29,6 +29,7 @@
 		E90D3D31222865480083BAB8 /* RidesOfferedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90D3D30222865480083BAB8 /* RidesOfferedTableViewCell.swift */; };
 		E90D3D332228656B0083BAB8 /* PassengersListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90D3D322228656B0083BAB8 /* PassengersListTableViewCell.swift */; };
 		E95E06CA2229AAD400EA7D07 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E95E06C92229AAD400EA7D07 /* GoogleService-Info.plist */; };
+		E995BA81222A215F00E9CA40 /* RegisterEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E995BA80222A215F00E9CA40 /* RegisterEmailViewController.swift */; };
 		E9EAEE4B2225A4AD001DB057 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9EAEE4A2225A4AD001DB057 /* AppDelegate.swift */; };
 		E9EAEE4D2225A4AD001DB057 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9EAEE4C2225A4AD001DB057 /* ViewController.swift */; };
 		E9EAEE502225A4AD001DB057 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E9EAEE4E2225A4AD001DB057 /* Main.storyboard */; };
@@ -62,6 +63,7 @@
 		E90D3D30222865480083BAB8 /* RidesOfferedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RidesOfferedTableViewCell.swift; sourceTree = "<group>"; };
 		E90D3D322228656B0083BAB8 /* PassengersListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassengersListTableViewCell.swift; sourceTree = "<group>"; };
 		E95E06C92229AAD400EA7D07 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		E995BA80222A215F00E9CA40 /* RegisterEmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterEmailViewController.swift; sourceTree = "<group>"; };
 		E9EAEE472225A4AD001DB057 /* W8D2-Ride-Share.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "W8D2-Ride-Share.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9EAEE4A2225A4AD001DB057 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E9EAEE4C2225A4AD001DB057 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -135,6 +137,7 @@
 				E90D3D24222861340083BAB8 /* OfferedRideDetailsViewController.swift */,
 				E90D3D322228656B0083BAB8 /* PassengersListTableViewCell.swift */,
 				E90D3D262228614B0083BAB8 /* ProfileViewController.swift */,
+				E995BA80222A215F00E9CA40 /* RegisterEmailViewController.swift */,
 				E9EAEE542225A4AF001DB057 /* Assets.xcassets */,
 				E9EAEE562225A4AF001DB057 /* LaunchScreen.storyboard */,
 				E95E06C92229AAD400EA7D07 /* GoogleService-Info.plist */,
@@ -289,6 +292,7 @@
 				E90D3D332228656B0083BAB8 /* PassengersListTableViewCell.swift in Sources */,
 				E90D3D1722285FC30083BAB8 /* OfferRideViewController.swift in Sources */,
 				E90D3D25222861340083BAB8 /* OfferedRideDetailsViewController.swift in Sources */,
+				E995BA81222A215F00E9CA40 /* RegisterEmailViewController.swift in Sources */,
 				E90D3D0F22285F3B0083BAB8 /* FindRideViewController.swift in Sources */,
 				E90D3D2D222865050083BAB8 /* StopoversTableViewCell.swift in Sources */,
 				E90D3D272228614B0083BAB8 /* ProfileViewController.swift in Sources */,
