@@ -18,15 +18,24 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     
+    var originalViewHeight: CGFloat = 0.0
+    var viewHeight: CGFloat = 0.0
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        //If keyboard appears/hide view size will change
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        originalViewHeight = self.view.frame.size.height
+        viewHeight = self.view.frame.size.height
+    
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.view.endEditing(true)
-    }
+//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        self.view.endEditing(true)
+//    }
     
     @IBAction func signInButton(_ sender: UIButton) {
         
@@ -41,8 +50,6 @@ class LoginViewController: UIViewController {
             self.present(alert, animated: true, completion: nil)
         }
         
-
-            // [START headless_email_auth]
         Auth.auth().signIn(withEmail: email, password: password) { (authDataResult, errorCurrent) in
                 if authDataResult != nil {
                     self.dismiss(animated: true, completion: nil)
@@ -55,24 +62,6 @@ class LoginViewController: UIViewController {
                 }
             
         }
-        
-//            Auth.auth().signIn(withEmail: email, password: password) { [weak self] user, error in
-//                guard let strongSelf = self else { return }
-//                // [START_EXCLUDE]
-//                strongSelf.hideSpinner {
-//                    if let error = error {
-//                        strongSelf.showMessagePrompt(error.localizedDescription)
-//                        return
-//                    }
-//                    strongSelf.navigationController?.popViewController(animated: true)
-//                }
-//                // [END_EXCLUDE]
-//            }
-//            // [END headless_email_auth]
-
-        
-//        self.dismiss(animated: true, completion: nil)
-
 
     }
     
@@ -83,6 +72,33 @@ class LoginViewController: UIViewController {
     @IBAction func fogotPassButton(_ sender: UIButton) {
     }
     
+    
+    //MARK: Keyboard appears/hide view size
+    
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            if viewHeight == originalViewHeight {
+                viewHeight -= keyboardSize.height
+                self.view.frame.size.height = viewHeight
+                self.view.layoutIfNeeded()
+            }
+        }
+    }
+    
+    @objc func keyboardWillHide(notification: NSNotification) {
+        if viewHeight != originalViewHeight {
+            self.viewHeight = self.originalViewHeight
+            self.view.frame.size.height = self.viewHeight
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    @IBAction func emailEditingDidEnd(_ sender: Any) {
+        emailField.resignFirstResponder()
+    }
+    @IBAction func passwordEditingDidEnd(_ sender: Any) {
+        passwordField.resignFirstResponder()
+    }
     /*
     // MARK: - Navigation
 
