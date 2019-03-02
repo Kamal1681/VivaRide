@@ -29,6 +29,9 @@ class MenuViewController: UIViewController {
         }
     }
 
+    @IBAction func profileVCButton(_ sender: UIButton) {
+        performSegue(withIdentifier: "goToProfileVC", sender: nil)
+    }
     /*
     // MARK: - Navigation
 
