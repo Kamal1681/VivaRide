@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="DGe-o0-boh">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="DGe-o0-boh">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -1396,6 +1395,52 @@
             </objects>
             <point key="canvasLocation" x="2846" y="130"/>
         </scene>
+        <!--Offer Ride View Controller-->
+        <scene sceneID="Tw2-M3-A2e">
+            <objects>
+                <viewController id="eiX-SY-cvT" customClass="OfferRideViewController" customModule="W8D2_Ride_Share" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="mg0-hY-D1i">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sUG-WX-fBF">
+                                <rect key="frame" x="0.0" y="40" width="375" height="44"/>
+                                <items>
+                                    <navigationItem title="Search Destination" id="sAF-ek-rUK">
+                                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="Cb9-7e-PPJ">
+                                            <connections>
+                                                <action selector="showSearchController:" destination="eiX-SY-cvT" id="cLo-H7-c71"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z5V-Mh-Hdd">
+                                <rect key="frame" x="0.0" y="84" width="375" height="583"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="sUG-WX-fBF" firstAttribute="top" secondItem="BcM-uF-T1t" secondAttribute="top" constant="20" id="256-bd-e3y"/>
+                            <constraint firstItem="BcM-uF-T1t" firstAttribute="bottom" secondItem="Z5V-Mh-Hdd" secondAttribute="bottom" id="3xk-hn-zfa"/>
+                            <constraint firstItem="sUG-WX-fBF" firstAttribute="leading" secondItem="Z5V-Mh-Hdd" secondAttribute="leading" id="5ri-IP-fXP"/>
+                            <constraint firstItem="Z5V-Mh-Hdd" firstAttribute="leading" secondItem="BcM-uF-T1t" secondAttribute="leading" id="7rZ-5X-syv"/>
+                            <constraint firstItem="sUG-WX-fBF" firstAttribute="trailing" secondItem="Z5V-Mh-Hdd" secondAttribute="trailing" id="Kpm-Lo-Rh5"/>
+                            <constraint firstItem="BcM-uF-T1t" firstAttribute="trailing" secondItem="Z5V-Mh-Hdd" secondAttribute="trailing" id="NVZ-RE-t7p"/>
+                            <constraint firstItem="Z5V-Mh-Hdd" firstAttribute="top" secondItem="sUG-WX-fBF" secondAttribute="bottom" id="VSx-Hn-dIB"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="BcM-uF-T1t"/>
+                    </view>
+                    <connections>
+                        <outlet property="mapView" destination="Z5V-Mh-Hdd" id="h1Z-o7-xlg"/>
+                        <outlet property="view" destination="mg0-hY-D1i" id="Tlr-JZ-rgC"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GJG-WK-PI0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="41" y="934"/>
+        </scene>
         <!--Menu View Controller-->
         <scene sceneID="Ph3-dk-Qj3">
             <objects>
@@ -1416,6 +1461,9 @@
                                         <rect key="frame" x="0.0" y="64" width="335" height="42"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                         <state key="normal" title="Offer a ride"/>
+                                        <connections>
+                                            <segue destination="eiX-SY-cvT" kind="presentation" id="ooD-oe-8CM"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g8k-oW-fcT">
                                         <rect key="frame" x="0.0" y="128" width="335" height="42"/>
@@ -1460,10 +1508,10 @@
             </objects>
             <point key="canvasLocation" x="42" y="132"/>
         </scene>
-        <!--Offer Ride View Controller-->
+        <!--Offer Ride Confirmation View Controller-->
         <scene sceneID="tCw-5c-86p">
             <objects>
-                <viewController id="Wb3-4H-icj" customClass="OfferRideViewController" customModule="W8D2_Ride_Share" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Wb3-4H-icj" customClass="OfferRideConfirmationViewController" customModule="W8D2_Ride_Share" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="WPs-0u-0kf">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2170,7 +2218,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="backButton" width="100" height="100"/>
-        <image name="profileDefaultPhoto" width="100" height="100"/>
+        <image name="backButton" width="75" height="75"/>
+        <image name="profileDefaultPhoto" width="75" height="75"/>
     </resources>
 </document>

@@ -17,15 +17,15 @@ class User {
     let password: String?
     let photo: UIImage?
     let phone: String?
-    let carDescription: String?
+    let car: Car?
     
-    init(uID: String, eMail: String, password: String, photo: UIImage, phone: String, carDescription: String) {
+    init(uID: String, eMail: String, password: String, photo: UIImage, phone: String, car: Car) {
         self.uID = uID
         self.eMail = eMail
         self.password = password
         self.photo = photo
         self.phone = phone
-        self.carDescription = carDescription
+        self.car = car
     }
     func addUserToDatabase() {
         

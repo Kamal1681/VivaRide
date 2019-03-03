@@ -12,6 +12,7 @@ import GooglePlaces
 
 class OfferRideViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap {
     
+    @IBOutlet weak var mapView: UIView!
     var searchResultController:SearchResultsController!
     var resultsArray = [String]()
     var googleMapsView:GMSMapView!
@@ -24,18 +25,19 @@ class OfferRideViewController: UIViewController, UISearchBarDelegate, LocateOnTh
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.googleMapsView = GMSMapView(frame: self.view.frame)
-        //self.googleMapsView =  GMSMapView(frame: self.mapViewContainer.frame)
+        self.googleMapsView = GMSMapView(frame: self.mapView.frame)
         self.view.addSubview(self.googleMapsView)
         searchResultController = SearchResultsController()
         searchResultController.delegate = self
     }
     
-    @IBAction func showSearchController(sender: AnyObject) {
+    @IBAction func showSearchController(_ sender: AnyObject) {
         let searchController = UISearchController(searchResultsController: searchResultController)
         searchController.searchBar.delegate = self
         self.present(searchController, animated: true, completion: nil)
+ 
     }
+
     
     func locateWithLongitude(lon: Double, andLatitude lat: Double, andTitle title: String) {
         
@@ -43,13 +45,24 @@ class OfferRideViewController: UIViewController, UISearchBarDelegate, LocateOnTh
             let position = CLLocationCoordinate2DMake(lat, lon)
             let marker = GMSMarker(position: position)
             
-            let camera  = GMSCameraPosition.camera(withLatitude: lat, longitude: lon, zoom: 10)
+            let camera  = GMSCameraPosition.camera(withLatitude: lat, longitude: lon, zoom: 15)
             self.googleMapsView.camera = camera
             
             marker.title = title
             marker.map = self.googleMapsView
+            let markerTap = UITapGestureRecognizer.init(target: self, action: #selector (self.rideOptions(_:)))
+            self.googleMapsView.addGestureRecognizer(markerTap)
         }
     }
+    
+    @objc func rideOptions(_ sender: UITapGestureRecognizer) {
+        
+        let confirmationViewController = storyboard?.instantiateViewController(withIdentifier: "confirm ride") as! OfferRideConfirmationViewController
+        self.addChild(confirmationViewController)
+        self.view.addSubview(confirmationViewController.view)
+        confirmationViewController.didMove(toParent: self)
+    }
+    
     func searchBar(_ searchBar: UISearchBar,
                    textDidChange searchText: String){
         
@@ -67,6 +80,7 @@ class OfferRideViewController: UIViewController, UISearchBarDelegate, LocateOnTh
             }
             self.searchResultController.reloadDataWithArray(array: self.resultsArray)
         }
+
     }
     /*
     // MARK: - Navigation

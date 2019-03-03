@@ -8,17 +8,13 @@
 
 import UIKit
 import GoogleMaps
+import GooglePlaces
 
 protocol LocateOnTheMap{
     func locateWithLongitude(lon:Double, andLatitude lat:Double, andTitle title: String)
 }
 
 class SearchResultsController: UITableViewController {
-    
-    
-    
-    
-    
     
     var searchResults: [String]!
     var delegate: LocateOnTheMap!
@@ -44,27 +40,27 @@ class SearchResultsController: UITableViewController {
 
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cellIdentifier", for: indexPath)
 
         cell.textLabel?.text = self.searchResults[indexPath.row]
         return cell
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // 1
+       
         self.dismiss(animated: true, completion: nil)
-        // 2
-        let correctedAddress:String! = self.searchResults[indexPath.row].addingPercentEncoding(withAllowedCharacters: .symbols)
-        let url = NSURL(string: "https://maps.googleapis.com/maps/api/geocode/json?address=\(String(describing: correctedAddress))&sensor=false")
+        
+        let correctedAddress:String = self.searchResults[indexPath.row].addingPercentEncoding(withAllowedCharacters: .symbols) ?? ""
+        let url = NSURL(string: "https://maps.googleapis.com/maps/api/geocode/json?address=\(String(describing: correctedAddress))&sensor=false&key=\(Constants.googleApiKey)")
         
         let task = URLSession.shared.dataTask(with: url! as URL) { (data, response, error) -> Void in
            
             do {
                 if data != nil{
                     let dic = try JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.mutableLeaves) as!  NSDictionary
-                    let results = dic["results"] as! NSDictionary
-                    let geometry = results.value(forKey: "geometry") as! NSDictionary
-                    let location = geometry.value(forKey: "location") as! NSDictionary
+                    let results = dic["results"] as! NSArray
+                    let geometry = results.value(forKey: "geometry") as! NSArray
+                    let location = geometry.value(forKey: "location") as! NSArray
                     let lat = location.value(forKey: "lat") as! NSArray
                     let latitude = lat.object(at: 0) as! Double
                     
@@ -79,7 +75,6 @@ class SearchResultsController: UITableViewController {
                 print("Error Invalid Address")
             }
         }
-        // 5
         task.resume()
     }
 
