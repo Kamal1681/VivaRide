@@ -30,7 +30,14 @@ class LoginViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         originalViewHeight = self.view.frame.size.height
         viewHeight = self.view.frame.size.height
+    }
     
+    override func viewDidAppear(_ animated: Bool) {
+        
+        // If user already login go to previous VC
+        if Auth.auth().currentUser != nil {
+            self.dismiss(animated: false, completion: nil)
+        }
     }
     
 //    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
