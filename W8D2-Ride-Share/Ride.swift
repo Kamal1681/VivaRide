@@ -10,22 +10,24 @@ import Foundation
 import UIKit
 import GoogleMaps
 
+
 class Ride {
     
     let startLocation: CLLocation?
     let endLocation: CLLocation?
     let tripStartTime: Date?
-    let tripEndTime: Date?
+    var tripEndTime: Date?
     var stopOvers = [StopOver?]()
+    let car: Car?
     var distance: Double = 0.0
     var estimatedArrivalTime: Date?
     
-    init(startLocation: CLLocation, endLocation: CLLocation, tripStartTime: Date, tripEndTime: Date, stopOvers: [ StopOver]) {
+    init(startLocation: CLLocation, endLocation: CLLocation, tripStartTime: Date, stopOvers: [ StopOver], car: Car) {
         self.startLocation = startLocation
         self.endLocation = endLocation
         self.tripStartTime = tripStartTime
-        self.tripEndTime = tripEndTime
         self.stopOvers = stopOvers
+        self.car = car
     }
     
 }

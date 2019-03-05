@@ -22,6 +22,8 @@ class OfferRideViewController: UIViewController, UISearchBarDelegate, LocateOnTh
     var startPoint: CLLocationCoordinate2D?
     var endPoint: CLLocationCoordinate2D?
     var startPointEndPointFlag: Bool = false
+    var tripStartTime: Date?
+    var estimtedArrivalTime: Date?
     
 
     override func viewDidLoad() {
@@ -37,6 +39,10 @@ class OfferRideViewController: UIViewController, UISearchBarDelegate, LocateOnTh
         self.view.addSubview(self.googleMapsView)
         searchResultController = SearchResultsController()
         searchResultController.delegate = self
+    }
+    
+    @IBAction func backButton(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
     }
     
     func showSearchController(_ sender: AnyObject) {
@@ -57,6 +63,7 @@ class OfferRideViewController: UIViewController, UISearchBarDelegate, LocateOnTh
         showSearchController(self)
         
     }
+    
     func locateWithLongitude(lon: Double, andLatitude lat: Double, andTitle title: String) {
         
         DispatchQueue.main.async { () -> Void in
@@ -68,8 +75,7 @@ class OfferRideViewController: UIViewController, UISearchBarDelegate, LocateOnTh
             
             marker.title = title
             marker.map = self.googleMapsView
-//            let markerTap = UITapGestureRecognizer.init(target: self, action: #selector (self.rideOptions(_:)))
-//            self.mapView.addGestureRecognizer(markerTap)
+
             self.createPath(position: position, title: title)
         }
         
@@ -77,6 +83,7 @@ class OfferRideViewController: UIViewController, UISearchBarDelegate, LocateOnTh
     
     func createPath(position: CLLocationCoordinate2D, title: String) {
  
+        
         if(!startPointEndPointFlag) {
             startPoint = position
             let marker1 = GMSMarker(position: startPoint!)
@@ -89,19 +96,23 @@ class OfferRideViewController: UIViewController, UISearchBarDelegate, LocateOnTh
             self.endPointText.title = title
             marker2.map = googleMapsView
         }
+        
+        guard let startPoint = startPoint, let endPoint = endPoint else {
+            return
+        }
+        
         if ((startPoint != nil) && (endPoint != nil)) {
+            
             let path = GMSMutablePath()
-            path.add(CLLocationCoordinate2D(latitude: (startPoint?.latitude)!, longitude: (startPoint?.longitude)!))
-            path.add(CLLocationCoordinate2D(latitude: (endPoint?.latitude)!, longitude: (endPoint?.longitude)!))
+            path.add(CLLocationCoordinate2D(latitude: (startPoint.latitude), longitude: (startPoint.longitude)))
+            path.add(CLLocationCoordinate2D(latitude: (endPoint.latitude), longitude: (endPoint.longitude)))
             
             let rectangle = GMSPolyline(path: path)
             rectangle.strokeWidth = 2
             rectangle.map = googleMapsView
             self.mapView = googleMapsView
             
-            guard let startPoint = startPoint, let endPoint = endPoint else {
-                return
-            }
+
             
             let url = NSURL(string: "https://maps.googleapis.com/maps/api/directions/json?origin=\(String(describing: startPoint.latitude)),\(String(describing: startPoint.longitude))&destination=\(String(describing: endPoint.latitude)),\(String(describing: endPoint.longitude))&key=\(Constants.googleApiKey)")
         
@@ -127,6 +138,10 @@ class OfferRideViewController: UIViewController, UISearchBarDelegate, LocateOnTh
                             singleLine.strokeWidth = 3.0
                             singleLine.strokeColor = .red
                             singleLine.map = self.googleMapsView
+                            let cameraBounds = GMSCoordinateBounds.init(coordinate: startPoint, coordinate: endPoint)
+                           let camera = GMSCameraUpdate.fit(cameraBounds)
+                            GMSCameraUpdate.fit(cameraBounds)
+                            self.googleMapsView.animate(with: camera)
                            
                         }
                         
@@ -185,6 +200,42 @@ class OfferRideViewController: UIViewController, UISearchBarDelegate, LocateOnTh
     }
     func calculateEstimatedTime() {
         
+        guard let startPoint = startPoint, let endPoint = endPoint else {
+            return
+        }
+        
+        let url = NSURL(string: "https://maps.googleapis.com/maps/api/directions/json?origin=\(startPoint.latitude),\(startPoint.longitude)&destination=\(endPoint.latitude),\(endPoint.longitude)&key=\(Constants.googleApiKey)")
+        let task = URLSession.shared.dataTask(with: url! as URL) { (data, response, error) -> Void in
+            
+            do {
+                if data != nil {
+                    let dict = try JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.mutableLeaves) as!  [String:AnyObject]
+                    
+                    let routes = dict["routes"] as! NSArray
+                    let legs = routes.value(forKey: "legs") as! NSArray
+                    //let city = results[0].address_components value(forKey: "address_components")
+                    let duration = legs.value(forKey: "duration") as! NSArray
+                    let timeInSeconds = (duration.object(at: 0) as! NSArray).value(forKey: "value")
+                    print(timeInSeconds)
+                    //self.calculateEndTime(timeInSeconds: timeInSeconds as! Int)
+                }
+            }
+            catch {
+                print("Error")
+            }
+            
+        }
+        task.resume()
+        
+    }
+    
+    func calculateEndTime(timeInSeconds: Int) {
+        
+        guard let tripStartTime = tripStartTime else {
+            return
+        }
+        estimtedArrivalTime = Calendar.current.date(byAdding: .second, value: timeInSeconds, to: tripStartTime)
+        print(tripStartTime)
     }
     /*
     // MARK: - Navigation

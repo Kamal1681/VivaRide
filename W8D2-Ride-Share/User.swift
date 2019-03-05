@@ -9,6 +9,15 @@
 import Foundation
 import UIKit
 
+struct Car {
+    
+    let carMake: String?
+    let carDescription: String?
+    let carYear: String?
+    let plateNumber: String?
+    let numberOfSeats: Int?
+    
+}
 
 class User {
     
