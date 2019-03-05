@@ -73,6 +73,11 @@ class ProfileViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
+    @IBAction func changePasswordButtonDidTap(_ sender: UIButton) {
+    }
+    
+    @IBAction func editPhoto(_ sender: UIButton) {
+    }
     
     @IBAction func editNameButton(_ sender: Any) {
         nameLabel.text = editAlert(alertTitle: "Edit your name", alertPlaceHolder: "Enter your name", fieldName: "name")
