@@ -10,6 +10,7 @@ target 'W8D2-Ride-Share' do
 	pod 'Firebase/Core'
 	pod 'Firebase/Database'
 	pod 'Firebase/Auth'
+  pod 'Firebase/Firestore'
 	pod 'GoogleMaps'
   pod 'GooglePlaces'
 

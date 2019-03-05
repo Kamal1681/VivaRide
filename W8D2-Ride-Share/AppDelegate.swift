@@ -29,7 +29,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         GMSServices.provideAPIKey(Constants.googleApiKey)
         GMSPlacesClient.provideAPIKey(Constants.googleApiKey)
         
+        // [START default_firestore]
         FirebaseApp.configure()
+        
+        let db = Firestore.firestore()
+        // [END default_firestore]
+        print(db) // silence warning
         
         return true
     }
