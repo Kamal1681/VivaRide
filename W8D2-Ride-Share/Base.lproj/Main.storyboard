@@ -1682,6 +1682,9 @@
                                             <constraint firstAttribute="width" constant="35" id="d99-pl-Vxy"/>
                                         </constraints>
                                         <state key="normal" title="Edit"/>
+                                        <connections>
+                                            <action selector="editNameButton:" destination="DUt-bZ-DX9" eventType="touchUpInside" id="NkG-yv-beW"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -1700,6 +1703,9 @@
                                             <constraint firstAttribute="width" constant="35" id="0aG-3s-YLt"/>
                                         </constraints>
                                         <state key="normal" title="Edit"/>
+                                        <connections>
+                                            <action selector="editEmailButton:" destination="DUt-bZ-DX9" eventType="touchUpInside" id="RAO-7k-86Y"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -1718,6 +1724,9 @@
                                             <constraint firstAttribute="width" constant="35" id="ipQ-jO-sNC"/>
                                         </constraints>
                                         <state key="normal" title="Edit"/>
+                                        <connections>
+                                            <action selector="editPhoneNumberButton:" destination="DUt-bZ-DX9" eventType="touchUpInside" id="nGq-hY-gTk"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -1781,6 +1790,9 @@
                                             <constraint firstAttribute="width" constant="35" id="iS8-kg-RiT"/>
                                         </constraints>
                                         <state key="normal" title="Edit"/>
+                                        <connections>
+                                            <action selector="editCarModelButton:" destination="DUt-bZ-DX9" eventType="touchUpInside" id="ULy-LP-FVS"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -1799,6 +1811,9 @@
                                             <constraint firstAttribute="width" constant="35" id="t4M-qI-RBl"/>
                                         </constraints>
                                         <state key="normal" title="Edit"/>
+                                        <connections>
+                                            <action selector="editCarColorButton:" destination="DUt-bZ-DX9" eventType="touchUpInside" id="XYZ-2I-Aqa"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -1834,8 +1849,8 @@
                         <viewLayoutGuide key="safeArea" id="g3q-TY-UxL"/>
                     </view>
                     <connections>
-                        <outlet property="carColor" destination="zv7-nY-QgB" id="wB5-v5-USv"/>
-                        <outlet property="carModel" destination="EUe-57-nLW" id="Tvu-u0-yLi"/>
+                        <outlet property="carColorLabel" destination="zv7-nY-QgB" id="VMm-dM-wjM"/>
+                        <outlet property="carModelLabel" destination="EUe-57-nLW" id="s9n-kp-hUM"/>
                         <outlet property="emailLabel" destination="bO5-Ac-oGM" id="uaY-GX-eWR"/>
                         <outlet property="nameLabel" destination="Vtf-op-3QQ" id="MlG-Im-YoC"/>
                         <outlet property="phoneNumberLabel" destination="VRD-P1-pcq" id="d8L-L2-E3T"/>
