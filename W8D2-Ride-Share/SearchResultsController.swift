@@ -60,6 +60,7 @@ class SearchResultsController: UITableViewController {
                     let dic = try JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.mutableLeaves) as!  NSDictionary
                     let results = dic["results"] as! NSArray
                     let geometry = results.value(forKey: "geometry") as! NSArray
+                    //let city = results[0].address_components value(forKey: "address_components")
                     let location = geometry.value(forKey: "location") as! NSArray
                     let lat = location.value(forKey: "lat") as! NSArray
                     let latitude = lat.object(at: 0) as! Double
