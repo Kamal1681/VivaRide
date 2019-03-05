@@ -17,6 +17,8 @@ class Ride {
     let tripStartTime: Date?
     let tripEndTime: Date?
     var stopOvers = [StopOver?]()
+    var distance: Double = 0.0
+    var estimatedArrivalTime: Date?
     
     init(startLocation: CLLocation, endLocation: CLLocation, tripStartTime: Date, tripEndTime: Date, stopOvers: [ StopOver]) {
         self.startLocation = startLocation
