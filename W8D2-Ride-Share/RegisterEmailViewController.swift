@@ -18,13 +18,20 @@ class RegisterEmailViewController: UIViewController {
     @IBOutlet weak var repeatPasswordField: UITextField!
     @IBOutlet weak var phoneNumberField: UITextField!
     
-    var ref: DatabaseReference!
+    var db: Firestore!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // [START setup]
+        let settings = FirestoreSettings()
+        
+        Firestore.firestore().settings = settings
+        // [END setup]
+        db = Firestore.firestore()
+        
+        //Helps to check names with apostrof
         nameField.smartQuotesType = .no
-        // Do any additional setup after loading the view.
     }
     
     @IBAction func backButtonDidTap(_ sender: UIButton) {
@@ -94,28 +101,84 @@ class RegisterEmailViewController: UIViewController {
             //Creating new user in Firebase
             Auth.auth().createUser(withEmail: email!, password: password!) { authResult, error in
                 guard let authResult = authResult, error == nil else {
+                    
+                    //Error during creting new user from Firebase
                     print(error!.localizedDescription)
+                    
+                    if let errCode = AuthErrorCode(rawValue: error!._code) {
+                        switch errCode {
+                        
+                        //Invalid email
+                        case .invalidEmail:
+                            let alert = UIAlertController(title: "Alert", message: "Email is not valid! Please check your email address.", preferredStyle: .alert)
+                            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                            self.present(alert, animated: true, completion: nil)
+                            self.emailField.backgroundColor = UIColor.red
+                        
+                        //Email is already in use
+                        case .emailAlreadyInUse:
+                            let alert = UIAlertController(title: "Alert", message: "The email address is already in use by another account! Please check your email address or use Fogot the password form.", preferredStyle: .alert)
+                            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                            self.present(alert, animated: true, completion: nil)
+                            self.emailField.backgroundColor = UIColor.red
+                            
+                        //Any other errors will present on the screen
+                        default:
+                            let alert = UIAlertController(title: "Alert", message: error!.localizedDescription, preferredStyle: .alert)
+                            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                            self.present(alert, animated: true, completion: nil)
+                            print("Create User Error: \(error!)")
+                        }
+                    }
+                    
                     return
                 }
-            print("\(authResult.user.email!) created")
+            
+                //Login as a new user to be able to add aditional infromation about user to Firebase
                 
-            //Make all text field white
-            self.nameField.backgroundColor = UIColor.white
-            self.emailField.backgroundColor = UIColor.white
-            self.passwordField.backgroundColor = UIColor.white
-            self.repeatPasswordField.backgroundColor = UIColor.white
-            self.phoneNumberField.backgroundColor = UIColor.white
-                
-            //Alert that user is successfully registered and logged in
-            let alert = UIAlertController(title: "Alert", message: "You have been successfully registered and logged in.", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (UIAlertAction) in
                 Auth.auth().signIn(withEmail: email!, password: password!, completion: { (authDataResult, errorCurrent) in
                     if authDataResult != nil {
-                        self.dismiss(animated: true, completion: nil)
+                        //Get user UID
+                        let user = Auth.auth().currentUser
+                        if user != nil {
+                            
+                            //Input additional information about useer to the Firebase
+                            self.db.collection("users").document(user!.uid).setData([
+                                "name": name!,
+                                "phoneNumber": phoneNumber!
+                            ], merge: true) { err in
+                                if let err = err {
+                                    print("Error writing document: \(err)")
+                                } else {
+                                    print("Additional user information successfully written in Firebase!")
+                                }
+                            }
+                            
+                            //Print some information about authentification
+                            print("\(authResult.user.email!) created")
+                            
+                            //Make all text field white
+                            self.nameField.backgroundColor = UIColor.white
+                            self.emailField.backgroundColor = UIColor.white
+                            self.passwordField.backgroundColor = UIColor.white
+                            self.repeatPasswordField.backgroundColor = UIColor.white
+                            self.phoneNumberField.backgroundColor = UIColor.white
+                            
+                            //Alert that user is successfully registered and logged in
+                            let alert = UIAlertController(title: "Alert", message: "You have been successfully registered and logged in.", preferredStyle: .alert)
+                            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (UIAlertAction) in
+                                self.dismiss(animated: true, completion: nil)
+                            }))
+                            self.present(alert, animated: true, completion: nil)
+                            
+                        }
+                        else {
+                            print("Error has happend during autologin process after creating a new user.")
+                            return
+                        }
                     }
                 })
-            }))
-            self.present(alert, animated: true, completion: nil)
+
             }
             
         }
