@@ -144,6 +144,7 @@ class RegisterEmailViewController: UIViewController {
                             
                             //Input additional information about useer to the Firebase
                             self.db.collection("users").document(user!.uid).setData([
+                                "uid": user!.uid,
                                 "name": name!,
                                 "phoneNumber": phoneNumber!
                             ], merge: true) { err in
