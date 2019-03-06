@@ -48,6 +48,8 @@ class ProfileViewController: UIViewController {
         handle = Auth.auth().addStateDidChangeListener { (auth, user) in
             self.user = user
             self.setProfileLabelsFromFirebase()
+            self.view.setNeedsLayout()
+            self.view.layoutIfNeeded()
         }
         // END auth_listener
     }
@@ -74,36 +76,37 @@ class ProfileViewController: UIViewController {
     }
     
     @IBAction func changePasswordButtonDidTap(_ sender: UIButton) {
+        updatePassword(alertTitle: "Edit your password", alertFirstPlaceHolder: "Enter your new password", alertSecondPlaceHolder: "Repeat your new password")
     }
     
     @IBAction func editPhoto(_ sender: UIButton) {
     }
     
     @IBAction func editNameButton(_ sender: Any) {
-        nameLabel.text = editAlert(alertTitle: "Edit your name", alertPlaceHolder: "Enter your name", fieldName: "name")
+        editAlert(alertTitle: "Edit your name", alertPlaceHolder: "Enter your name", fieldName: "name", label: nameLabel)
     }
     
     
     @IBAction func editEmailButton(_ sender: Any) {
-
+        updateEmail(alertTitle: "Edit your email", alertPlaceHolder: "Enter your email")
     }
     
     @IBAction func editPhoneNumberButton(_ sender: Any) {
-        phoneNumberLabel.text = editAlert(alertTitle: "Edit your phone number", alertPlaceHolder: "Enter your  phone number", fieldName: "phoneNumber")
+        editAlert(alertTitle: "Edit your phone number", alertPlaceHolder: "Enter your  phone number", fieldName: "phoneNumber", label: phoneNumberLabel)
     }
     
     @IBAction func editCarModelButton(_ sender: Any) {
-        carModelLabel.text = editAlert(alertTitle: "Edit your car model", alertPlaceHolder: "Enter your car model", fieldName: "carModel")
+        editAlert(alertTitle: "Edit your car model", alertPlaceHolder: "Enter your car model", fieldName: "carModel", label: carModelLabel)
     }
     
     @IBAction func editCarColorButton(_ sender: Any) {
-        carColorLabel.text = editAlert(alertTitle: "Edit your car color", alertPlaceHolder: "Enter your car color", fieldName: "carColor")
+        editAlert(alertTitle: "Edit your car color", alertPlaceHolder: "Enter your car color", fieldName: "carColor", label: carColorLabel)
     }
     
     //MARK: - Edit alert
 
-    func editAlert(alertTitle: String, alertPlaceHolder: String, fieldName: String) -> String {
-        var editStringValue: String = ""
+    func editAlert(alertTitle: String, alertPlaceHolder: String, fieldName: String, label: UILabel) {
+        var editNewValue: String = ""
         
         let alertController = UIAlertController(title: alertTitle, message: "", preferredStyle: UIAlertController.Style.alert)
         alertController.addTextField { (textField : UITextField!) -> Void in
@@ -117,9 +120,13 @@ class ProfileViewController: UIViewController {
             if let user = self.user {
                 self.db.collection("users").document(user.uid).setData([ fieldName: nameTextField.text ?? "" ], merge: true) { err in
                     if let err = err {
-                        print("Error writing document: \(err)")
+                        self.errorAlert(errorMessage: err.localizedDescription)
+                        print(err.localizedDescription)
                     } else {
-                        editStringValue = nameTextField.text ?? ""
+                        editNewValue = nameTextField.text ?? ""
+                        label.text = editNewValue
+                        self.view.setNeedsLayout()
+                        self.view.layoutIfNeeded()
                         print("Document successfully written!")
                     }
                 }
@@ -127,7 +134,6 @@ class ProfileViewController: UIViewController {
             else {
                 print("Error! User do not login")
             }
-            
         })
         
         let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default, handler: {
@@ -137,12 +143,102 @@ class ProfileViewController: UIViewController {
         alertController.addAction(cancelAction)
         
         self.present(alertController, animated: true, completion: nil)
-        
-        return editStringValue
     }
     
+    //MARK: - Update password in Firebase
     
-    //MARK - Get profile info from Firebase and set labels
+    func updatePassword(alertTitle: String, alertFirstPlaceHolder: String, alertSecondPlaceHolder: String) {
+        let alertController = UIAlertController(title: alertTitle, message: "", preferredStyle: UIAlertController.Style.alert)
+        alertController.addTextField { (textField : UITextField!) -> Void in
+            textField.placeholder = alertFirstPlaceHolder
+            textField.isSecureTextEntry = true
+        }
+        alertController.addTextField { (textField : UITextField!) -> Void in
+            textField.placeholder = alertSecondPlaceHolder
+            textField.isSecureTextEntry = true
+        }
+        
+        let saveAction = UIAlertAction(title: "Save", style: UIAlertAction.Style.default, handler: { alert -> Void in
+            let passwordFirstTextField = alertController.textFields![0] as UITextField
+            guard let newPassword = passwordFirstTextField.text else {return}
+            let passwordSecondTextField = alertController.textFields![1] as UITextField
+            guard let newPasswordRepeat = passwordSecondTextField.text else {return}
+            
+            if newPassword == newPasswordRepeat {
+
+                if let user = self.user {
+                    user.updatePassword(to: newPassword) { (error) in
+                        if error == nil {
+                            print("Password successfully updated!")
+                        }
+                        else {
+                            self.errorAlert(errorMessage: error!.localizedDescription)
+                            print(error!.localizedDescription)
+                        }
+                    }
+                }
+                else {
+                    print("Error! User do not login")
+                }
+            }
+            else {
+                self.errorAlert(errorMessage: "Password do not match!")
+            }
+            
+            
+
+        })
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default, handler: {
+            (action : UIAlertAction!) -> Void in })
+        
+        alertController.addAction(saveAction)
+        alertController.addAction(cancelAction)
+        
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    //MARK: - Update email in Firebase
+    
+    func updateEmail(alertTitle: String, alertPlaceHolder: String) {
+        let alertController = UIAlertController(title: alertTitle, message: "", preferredStyle: UIAlertController.Style.alert)
+        alertController.addTextField { (textField : UITextField!) -> Void in
+            textField.placeholder = alertPlaceHolder
+        }
+        
+        let saveAction = UIAlertAction(title: "Save", style: UIAlertAction.Style.default, handler: { alert -> Void in
+            let emailTextField = alertController.textFields![0] as UITextField
+            guard let newEmail = emailTextField.text else {return}
+            
+            if let user = self.user {
+                user.updateEmail(to: newEmail) { (error) in
+                    if error == nil {
+                        self.emailLabel.text = newEmail
+                        self.view.setNeedsLayout()
+                        self.view.layoutIfNeeded()
+                        print("Email successfully updated!")
+                    }
+                    else {
+                        self.errorAlert(errorMessage: error!.localizedDescription)
+                        print(error!.localizedDescription)
+                    }
+                }
+            }
+            else {
+                print("Error! User do not login")
+            }
+        })
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default, handler: {
+            (action : UIAlertAction!) -> Void in })
+        
+        alertController.addAction(saveAction)
+        alertController.addAction(cancelAction)
+        
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    //MARK: - Get profile info from Firebase and set labels
     
     func setProfileLabelsFromFirebase() {
         if let user = user {
@@ -151,7 +247,8 @@ class ProfileViewController: UIViewController {
             
             self.db.collection("users").whereField("uid", isEqualTo: user.uid).getDocuments { (snapshot, err) in
                 if let err = err {
-                    print("Error getting documents: \(err)")
+                    self.errorAlert(errorMessage: err.localizedDescription)
+                    print("Error getting documents: \(err.localizedDescription)")
                 } else {
                     let document = snapshot!.documents[0]
                     let docId = document.documentID
@@ -175,6 +272,12 @@ class ProfileViewController: UIViewController {
             print("Error! User do not login")
             self.dismiss(animated: true, completion: nil)
         }
+    }
+    
+    func errorAlert(errorMessage: String) {
+        let alert = UIAlertController(title: "Error", message: errorMessage, preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
     
     /*
