@@ -10,24 +10,36 @@ import Foundation
 import UIKit
 import GoogleMaps
 
+enum TripStatus {
+    case available
+    case booked
+    case started
+    case cancelled
+    case finished
+}
 
 class Ride {
     
     let startLocation: CLLocationCoordinate2D?
     let endLocation: CLLocationCoordinate2D?
     let tripStartTime: Date?
-    var estimatedArrivalTime: Date?
+    let estimatedArrivalTime: Date?
+    var tripDuration: String? = ""
     var stopOvers = [StopOver?]()
-    let car: Car?
+
     var distance: Double = 0.0
+    var numberOfSeats: Int = 3
+    var tripStatus: TripStatus?
+    var price: Float?
     
-    init(startLocation: CLLocationCoordinate2D, endLocation: CLLocationCoordinate2D, tripStartTime: Date, estimatedArrivalTime: Date, stopOvers: [ StopOver]?, car: Car?) {
+    init(startLocation: CLLocationCoordinate2D, endLocation: CLLocationCoordinate2D, tripStartTime: Date, estimatedArrivalTime: Date, tripDuration: String) {
         self.startLocation = startLocation
         self.endLocation = endLocation
         self.tripStartTime = tripStartTime
         self.estimatedArrivalTime = estimatedArrivalTime
-        self.stopOvers = stopOvers ?? []
-        self.car = car
+        self.tripDuration = tripDuration
+        //self.stopOvers = stopOvers ?? []
+        //self.car = car
     }
     
 }
