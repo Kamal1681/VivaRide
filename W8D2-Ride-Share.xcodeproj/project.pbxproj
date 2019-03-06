@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		150C9E14222F57A700411407 /* EnterCarDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150C9E13222F57A700411407 /* EnterCarDetails.swift */; };
 		15B2CA3C2229CC2700ADFF46 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15B2CA3B2229CC2700ADFF46 /* UserProfile.swift */; };
 		15B2CA3E2229CC3A00ADFF46 /* Ride.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15B2CA3D2229CC3A00ADFF46 /* Ride.swift */; };
 		15B2CA402229FEB300ADFF46 /* SearchResultsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15B2CA3F2229FEB300ADFF46 /* SearchResultsController.swift */; };
@@ -43,7 +42,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		150C9E13222F57A700411407 /* EnterCarDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterCarDetails.swift; sourceTree = "<group>"; };
 		15B2CA3B2229CC2700ADFF46 /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		15B2CA3D2229CC3A00ADFF46 /* Ride.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ride.swift; sourceTree = "<group>"; };
 		15B2CA3F2229FEB300ADFF46 /* SearchResultsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsController.swift; sourceTree = "<group>"; };
@@ -137,7 +135,6 @@
 				E90D3D1222285F700083BAB8 /* RideDetailsViewController.swift */,
 				E90D3D1C222860260083BAB8 /* BookRideConfirmationViewController.swift */,
 				E90D3D1622285FC30083BAB8 /* OfferRideViewController.swift */,
-				150C9E13222F57A700411407 /* EnterCarDetails.swift */,
 				E90D3D2C222865050083BAB8 /* StopoversTableViewCell.swift */,
 				E90D3D1822285FE20083BAB8 /* OfferRideDetailsViewController.swift */,
 				E90D3D1A222860030083BAB8 /* OfferRideConfirmationViewController.swift */,
@@ -335,7 +332,6 @@
 				E90D3D31222865480083BAB8 /* RidesOfferedTableViewCell.swift in Sources */,
 				E90D3D1922285FE20083BAB8 /* OfferRideDetailsViewController.swift in Sources */,
 				E90D3D332228656B0083BAB8 /* PassengersListTableViewCell.swift in Sources */,
-				150C9E14222F57A700411407 /* EnterCarDetails.swift in Sources */,
 				E90D3D1722285FC30083BAB8 /* OfferRideViewController.swift in Sources */,
 				E90D3D25222861340083BAB8 /* OfferedRideDetailsViewController.swift in Sources */,
 				E995BA81222A215F00E9CA40 /* RegisterEmailViewController.swift in Sources */,

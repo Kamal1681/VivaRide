@@ -14,19 +14,20 @@ class OfferRideViewController: UIViewController, UISearchBarDelegate, LocateOnTh
     
     @IBOutlet weak var tripDate: UIDatePicker!
     @IBOutlet weak var mapView: UIView!
-    @IBOutlet weak var startPointText: UINavigationItem!
-    @IBOutlet weak var endPointText: UINavigationItem!
-    @IBOutlet weak var reviewTripDetails: UIButton!
+    @IBOutlet weak var startAddress: UINavigationItem!
+    @IBOutlet weak var destinationAddress: UINavigationItem!
+    @IBOutlet weak var nextButtton: UIButton!
 
-    @IBOutlet weak var reviewTripDetailsText: UITextField!
+    
     var searchResultController:SearchResultsController!
-    var resultsArray = [String]()
+    var resultsArray = [String]() //autocomplete results
     var googleMapsView: GMSMapView!
     var startPoint: CLLocationCoordinate2D?
     var endPoint: CLLocationCoordinate2D?
     var startPointEndPointFlag: Bool = false
     var tripStartTime: Date?
-    var estimtedArrivalTime: Date?
+    var estimatedArrivalTime: Date?
+    var tripDuration: String? = ""
     
 
     override func viewDidLoad() {
@@ -53,13 +54,6 @@ class OfferRideViewController: UIViewController, UISearchBarDelegate, LocateOnTh
     @IBAction func backButton(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
-    
-    func showSearchController(_ sender: AnyObject) {
-        let searchController = UISearchController(searchResultsController: searchResultController)
-        searchController.searchBar.delegate = self
-        self.present(searchController, animated: true, completion: nil)
- 
-    }
 
     @IBAction func searchForPickUpLocation(_ sender: Any) {
         startPointEndPointFlag = false
@@ -70,6 +64,13 @@ class OfferRideViewController: UIViewController, UISearchBarDelegate, LocateOnTh
     @IBAction func searchForDropOffLocation(_ sender: Any) {
         startPointEndPointFlag = true
         showSearchController(self)
+        
+    }
+    
+    func showSearchController(_ sender: AnyObject) {
+        let searchController = UISearchController(searchResultsController: searchResultController)
+        searchController.searchBar.delegate = self
+        self.present(searchController, animated: true, completion: nil)
         
     }
     
@@ -89,20 +90,41 @@ class OfferRideViewController: UIViewController, UISearchBarDelegate, LocateOnTh
         }
         
     }
-    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let startPoint = startPoint, let endPoint = endPoint, let tripStartTime = tripStartTime, let estimatedArrivalTime = estimatedArrivalTime, let tripDuration = tripDuration else {
+            return
+        }
+        if segue.identifier == "showNextSteps"
+        {
+            let offerRideDetailViewController: OfferRideDetailsViewController = segue.destination as! OfferRideDetailsViewController
+            let ride = Ride.init(startLocation: startPoint, endLocation: endPoint, tripStartTime: tripStartTime, estimatedArrivalTime: estimatedArrivalTime, tripDuration: tripDuration)
+            offerRideDetailViewController.ride = ride
+            offerRideDetailViewController.startAddress = startAddress.title
+            offerRideDetailViewController.destinationAddress = destinationAddress.title
+            let dateformatter = DateFormatter()
+            dateformatter.dateStyle = DateFormatter.Style.long
+            dateformatter.timeStyle = DateFormatter.Style.long
+            let startTimeText = dateformatter.string(from: tripStartTime)
+            let estimatedArrivalTimeText = dateformatter.string(from: self.estimatedArrivalTime!)
+            offerRideDetailViewController.startTimeText = startTimeText
+        offerRideDetailViewController.estimatedArrivalTimeText = estimatedArrivalTimeText
+            offerRideDetailViewController.tripDuration = tripDuration
+        }
+    }
+
     func createPath(position: CLLocationCoordinate2D, title: String) {
  
         
         if(!startPointEndPointFlag) {
             startPoint = position
             let marker1 = GMSMarker(position: startPoint!)
-            self.startPointText.title = title
+            self.startAddress.title = title
             marker1.map = googleMapsView
         }
         else {
             endPoint = position
             let marker2 = GMSMarker(position: endPoint!)
-            self.endPointText.title = title
+            self.destinationAddress.title = title
             marker2.map = googleMapsView
             
         }
@@ -196,6 +218,7 @@ class OfferRideViewController: UIViewController, UISearchBarDelegate, LocateOnTh
         print("\(distance) km")
 
     }
+    
     func calculateEstimatedTime() {
         
         guard let startPoint = startPoint, let endPoint = endPoint else {
@@ -217,6 +240,7 @@ class OfferRideViewController: UIViewController, UISearchBarDelegate, LocateOnTh
                     print(timeInSeconds)
                     
                     self.calculateEndTime(timeInSeconds: timeInSeconds)
+                    self.calculateDuration(timeInSeconds: timeInSeconds)
                 }
             }
             catch {
@@ -235,17 +259,31 @@ class OfferRideViewController: UIViewController, UISearchBarDelegate, LocateOnTh
             return
         }
         
-        estimtedArrivalTime = Calendar.current.date(byAdding: .second, value: timeInSeconds, to: tripStartTime)
+        estimatedArrivalTime = Calendar.current.date(byAdding: .second, value: timeInSeconds, to: tripStartTime)
         
-        print(tripStartTime)
-        print(estimtedArrivalTime)
-        let ride = Ride.init(startLocation: startPoint!, endLocation: endPoint!, tripStartTime: tripStartTime, estimatedArrivalTime: estimtedArrivalTime!, stopOvers: nil, car: nil)
+        
         DispatchQueue.main.async {
-            self.reviewTripDetails.isHidden = false
-            self.reviewTripDetailsText.isHidden = false
+            self.nextButtton.isHidden = false
+            
 
         }
 
+    }
+    
+    func calculateDuration(timeInSeconds: Int){
+        
+            let days = timeInSeconds / 86400
+            let hours = (timeInSeconds % 86400) / 3600
+            let minutes = ((timeInSeconds % 86400) % 3600) / 60
+        if days != 0 {
+            tripDuration = "\(days) days, \(hours) hours, \(minutes) minutes"
+        } else if hours != 0 {
+            tripDuration = "\(hours) hours, \(minutes) minutes"
+        } else {
+            tripDuration = "\(minutes) minutes"
+        }
+        
+           
     }
 
     /*
