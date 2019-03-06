@@ -16,6 +16,9 @@ class OfferRideViewController: UIViewController, UISearchBarDelegate, LocateOnTh
     @IBOutlet weak var mapView: UIView!
     @IBOutlet weak var startPointText: UINavigationItem!
     @IBOutlet weak var endPointText: UINavigationItem!
+    @IBOutlet weak var reviewTripDetails: UIButton!
+
+    @IBOutlet weak var reviewTripDetailsText: UITextField!
     var searchResultController:SearchResultsController!
     var resultsArray = [String]()
     var googleMapsView: GMSMapView!
@@ -35,12 +38,18 @@ class OfferRideViewController: UIViewController, UISearchBarDelegate, LocateOnTh
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.googleMapsView = GMSMapView(frame: self.mapView.frame)
-
+        tripStartTime = tripDate.date
+        print(tripDate.date)
         self.view.addSubview(self.googleMapsView)
         searchResultController = SearchResultsController()
         searchResultController.delegate = self
     }
     
+    @IBAction func setStartTime(_ sender: Any) {
+
+        tripStartTime = tripDate.date
+        calculateEstimatedTime()
+    }
     @IBAction func backButton(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
@@ -95,13 +104,13 @@ class OfferRideViewController: UIViewController, UISearchBarDelegate, LocateOnTh
             let marker2 = GMSMarker(position: endPoint!)
             self.endPointText.title = title
             marker2.map = googleMapsView
+            
         }
         
         guard let startPoint = startPoint, let endPoint = endPoint else {
             return
         }
         
-        if ((startPoint != nil) && (endPoint != nil)) {
             
             let path = GMSMutablePath()
             path.add(CLLocationCoordinate2D(latitude: (startPoint.latitude), longitude: (startPoint.longitude)))
@@ -141,30 +150,19 @@ class OfferRideViewController: UIViewController, UISearchBarDelegate, LocateOnTh
                             let cameraBounds = GMSCoordinateBounds.init(coordinate: startPoint, coordinate: endPoint)
                            let camera = GMSCameraUpdate.fit(cameraBounds)
                             GMSCameraUpdate.fit(cameraBounds)
+
                             self.googleMapsView.animate(with: camera)
-                           
                         }
-                        
                     }
                 } catch {
                     print("Error")
             }
         }
-        
             task.resume()
             calculateDistance()
-            calculateEstimatedTime()
-        }
-        
     }
     
-//    @objc func rideOptions(_ sender: UITapGestureRecognizer) {
-//
-//        let confirmationViewController = storyboard?.instantiateViewController(withIdentifier: "confirm ride") as! OfferRideConfirmationViewController
-//        self.addChild(confirmationViewController)
-//        self.view.addSubview(confirmationViewController.view)
-//        confirmationViewController.didMove(toParent: self)
-//    }
+
     
     func searchBar(_ searchBar: UISearchBar,
                    textDidChange searchText: String){
@@ -215,9 +213,10 @@ class OfferRideViewController: UIViewController, UISearchBarDelegate, LocateOnTh
                     let legs = routes.value(forKey: "legs") as! NSArray
                     //let city = results[0].address_components value(forKey: "address_components")
                     let duration = legs.value(forKey: "duration") as! NSArray
-                    let timeInSeconds = (duration.object(at: 0) as! NSArray).value(forKey: "value")
+                    let timeInSeconds = ((duration.object(at: 0) as! NSArray).value(forKey: "value") as! Array<Int>)[0]
                     print(timeInSeconds)
-                    //self.calculateEndTime(timeInSeconds: timeInSeconds as! Int)
+                    
+                    self.calculateEndTime(timeInSeconds: timeInSeconds)
                 }
             }
             catch {
@@ -226,17 +225,29 @@ class OfferRideViewController: UIViewController, UISearchBarDelegate, LocateOnTh
             
         }
         task.resume()
+
         
     }
     
     func calculateEndTime(timeInSeconds: Int) {
-        
+
         guard let tripStartTime = tripStartTime else {
             return
         }
+        
         estimtedArrivalTime = Calendar.current.date(byAdding: .second, value: timeInSeconds, to: tripStartTime)
+        
         print(tripStartTime)
+        print(estimtedArrivalTime)
+        let ride = Ride.init(startLocation: startPoint!, endLocation: endPoint!, tripStartTime: tripStartTime, estimatedArrivalTime: estimtedArrivalTime!, stopOvers: nil, car: nil)
+        DispatchQueue.main.async {
+            self.reviewTripDetails.isHidden = false
+            self.reviewTripDetailsText.isHidden = false
+
+        }
+
     }
+
     /*
     // MARK: - Navigation
 

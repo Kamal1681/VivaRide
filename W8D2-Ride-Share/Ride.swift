@@ -13,20 +13,20 @@ import GoogleMaps
 
 class Ride {
     
-    let startLocation: CLLocation?
-    let endLocation: CLLocation?
+    let startLocation: CLLocationCoordinate2D?
+    let endLocation: CLLocationCoordinate2D?
     let tripStartTime: Date?
-    var tripEndTime: Date?
+    var estimatedArrivalTime: Date?
     var stopOvers = [StopOver?]()
     let car: Car?
     var distance: Double = 0.0
-    var estimatedArrivalTime: Date?
     
-    init(startLocation: CLLocation, endLocation: CLLocation, tripStartTime: Date, stopOvers: [ StopOver], car: Car) {
+    init(startLocation: CLLocationCoordinate2D, endLocation: CLLocationCoordinate2D, tripStartTime: Date, estimatedArrivalTime: Date, stopOvers: [ StopOver]?, car: Car?) {
         self.startLocation = startLocation
         self.endLocation = endLocation
         self.tripStartTime = tripStartTime
-        self.stopOvers = stopOvers
+        self.estimatedArrivalTime = estimatedArrivalTime
+        self.stopOvers = stopOvers ?? []
         self.car = car
     }
     
