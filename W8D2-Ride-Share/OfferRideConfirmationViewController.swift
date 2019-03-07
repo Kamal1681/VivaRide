@@ -8,7 +8,6 @@
 
 import UIKit
 import Firebase
-import Geofirestore
 
 class OfferRideConfirmationViewController: UIViewController {
     //Setting Firestore
