@@ -7,9 +7,19 @@
 //
 
 import UIKit
+import Firebase
 
 class OfferRideDetailsViewController: UIViewController {
-
+    
+    //Setting Firestore
+    var db: Firestore!
+    var settings: FirestoreSettings!
+    
+    //Handler for checking user aithorization
+    var user: FirebaseAuth.User?
+    var handle: AuthStateDidChangeListenerHandle? = nil
+    
+    //Other properties
     var ride: Ride?
     var startAddress: String?
     var destinationAddress: String?
@@ -24,6 +34,7 @@ class OfferRideDetailsViewController: UIViewController {
     @IBOutlet weak var startTimeLabel: UILabel!
     @IBOutlet weak var estimatedArrivalTimeLabel: UILabel!
     @IBOutlet weak var tripDurationLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -33,11 +44,21 @@ class OfferRideDetailsViewController: UIViewController {
         estimatedArrivalTimeLabel.text = estimatedArrivalTimeText
         tripDurationLabel.text = tripDuration
         
-        
-
-        // Do any additional setup after loading the view.
+        // START setup for Firestore
+        settings = FirestoreSettings()
+        Firestore.firestore().settings = settings
+        db = Firestore.firestore()
+        // END setup for Firestore
     }
-    
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        // START auth_listener
+        handle = Auth.auth().addStateDidChangeListener { (auth, user) in
+            self.user = user
+        }
+        // END auth_listener
+    }
 
     @IBAction func backButton(_ sender: Any) {
         
@@ -59,11 +80,60 @@ class OfferRideDetailsViewController: UIViewController {
         ride.numberOfSeats = Int(numberOfSeatsLabel.text!)!
         ride.price = Float(priceLabel.text!)!
         
+        //Create a new ride in Firestore
+        createRide(startPoint: GeoPoint(latitude: ride.startLocation!.latitude, longitude: ride.startLocation!.longitude), endPoint: GeoPoint(latitude: ride.endLocation!.latitude, longitude: ride.endLocation!.longitude), startTimeDate: ride.tripStartTime!, estimatedArrivalTime: ride.estimatedArrivalTime!, tripDuration: ride.tripDuration!, distance: ride.distance, numberOfSeats: ride.numberOfSeats, price: ride.price!)
+        
     }
     
     @IBAction func editPrice(_ sender: UIStepper!) {
         priceLabel.text = String(sender.value)
     }
+    
+    
+    //MARK: Create new ride
+    func createRide(startPoint: GeoPoint, endPoint: GeoPoint, startTimeDate: Date, estimatedArrivalTime: Date, tripDuration: String, distance: Double, numberOfSeats:Int, price: Float) {
+        if let user = self.user {
+            //Create a new ride document in Firestore
+            
+            var ref: DocumentReference? = nil
+            ref = db.collection("rides").addDocument(data: [
+                "rideID": ref?.documentID ?? "noRideID",
+                "userID": user.uid,
+                "status": 1,
+                "startPoint": startPoint,
+                "endPoint": endPoint,
+                "startTimeDate": startTimeDate,
+                "estimatedArrivalTime": estimatedArrivalTime,
+                "tripDuration": tripDuration,
+                "distance": distance,
+                "numberOfSeats": numberOfSeats,
+                "price": price
+            ]) { err in
+                if let err = err {
+                    print("Error adding document: \(err.localizedDescription)")
+                } else {
+                    print("Document added with ID: \(ref!.documentID)")
+                    // Add rideID as a documentID
+                    self.addRideID(documentID: ref!.documentID)
+                }
+            }
+        }
+        else {
+            print("Error! User do not login")
+        }
+    }
+    
+    //MARK: Add rideID to the newly created ride
+    func addRideID(documentID: String) {
+        db.collection("rides").document(documentID).setData([ "rideID": documentID ], merge: true) { err in
+            if let err = err {
+                print("Error writing document: \(err.localizedDescription)")
+            } else {
+                print("RideID successfully written!")
+            }
+        }
+    }
+    
     /*
      @IBAction func confirm(_ sender: Any) {
      }

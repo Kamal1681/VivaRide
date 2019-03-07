@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="DGe-o0-boh">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="29J-32-PEq">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -2387,22 +2387,32 @@
                                     </label>
                                 </subviews>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RfU-Ek-isP">
+                                <rect key="frame" x="20" y="500.5" width="335" height="30"/>
+                                <state key="normal" title="Query"/>
+                                <connections>
+                                    <action selector="queryButton:" destination="29J-32-PEq" eventType="touchUpInside" id="hb6-jx-kdK"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="mN3-ga-4Is" firstAttribute="leading" secondItem="0aU-0Q-EM9" secondAttribute="leading" constant="20" id="1Dn-iF-bqQ"/>
+                            <constraint firstItem="RfU-Ek-isP" firstAttribute="leading" secondItem="0aU-0Q-EM9" secondAttribute="leading" constant="20" id="4nW-zG-cYc"/>
                             <constraint firstItem="0aU-0Q-EM9" firstAttribute="trailing" secondItem="e57-kx-xPg" secondAttribute="trailing" constant="20" id="Bzf-tY-gfN"/>
                             <constraint firstItem="e57-kx-xPg" firstAttribute="top" secondItem="FJh-aj-eEV" secondAttribute="bottom" constant="5" id="I11-Bb-a1K"/>
                             <constraint firstItem="g7D-Aj-Atp" firstAttribute="top" secondItem="Dgw-fO-sWm" secondAttribute="bottom" constant="5" id="Ils-Bm-ZFd"/>
                             <constraint firstItem="0aU-0Q-EM9" firstAttribute="trailing" secondItem="g7D-Aj-Atp" secondAttribute="trailing" constant="20" id="KNc-Yk-YHL"/>
                             <constraint firstItem="Dgw-fO-sWm" firstAttribute="leading" secondItem="0aU-0Q-EM9" secondAttribute="leading" constant="20" id="OPt-wd-iq7"/>
                             <constraint firstItem="0aU-0Q-EM9" firstAttribute="trailing" secondItem="mN3-ga-4Is" secondAttribute="trailing" constant="20" id="W28-BM-ba4"/>
+                            <constraint firstItem="0aU-0Q-EM9" firstAttribute="trailing" secondItem="RfU-Ek-isP" secondAttribute="trailing" constant="20" id="WWS-0b-OdR"/>
                             <constraint firstItem="0aU-0Q-EM9" firstAttribute="trailing" secondItem="Dgw-fO-sWm" secondAttribute="trailing" constant="20" id="Zj8-bV-afY"/>
                             <constraint firstItem="FJh-aj-eEV" firstAttribute="leading" secondItem="0aU-0Q-EM9" secondAttribute="leading" constant="20" id="cvE-Ac-DLh"/>
                             <constraint firstItem="e57-kx-xPg" firstAttribute="leading" secondItem="0aU-0Q-EM9" secondAttribute="leading" constant="20" id="ep9-AQ-HU1"/>
                             <constraint firstItem="0aU-0Q-EM9" firstAttribute="trailing" secondItem="FJh-aj-eEV" secondAttribute="trailing" constant="20" id="f6I-v1-3dt"/>
                             <constraint firstItem="g7D-Aj-Atp" firstAttribute="leading" secondItem="0aU-0Q-EM9" secondAttribute="leading" constant="20" id="pN4-RS-PKn"/>
                             <constraint firstItem="Dgw-fO-sWm" firstAttribute="top" secondItem="0aU-0Q-EM9" secondAttribute="top" constant="10" id="pS5-xj-VaE"/>
+                            <constraint firstItem="RfU-Ek-isP" firstAttribute="top" secondItem="mN3-ga-4Is" secondAttribute="bottom" constant="10" id="s5f-qJ-t32"/>
                             <constraint firstItem="mN3-ga-4Is" firstAttribute="top" secondItem="e57-kx-xPg" secondAttribute="bottom" constant="10" id="vnw-tW-kyE"/>
                             <constraint firstItem="FJh-aj-eEV" firstAttribute="top" secondItem="g7D-Aj-Atp" secondAttribute="bottom" constant="10" id="w1e-vw-9Sr"/>
                         </constraints>
@@ -2415,8 +2425,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="backButton" width="75" height="75"/>
-        <image name="icons8-forward-50" width="37.5" height="37.5"/>
-        <image name="profileDefaultPhoto" width="75" height="75"/>
+        <image name="backButton" width="100" height="100"/>
+        <image name="icons8-forward-50" width="50" height="50"/>
+        <image name="profileDefaultPhoto" width="100" height="100"/>
     </resources>
 </document>

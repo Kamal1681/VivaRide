@@ -121,7 +121,8 @@ class OfferRideConfirmationViewController: UIViewController {
     
     @IBAction func queryButton(_ sender: UIButton) {
         // Get all locations within 10 miles of startPoint
-        getDocumentNearBy(latitude: 37.7853889, longitude: -122.4056973, distance: 10)
+        getDocumentNearBy(latitude: 43.653226, longitude: -79.3831843, distance: 10)
+        print("Query button tapped.")
     }
     
 
