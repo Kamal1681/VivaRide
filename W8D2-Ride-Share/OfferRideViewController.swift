@@ -19,7 +19,7 @@ class OfferRideViewController: UIViewController, UISearchBarDelegate, LocateOnTh
     @IBOutlet weak var nextButtton: UIButton!
 
     
-    var searchResultController:SearchResultsController!
+    var searchResultController: SearchResultsController!
     var resultsArray = [String]() //autocomplete results
     var googleMapsView: GMSMapView!
     var startPoint: CLLocationCoordinate2D?
@@ -40,10 +40,11 @@ class OfferRideViewController: UIViewController, UISearchBarDelegate, LocateOnTh
         super.viewDidAppear(animated)
         self.googleMapsView = GMSMapView(frame: self.mapView.frame)
         tripStartTime = tripDate.date
-        print(tripDate.date)
+       
         self.view.addSubview(self.googleMapsView)
         searchResultController = SearchResultsController()
         searchResultController.delegate = self
+
     }
     
     @IBAction func setStartTime(_ sender: Any) {
@@ -96,18 +97,22 @@ class OfferRideViewController: UIViewController, UISearchBarDelegate, LocateOnTh
         }
         if segue.identifier == "showNextSteps"
         {
-            let offerRideDetailViewController: OfferRideDetailsViewController = segue.destination as! OfferRideDetailsViewController
             let ride = Ride.init(startLocation: startPoint, endLocation: endPoint, tripStartTime: tripStartTime, estimatedArrivalTime: estimatedArrivalTime, tripDuration: tripDuration)
+            
+            let offerRideDetailViewController: OfferRideDetailsViewController = segue.destination as! OfferRideDetailsViewController
+            
             offerRideDetailViewController.ride = ride
             offerRideDetailViewController.startAddress = startAddress.title
             offerRideDetailViewController.destinationAddress = destinationAddress.title
+            
             let dateformatter = DateFormatter()
             dateformatter.dateStyle = DateFormatter.Style.long
             dateformatter.timeStyle = DateFormatter.Style.long
             let startTimeText = dateformatter.string(from: tripStartTime)
             let estimatedArrivalTimeText = dateformatter.string(from: self.estimatedArrivalTime!)
+            
             offerRideDetailViewController.startTimeText = startTimeText
-        offerRideDetailViewController.estimatedArrivalTimeText = estimatedArrivalTimeText
+            offerRideDetailViewController.estimatedArrivalTimeText = estimatedArrivalTimeText
             offerRideDetailViewController.tripDuration = tripDuration
         }
     }
