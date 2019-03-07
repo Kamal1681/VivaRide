@@ -34,7 +34,6 @@
 		E95E06CA2229AAD400EA7D07 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E95E06C92229AAD400EA7D07 /* GoogleService-Info.plist */; };
 		E995BA81222A215F00E9CA40 /* RegisterEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E995BA80222A215F00E9CA40 /* RegisterEmailViewController.swift */; };
 		E9EAEE4B2225A4AD001DB057 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9EAEE4A2225A4AD001DB057 /* AppDelegate.swift */; };
-		E9EAEE4D2225A4AD001DB057 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9EAEE4C2225A4AD001DB057 /* ViewController.swift */; };
 		E9EAEE502225A4AD001DB057 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E9EAEE4E2225A4AD001DB057 /* Main.storyboard */; };
 		E9EAEE532225A4AE001DB057 /* W8D2_Ride_Share.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E9EAEE512225A4AE001DB057 /* W8D2_Ride_Share.xcdatamodeld */; };
 		E9EAEE552225A4AF001DB057 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E9EAEE542225A4AF001DB057 /* Assets.xcassets */; };
@@ -72,7 +71,6 @@
 		E995BA80222A215F00E9CA40 /* RegisterEmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterEmailViewController.swift; sourceTree = "<group>"; };
 		E9EAEE472225A4AD001DB057 /* W8D2-Ride-Share.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "W8D2-Ride-Share.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9EAEE4A2225A4AD001DB057 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		E9EAEE4C2225A4AD001DB057 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		E9EAEE4F2225A4AD001DB057 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E9EAEE522225A4AE001DB057 /* W8D2_Ride_Share.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = W8D2_Ride_Share.xcdatamodel; sourceTree = "<group>"; };
 		E9EAEE542225A4AF001DB057 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -152,7 +150,6 @@
 				E95E06C92229AAD400EA7D07 /* GoogleService-Info.plist */,
 				E9EAEE592225A4AF001DB057 /* Info.plist */,
 				E9EAEE512225A4AE001DB057 /* W8D2_Ride_Share.xcdatamodeld */,
-				E9EAEE4C2225A4AD001DB057 /* ViewController.swift */,
 			);
 			path = "W8D2-Ride-Share";
 			sourceTree = "<group>";
@@ -343,7 +340,6 @@
 				E90D3D1322285F700083BAB8 /* RideDetailsViewController.swift in Sources */,
 				E9EAEE532225A4AE001DB057 /* W8D2_Ride_Share.xcdatamodeld in Sources */,
 				E90D3D2B222864C40083BAB8 /* AvailableRidesTableViewCell.swift in Sources */,
-				E9EAEE4D2225A4AD001DB057 /* ViewController.swift in Sources */,
 				E90D3D1F222860640083BAB8 /* RidesBookedViewController.swift in Sources */,
 				E90D3D1122285F570083BAB8 /* AvailableRidesViewController.swift in Sources */,
 				E90D3D1B222860030083BAB8 /* OfferRideConfirmationViewController.swift in Sources */,

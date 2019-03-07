@@ -7,16 +7,23 @@
 //
 
 import UIKit
+import GoogleMaps
 
 class AvailableRidesViewController: UIViewController {
-
+    var startPoint: CLLocationCoordinate2D?
+    var endPoint: CLLocationCoordinate2D?
+    var tripStartTime: Date?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
     
-
+    @IBAction func backButton(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     /*
     // MARK: - Navigation
 

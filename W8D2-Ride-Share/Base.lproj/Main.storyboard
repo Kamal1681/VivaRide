@@ -811,6 +811,7 @@
                                         </constraints>
                                         <state key="normal" title="Back" image="backButton"/>
                                         <connections>
+                                            <action selector="backButton:" destination="gL2-Ny-mbN" eventType="touchUpInside" id="yQS-Sf-o48"/>
                                             <action selector="backButton:" destination="iUf-UW-2fR" eventType="touchUpInside" id="zHP-vq-6k7"/>
                                         </connections>
                                     </button>
@@ -823,7 +824,7 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="2tq-5i-fQq">
-                                <rect key="frame" x="20" y="65" width="335" height="183"/>
+                                <rect key="frame" x="20" y="65" width="335" height="159"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pick-up" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1sG-NX-dle">
                                         <rect key="frame" x="0.0" y="0.0" width="335" height="20.5"/>
@@ -831,43 +832,73 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="cRF-ob-VvW">
-                                        <rect key="frame" x="0.0" y="30.5" width="335" height="56"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </searchBar>
+                                    <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tlp-h6-80f">
+                                        <rect key="frame" x="0.0" y="30.5" width="335" height="44"/>
+                                        <items>
+                                            <navigationItem id="a17-5T-Xal">
+                                                <barButtonItem key="rightBarButtonItem" systemItem="search" id="xg0-eC-dpQ">
+                                                    <connections>
+                                                        <action selector="searchForPickUpLocation:" destination="gL2-Ny-mbN" id="Ff5-AU-6vJ"/>
+                                                    </connections>
+                                                </barButtonItem>
+                                            </navigationItem>
+                                        </items>
+                                    </navigationBar>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Drop-off" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f9h-iG-CYA">
-                                        <rect key="frame" x="0.0" y="96.5" width="335" height="20.5"/>
+                                        <rect key="frame" x="0.0" y="84.5" width="335" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="Gqw-jz-jr0">
-                                        <rect key="frame" x="0.0" y="127" width="335" height="56"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </searchBar>
+                                    <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aT8-Tj-QPV">
+                                        <rect key="frame" x="0.0" y="115" width="335" height="44"/>
+                                        <items>
+                                            <navigationItem id="gny-Xx-asT">
+                                                <barButtonItem key="rightBarButtonItem" systemItem="search" id="AfP-yl-cPH">
+                                                    <connections>
+                                                        <action selector="searchForDropOffLocation:" destination="gL2-Ny-mbN" id="sMC-6U-bom"/>
+                                                    </connections>
+                                                </barButtonItem>
+                                            </navigationItem>
+                                        </items>
+                                    </navigationBar>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="f9h-iG-CYA" secondAttribute="trailing" id="2KZ-mq-1TM"/>
+                                    <constraint firstItem="Tlp-h6-80f" firstAttribute="leading" secondItem="2tq-5i-fQq" secondAttribute="leading" id="2mR-tw-GDa"/>
                                     <constraint firstItem="f9h-iG-CYA" firstAttribute="leading" secondItem="2tq-5i-fQq" secondAttribute="leading" id="4gi-UK-Hl9"/>
+                                    <constraint firstItem="aT8-Tj-QPV" firstAttribute="top" secondItem="f9h-iG-CYA" secondAttribute="bottom" constant="10" id="G7Y-Nb-Xsx"/>
                                     <constraint firstAttribute="trailing" secondItem="1sG-NX-dle" secondAttribute="trailing" id="RQG-qp-hd6"/>
                                     <constraint firstItem="1sG-NX-dle" firstAttribute="leading" secondItem="2tq-5i-fQq" secondAttribute="leading" id="cLs-4G-yXY"/>
+                                    <constraint firstAttribute="trailing" secondItem="aT8-Tj-QPV" secondAttribute="trailing" id="gjb-Dx-rj2"/>
+                                    <constraint firstItem="Tlp-h6-80f" firstAttribute="top" secondItem="1sG-NX-dle" secondAttribute="bottom" constant="10" id="jeY-3O-MhW"/>
+                                    <constraint firstItem="aT8-Tj-QPV" firstAttribute="leading" secondItem="2tq-5i-fQq" secondAttribute="leading" id="k5Z-Xv-1Kg"/>
+                                    <constraint firstAttribute="trailing" secondItem="Tlp-h6-80f" secondAttribute="trailing" id="mWw-ZU-idj"/>
+                                    <constraint firstAttribute="bottom" secondItem="aT8-Tj-QPV" secondAttribute="bottom" id="n6m-jb-nYU"/>
+                                    <constraint firstItem="f9h-iG-CYA" firstAttribute="top" secondItem="Tlp-h6-80f" secondAttribute="bottom" constant="10" id="qD7-zt-lcD"/>
                                 </constraints>
                             </stackView>
                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" datePickerMode="dateAndTime" minuteInterval="15" translatesAutoresizingMaskIntoConstraints="NO" id="MSW-bh-Rxv">
-                                <rect key="frame" x="20" y="258" width="335" height="100"/>
+                                <rect key="frame" x="20" y="234" width="335" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="v9k-Ue-B1M"/>
                                 </constraints>
                                 <date key="date" timeIntervalSinceReferenceDate="572894282.31422603">
                                     <!--2019-02-26 17:18:02 +0000-->
                                 </date>
+                                <connections>
+                                    <action selector="setStartTime:" destination="gL2-Ny-mbN" eventType="valueChanged" id="kXJ-5w-cwa"/>
+                                </connections>
                             </datePicker>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ix6-4c-NL8">
-                                <rect key="frame" x="20" y="368" width="335" height="30"/>
+                                <rect key="frame" x="20" y="344" width="335" height="30"/>
                                 <state key="normal" title="Search"/>
+                                <connections>
+                                    <segue destination="QrE-Re-Gbd" kind="presentation" identifier="search" id="4LA-iE-s1m"/>
+                                </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="RD4-9Z-jsR" userLabel="Search History Table View">
-                                <rect key="frame" x="20" y="408" width="335" height="239"/>
+                                <rect key="frame" x="20" y="384" width="335" height="263"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="76" id="cpz-ba-K7L" customClass="SearchHistoryTableViewCell" customModule="W8D2_Ride_Share" customModuleProvider="target">
@@ -934,6 +965,11 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="LB6-7g-Jea"/>
                     </view>
+                    <connections>
+                        <outlet property="destinationAddress" destination="gny-Xx-asT" id="X6V-9C-39Y"/>
+                        <outlet property="startAddress" destination="a17-5T-Xal" id="9XA-bT-Msg"/>
+                        <outlet property="tripDate" destination="MSW-bh-Rxv" id="J2Q-u6-f2u"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gkh-hy-49V" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="iUf-UW-2fR" userLabel="Exit" sceneMemberID="exit"/>
@@ -1067,6 +1103,9 @@
                                             <constraint firstAttribute="width" constant="30" id="HPC-GU-wlV"/>
                                         </constraints>
                                         <state key="normal" title="Back" image="backButton"/>
+                                        <connections>
+                                            <action selector="backButton:" destination="QrE-Re-Gbd" eventType="touchUpInside" id="BRf-2J-ts4"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Available rides" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yAR-Oh-5Nu">
                                         <rect key="frame" x="40" y="2.5" width="295" height="25.5"/>
@@ -1424,6 +1463,9 @@
                                         <rect key="frame" x="0.0" y="0.0" width="335" height="42"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                         <state key="normal" title="Find a ride"/>
+                                        <connections>
+                                            <segue destination="gL2-Ny-mbN" kind="presentation" id="Vse-9k-i4H"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nim-2i-eUy">
                                         <rect key="frame" x="0.0" y="64" width="335" height="42"/>
