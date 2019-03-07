@@ -13,6 +13,7 @@ import Geofirestore
 class OfferRideConfirmationViewController: UIViewController {
     //Setting Firestore
     var db: Firestore!
+    var settings: FirestoreSettings!
     
     //Handler for checking user aithorization
     var user: FirebaseAuth.User?
@@ -21,11 +22,16 @@ class OfferRideConfirmationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // START setup for Firestore
-        let settings = FirestoreSettings()
-        Firestore.firestore().settings = settings
+//        // START setup for Firestore
+//        let settings = FirestoreSettings()
+//        Firestore.firestore().settings = settings
+//        db = Firestore.firestore()
+//        // END setup for Firestore
+
         db = Firestore.firestore()
-        // END setup for Firestore
+        settings = db.settings
+        settings.areTimestampsInSnapshotsEnabled = true
+        db.settings = settings
         
     }
     
@@ -79,6 +85,44 @@ class OfferRideConfirmationViewController: UIViewController {
                 print("RideID successfully written!")
             }
         }
+    }
+    
+    //MARK: - Geo Query
+    
+    func getDocumentNearBy(latitude: Double, longitude: Double, distance: Double) {
+        
+        // ~1 mile of lat and lon in degrees
+        let lat = 0.0144927536231884
+        let lon = 0.0181818181818182
+        
+        let lowerLat = latitude - (lat * distance)
+        let lowerLon = longitude - (lon * distance)
+        
+        let greaterLat = latitude + (lat * distance)
+        let greaterLon = longitude + (lon * distance)
+        
+        let lesserGeopoint = GeoPoint(latitude: lowerLat, longitude: lowerLon)
+        let greaterGeopoint = GeoPoint(latitude: greaterLat, longitude: greaterLon)
+        
+        let docRef = db.collection("rides")
+        let query = docRef.whereField("startPoint", isGreaterThan: lesserGeopoint).whereField("startPoint", isLessThan: greaterGeopoint)
+        
+        query.getDocuments { snapshot, error in
+            if let error = error {
+                print("Error getting documents: \(error)")
+            } else {
+                for document in snapshot!.documents {
+                    print("\(document.documentID) => \(document.data())")
+                }
+            }
+        }
+        
+    }
+    
+    
+    @IBAction func queryButton(_ sender: UIButton) {
+        // Get all locations within 10 miles of startPoint
+        getDocumentNearBy(latitude: 37.7853889, longitude: -122.4056973, distance: 10)
     }
     
 
