@@ -62,6 +62,7 @@ class OfferRideViewController: UIViewController, UISearchBarDelegate, LocateOnTh
     }
 
     @IBAction func searchForPickUpLocation(_ sender: Any) {
+
         startPointEndPointFlag = false
         showSearchController(self)
         
@@ -184,6 +185,7 @@ class OfferRideViewController: UIViewController, UISearchBarDelegate, LocateOnTh
 
                             self.googleMapsView.animate(with: camera)
                             self.saveLine = true
+                            
                         }
                     }
                 } catch {
@@ -225,7 +227,7 @@ class OfferRideViewController: UIViewController, UISearchBarDelegate, LocateOnTh
         let startLocation = CLLocation(latitude: startPoint.latitude, longitude: startPoint.longitude)
         let endLocation = CLLocation(latitude: endPoint.latitude, longitude: endPoint.longitude)
         distance = (startLocation.distance(from: endLocation) / 1000.0)
-        print("\(distance) km")
+
 
     }
     

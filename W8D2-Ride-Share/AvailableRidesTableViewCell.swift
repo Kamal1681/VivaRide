@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import GoogleMaps
 
 class AvailableRidesTableViewCell: UITableViewCell {
     @IBOutlet weak var dateLabel: UILabel!
@@ -37,27 +38,56 @@ class AvailableRidesTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     func configureCell(ride: Ride) {
+
         
 //        dateLabel.text = "March-03-2019"
 //        startTimeLabel.text = "9:00 PM"
 //        estimatedArrivalTimeLabel.text = "11:00 AM"
-//        startPointLabel.text = "Toronto ON"
-//        endPointLabel.text = "Vancouver BC"
+        getAddressFromLocation(location: ride.startLocation!, complete: { (city) in
+            OperationQueue.main.addOperation {
+                self.startPointLabel.text = city
+            }
+        })
+        getAddressFromLocation(location: ride.endLocation!, complete: { (city) in
+            OperationQueue.main.addOperation {
+                self.endPointLabel.text = city
+            }
+       })
         driverName.text = ride.tripDuration
         price.text = ride.price?.description
         distanceLabel.text = "\(Int(ride.distance)) km"
         
         
-//        dateLabel.text = String(ride.tripStartTime)
-//        startTimeLabel.text =
-//        estimatedArrivalTimeLabel.text = ride.estimatedArrivalTime
-//        startPointLabel.text = ride.startLocation
-//        endPointLabel.text = ride.endLocation
-//        driverName.text = ride.driverName
-//        price.text = (ride.price as! String)
-//        distanceLabel.text = ride.distance
+    }
+    
+    func getAddressFromLocation (location: CLLocationCoordinate2D, complete: @escaping (String) -> Void) {
         
+        var city: String? = ""
+        let url = NSURL(string: "https://maps.googleapis.com/maps/api/geocode/json?latlng=\(String(describing: location.latitude)),\(String(describing: location.longitude))&location_type=APPROXIMATE&result_type=locality&language=en&key=\(Constants.googleApiKey)")
+        
+        let task = URLSession.shared.dataTask(with: url! as URL) { (data, response, error) -> Void in
+            
+            do {
+                if data != nil{
+                    let dict = try JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.mutableLeaves) as!  NSDictionary
+                    let results = dict["results"] as! NSArray
+                    let addressComponents = results.value(forKey: "address_components") as! NSArray
+                    let components = (addressComponents[0] as! NSArray)[0] as! NSDictionary
+                    city = (components.value(forKey: "long_name") as! String)
+            
+                    complete(city ?? "")
+                }
+            }catch {
+                print("Error request")
+            }
+        }
+        task.resume()
         
     }
 
 }
+    
+        
+
+
+
