@@ -92,7 +92,7 @@ class OfferRideConfirmationViewController: UIViewController {
         
         var rideArray = [Ride]()
         
-        var geoPoinLocation =  rideArray[0].startLocation?.toGeopoint()
+//        var geoPoinLocation =  rideArray[0].startLocation?.toGeopoint()
         
         // ~1 mile of lat and lon in degrees
         let lat = 0.0144927536231884
