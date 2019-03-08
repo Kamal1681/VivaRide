@@ -28,6 +28,7 @@ class OfferRideViewController: UIViewController, UISearchBarDelegate, LocateOnTh
     var tripStartTime: Date?
     var estimatedArrivalTime: Date?
     var tripDuration: String? = ""
+    var distance: Double?
     
 
     override func viewDidLoad() {
@@ -92,12 +93,12 @@ class OfferRideViewController: UIViewController, UISearchBarDelegate, LocateOnTh
         
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let startPoint = startPoint, let endPoint = endPoint, let tripStartTime = tripStartTime, let estimatedArrivalTime = estimatedArrivalTime, let tripDuration = tripDuration else {
+        guard let startPoint = startPoint, let endPoint = endPoint, let tripStartTime = tripStartTime, let estimatedArrivalTime = estimatedArrivalTime, let tripDuration = tripDuration, let distance = distance else {
             return
         }
         if segue.identifier == "showNextSteps"
         {
-            let ride = Ride.init(startLocation: startPoint, endLocation: endPoint, tripStartTime: tripStartTime, estimatedArrivalTime: estimatedArrivalTime, tripDuration: tripDuration)
+            let ride = Ride.init(startLocation: startPoint, endLocation: endPoint, tripStartTime: tripStartTime, estimatedArrivalTime: estimatedArrivalTime, tripDuration: tripDuration, distance: distance)
             
             let offerRideDetailViewController: OfferRideDetailsViewController = segue.destination as! OfferRideDetailsViewController
             
@@ -137,7 +138,6 @@ class OfferRideViewController: UIViewController, UISearchBarDelegate, LocateOnTh
         guard let startPoint = startPoint, let endPoint = endPoint else {
             return
         }
-        
             
             let path = GMSMutablePath()
             path.add(CLLocationCoordinate2D(latitude: (startPoint.latitude), longitude: (startPoint.longitude)))
@@ -202,7 +202,7 @@ class OfferRideViewController: UIViewController, UISearchBarDelegate, LocateOnTh
                 return
             }
             for result in results!{
-                if let result = result as? GMSAutocompletePrediction{
+                if let result = result as? GMSAutocompletePrediction {
                     self.resultsArray.append(result.attributedFullText.string)
                 }
             }
@@ -219,7 +219,7 @@ class OfferRideViewController: UIViewController, UISearchBarDelegate, LocateOnTh
         
         let startLocation = CLLocation(latitude: startPoint.latitude, longitude: startPoint.longitude)
         let endLocation = CLLocation(latitude: endPoint.latitude, longitude: endPoint.longitude)
-        let distance = (startLocation.distance(from: endLocation) / 1000.0)
+        distance = (startLocation.distance(from: endLocation) / 1000.0)
         print("\(distance) km")
 
     }
@@ -251,11 +251,8 @@ class OfferRideViewController: UIViewController, UISearchBarDelegate, LocateOnTh
             catch {
                 print("Error")
             }
-            
         }
         task.resume()
-
-        
     }
     
     func calculateEndTime(timeInSeconds: Int) {
@@ -287,8 +284,6 @@ class OfferRideViewController: UIViewController, UISearchBarDelegate, LocateOnTh
         } else {
             tripDuration = "\(minutes) minutes"
         }
-        
-           
     }
 
     /*
