@@ -60,9 +60,6 @@ class Ride {
     var numberOfSeats: Int = 3
     var tripStatus: TripStatus?
     var price: Float?
-    var driverName: String? = ""
-    var driverPhoneNumber: String? = ""
-    var driverImage: String = ""
     
     
     init(startLocation: CLLocationCoordinate2D, endLocation: CLLocationCoordinate2D, tripStartTime: Date, estimatedArrivalTime: Date, tripDuration: String, distance: Double) {

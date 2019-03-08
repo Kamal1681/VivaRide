@@ -38,14 +38,16 @@ class AvailableRidesTableViewCell: UITableViewCell {
     }
     func configureCell(ride: Ride) {
         
-        dateLabel.text = "March-03-2019"
-        startTimeLabel.text = "9:00 PM"
-        estimatedArrivalTimeLabel.text = "11:00 AM"
-        startPointLabel.text = "Toronto ON"
-        endPointLabel.text = "Vancouver BC"
-        driverName.text = "Bob"
-        price.text = "20.0 $"
-        distanceLabel.text = "1000 km"
+//        dateLabel.text = "March-03-2019"
+//        startTimeLabel.text = "9:00 PM"
+//        estimatedArrivalTimeLabel.text = "11:00 AM"
+//        startPointLabel.text = "Toronto ON"
+//        endPointLabel.text = "Vancouver BC"
+        driverName.text = ride.tripDuration
+        price.text = ride.price?.description
+        distanceLabel.text = "\(Int(ride.distance)) km"
+        
+        
 //        dateLabel.text = String(ride.tripStartTime)
 //        startTimeLabel.text =
 //        estimatedArrivalTimeLabel.text = ride.estimatedArrivalTime
