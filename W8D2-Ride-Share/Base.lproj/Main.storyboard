@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="DGe-o0-boh">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="DGe-o0-boh">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -1644,7 +1644,7 @@
                                 <rect key="frame" x="0.0" y="487" width="375" height="180"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3Je-Bh-G5Y">
+                            <button opaque="NO" alpha="0.40000000000000002" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3Je-Bh-G5Y">
                                 <rect key="frame" x="239" y="406" width="116" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="icons8-forward-50">
@@ -2201,7 +2201,7 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="i1U-sg-yib">
-                                <rect key="frame" x="99" y="591" width="177" height="35.5"/>
+                                <rect key="frame" x="99" y="604" width="177" height="35.5"/>
                                 <state key="normal">
                                     <attributedString key="attributedTitle">
                                         <fragment content="Confirm">
@@ -2217,7 +2217,7 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" alignment="center" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="r6g-h7-fFb">
-                                <rect key="frame" x="17.5" y="247" width="300" height="336"/>
+                                <rect key="frame" x="37.5" y="260" width="300" height="336"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Start Address" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="anz-zw-fQ1">
@@ -2229,7 +2229,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TgJ-Jn-x4w">
                                         <rect key="frame" x="43.5" y="35.5" width="213" height="20.5"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="213" id="rRV-dz-ucw"/>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="213" id="rRV-dz-ucw"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
@@ -2307,7 +2307,7 @@
                             <constraint firstItem="KMS-SY-pXw" firstAttribute="leading" secondItem="OQZ-FW-bkI" secondAttribute="leading" constant="20" id="CM5-fP-ckG"/>
                             <constraint firstItem="cC4-QT-12e" firstAttribute="leading" secondItem="OQZ-FW-bkI" secondAttribute="leading" constant="20" id="CYw-i4-Z27"/>
                             <constraint firstItem="OQZ-FW-bkI" firstAttribute="trailing" secondItem="0Tx-H5-N1b" secondAttribute="trailing" constant="20" id="J4S-IV-y5y"/>
-                            <constraint firstItem="OQZ-FW-bkI" firstAttribute="bottom" secondItem="i1U-sg-yib" secondAttribute="bottom" constant="40.5" id="LDO-gF-81D"/>
+                            <constraint firstItem="OQZ-FW-bkI" firstAttribute="bottom" secondItem="i1U-sg-yib" secondAttribute="bottom" constant="27.5" id="LDO-gF-81D"/>
                             <constraint firstItem="OQZ-FW-bkI" firstAttribute="trailing" secondItem="cC4-QT-12e" secondAttribute="trailing" constant="20" id="Pcc-m5-xs0"/>
                             <constraint firstItem="0Tx-H5-N1b" firstAttribute="leading" secondItem="OQZ-FW-bkI" secondAttribute="leading" constant="20" id="QIH-RC-uxX"/>
                             <constraint firstItem="cC4-QT-12e" firstAttribute="top" secondItem="fUk-0M-YLp" secondAttribute="bottom" constant="45" id="Rt0-rN-opf"/>
@@ -2427,8 +2427,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="backButton" width="100" height="100"/>
-        <image name="icons8-forward-50" width="50" height="50"/>
-        <image name="profileDefaultPhoto" width="100" height="100"/>
+        <image name="backButton" width="75" height="75"/>
+        <image name="icons8-forward-50" width="37.5" height="37.5"/>
+        <image name="profileDefaultPhoto" width="75" height="75"/>
     </resources>
 </document>

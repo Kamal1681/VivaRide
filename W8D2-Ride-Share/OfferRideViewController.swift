@@ -29,23 +29,27 @@ class OfferRideViewController: UIViewController, UISearchBarDelegate, LocateOnTh
     var estimatedArrivalTime: Date?
     var tripDuration: String? = ""
     var distance: Double?
+    var saveLine: Bool = false
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.nextButtton.isUserInteractionEnabled = false
+        
         // Do any additional setup after loading the view.
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.googleMapsView = GMSMapView(frame: self.mapView.frame)
-        tripStartTime = tripDate.date
-       
-        self.view.addSubview(self.googleMapsView)
+        if (!saveLine) {
+            self.googleMapsView = GMSMapView(frame: self.mapView.frame)
+            tripStartTime = tripDate.date
+            self.view.addSubview(self.googleMapsView)
+        }
         searchResultController = SearchResultsController()
         searchResultController.delegate = self
 
+        
     }
     
     @IBAction func setStartTime(_ sender: Any) {
@@ -162,7 +166,7 @@ class OfferRideViewController: UIViewController, UISearchBarDelegate, LocateOnTh
                         var routesArray:String!
                         if status == "OK" {
                             routesArray = ((((dict["routes"]!as! [Any])[0] as! [String:Any])["overview_polyline"] as! [String:Any])["points"] as! String)
-                            print("routesArray: \(String(describing: routesArray))")
+                            //print("routesArray: \(String(describing: routesArray))")
                         }
                         guard let linesArray = routesArray else {
                             print("Not Found")
@@ -175,10 +179,11 @@ class OfferRideViewController: UIViewController, UISearchBarDelegate, LocateOnTh
                             singleLine.strokeColor = .red
                             singleLine.map = self.googleMapsView
                             let cameraBounds = GMSCoordinateBounds.init(coordinate: startPoint, coordinate: endPoint)
-                           let camera = GMSCameraUpdate.fit(cameraBounds)
+                            let camera = GMSCameraUpdate.fit(cameraBounds)
                             GMSCameraUpdate.fit(cameraBounds)
 
                             self.googleMapsView.animate(with: camera)
+                            self.saveLine = true
                         }
                     }
                 } catch {
@@ -194,7 +199,7 @@ class OfferRideViewController: UIViewController, UISearchBarDelegate, LocateOnTh
     func searchBar(_ searchBar: UISearchBar,
                    textDidChange searchText: String){
         
-        let placesClient = GMSPlacesClient()
+        let placesClient = GMSPlacesClient.shared()
         
         placesClient.autocompleteQuery(searchText, bounds: nil, filter: nil) { (results, error:Error?) -> Void in
             self.resultsArray.removeAll()
@@ -263,12 +268,12 @@ class OfferRideViewController: UIViewController, UISearchBarDelegate, LocateOnTh
         
         estimatedArrivalTime = Calendar.current.date(byAdding: .second, value: timeInSeconds, to: tripStartTime)
         
-        
         DispatchQueue.main.async {
-            self.nextButtton.isHidden = false
-            
-
+            self.nextButtton.isUserInteractionEnabled = true
+            self.nextButtton.alpha = 1.0
         }
+
+
 
     }
     
