@@ -10,20 +10,46 @@ import Foundation
 import UIKit
 import GoogleMaps
 
-enum TripStatus {
-    case available
-    case booked
-    case started
-    case cancelled
-    case finished
+enum TripStatus: String {
+    case available = "available"
+    case booked = "booked"
+    case started = "started"
+    case cancelled = "cancelled"
+    case finished = "finished"
+    
+//    static func myStaticFunction() {
+//        
+//    }
+//    
+//    func myInstanceFunction() {
+//        
+//    }
+    
+//    static func convertTripStatus(from string: String) -> TripStatus? {
+//        switch string {
+//        case "available":
+//            return TripStatus.available
+//        case "booked":
+//            return TripStatus.available
+//        case "started":
+//            return TripStatus.available
+//        case "cancelled":
+//            return TripStatus.available
+//        case "finished":
+//            return TripStatus.available
+//        default:
+//            return nil
+//        }
+//    }
 }
 
 class Ride {
     
-    let startLocation: CLLocationCoordinate2D?
-    let endLocation: CLLocationCoordinate2D?
-    let tripStartTime: Date?
-    let estimatedArrivalTime: Date?
+    var startLocation: CLLocationCoordinate2D?
+    var endLocation: CLLocationCoordinate2D?
+    
+    var tripStartTime: Date?
+    var estimatedArrivalTime: Date?
     var tripDuration: String? = ""
     var stopOvers = [StopOver?]()
 
@@ -31,6 +57,10 @@ class Ride {
     var numberOfSeats: Int = 3
     var tripStatus: TripStatus?
     var price: Float?
+    var driverName: String? = ""
+    var driverPhoneNumber: String? = ""
+    var driverImage: String = ""
+    
     
     init(startLocation: CLLocationCoordinate2D, endLocation: CLLocationCoordinate2D, tripStartTime: Date, estimatedArrivalTime: Date, tripDuration: String) {
         self.startLocation = startLocation
@@ -40,6 +70,16 @@ class Ride {
         self.tripDuration = tripDuration
         //self.stopOvers = stopOvers ?? []
         //self.car = car
+        
+        //Trip Status convert from Firebase
+//        TripStatus.booked.rawValue
+//        TripStatus.convertTripStatus(from: "A STRING")
+//        TripStatus(rawValue: "A String")
+//
+//        TripStatus.myStaticFunction()
+//
+//        TripStatus.booked.myInstanceFunction()
+        
     }
     
 }
