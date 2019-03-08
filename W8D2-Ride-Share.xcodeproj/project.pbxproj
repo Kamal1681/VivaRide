@@ -131,10 +131,10 @@
 				E90D3D1022285F570083BAB8 /* AvailableRidesViewController.swift */,
 				E90D3D2A222864C40083BAB8 /* AvailableRidesTableViewCell.swift */,
 				E90D3D1222285F700083BAB8 /* RideDetailsViewController.swift */,
-				E90D3D1C222860260083BAB8 /* BookRideConfirmationViewController.swift */,
 				E90D3D1622285FC30083BAB8 /* OfferRideViewController.swift */,
 				E90D3D2C222865050083BAB8 /* StopoversTableViewCell.swift */,
 				E90D3D1822285FE20083BAB8 /* OfferRideDetailsViewController.swift */,
+				E90D3D1C222860260083BAB8 /* BookRideConfirmationViewController.swift */,
 				E90D3D1A222860030083BAB8 /* OfferRideConfirmationViewController.swift */,
 				E90D3D1E222860640083BAB8 /* RidesBookedViewController.swift */,
 				E90D3D2E222865270083BAB8 /* RidesBookedTableViewCell.swift */,
@@ -496,7 +496,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = X7247USMTY;
+				DEVELOPMENT_TEAM = X6GVVL7554;
 				INFOPLIST_FILE = "W8D2-Ride-Share/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -516,7 +516,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = X7247USMTY;
+				DEVELOPMENT_TEAM = X6GVVL7554;
 				INFOPLIST_FILE = "W8D2-Ride-Share/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (

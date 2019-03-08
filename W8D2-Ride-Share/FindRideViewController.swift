@@ -19,7 +19,6 @@ class FindRideViewController: UIViewController, UISearchBarDelegate, LocateOnThe
     var startPoint: CLLocationCoordinate2D?
     var endPoint: CLLocationCoordinate2D?
 
-
     
     @IBOutlet weak var tripDate: UIDatePicker!
     @IBOutlet weak var startAddress: UINavigationItem!

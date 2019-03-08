@@ -26,18 +26,23 @@ class Ride {
     let estimatedArrivalTime: Date?
     var tripDuration: String? = ""
     var stopOvers = [StopOver?]()
+    var driverName: String?
+    var driverPhoneNumber: String?
+    var driverPhoto: String?
 
     var distance: Double = 0.0
     var numberOfSeats: Int = 3
     var tripStatus: TripStatus?
     var price: Float?
     
-    init(startLocation: CLLocationCoordinate2D, endLocation: CLLocationCoordinate2D, tripStartTime: Date, estimatedArrivalTime: Date, tripDuration: String) {
+    init(startLocation: CLLocationCoordinate2D, endLocation: CLLocationCoordinate2D, tripStartTime: Date, estimatedArrivalTime: Date, tripDuration: String, distance: Double) {
         self.startLocation = startLocation
         self.endLocation = endLocation
         self.tripStartTime = tripStartTime
         self.estimatedArrivalTime = estimatedArrivalTime
         self.tripDuration = tripDuration
+        self.distance = distance
+ 
         //self.stopOvers = stopOvers ?? []
         //self.car = car
     }
