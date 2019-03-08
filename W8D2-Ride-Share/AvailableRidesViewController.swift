@@ -189,8 +189,9 @@ class AvailableRidesViewController: UIViewController, UITableViewDelegate, UITab
         return greaterGeopoint
     }
     
-
-
+    //MARK: - Navigation
+    
+    
   
     /*
     // MARK: - Navigation
