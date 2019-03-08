@@ -21,12 +21,16 @@ class AvailableRidesViewController: UIViewController, UITableViewDelegate, UITab
     var handle: AuthStateDidChangeListenerHandle? = nil
     
     //Other properties
-    var startLocation: CLLocationCoordinate2D?
-    var endLocation: CLLocationCoordinate2D?
-    var tripStartTime: Date?
+    var startLocation: CLLocationCoordinate2D!
+    var endLocation: CLLocationCoordinate2D!
+    var tripStartTime: Date!
+    
+    //Available rides array
     var ridesArray = [Ride]()
     var filteredArrayByEndLocation = [Ride]()
+    var filteredArrayByDate = [Ride]()
     
+    //TableView
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
@@ -59,7 +63,7 @@ class AvailableRidesViewController: UIViewController, UITableViewDelegate, UITab
 //        ridesArray[0].driverPhoneNumber = "+12223334455"
         
         // Get all locations within 10 miles of startLocation
-        getDocumentNearBy(latitudeStartLocation: Double(startLocation!.latitude), longitudeStartLocation: Double(startLocation!.longitude), latitudeEndLocation: Double(endLocation!.latitude), longitudeEndLocation: Double(endLocation!.longitude), tripStartTime: tripStartTime ?? Date(), distance: 10)
+        getDocumentNearBy(latitudeStartLocation: Double(startLocation!.latitude), longitudeStartLocation: Double(startLocation!.longitude), latitudeEndLocation: Double(endLocation!.latitude), longitudeEndLocation: Double(endLocation!.longitude), tripStartTime: tripStartTime, distance: 10)
         
         // Do any additional setup after loading the view.
     }
@@ -78,7 +82,7 @@ class AvailableRidesViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-       return filteredArrayByEndLocation.count
+       return filteredArrayByDate.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
@@ -89,9 +93,9 @@ class AvailableRidesViewController: UIViewController, UITableViewDelegate, UITab
 //        ridesArray[1].driverName = "Ted"
 //        ridesArray[1].driverPhoneNumber = "+12223334455"
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellIdentifier", for: indexPath) as! AvailableRidesTableViewCell
-        let ride = self.filteredArrayByEndLocation[indexPath.row]
+        let ride = self.filteredArrayByDate[indexPath.row]
         print("IndexPathRow: \(indexPath.row)")
-        print(self.filteredArrayByEndLocation[indexPath.row].tripDuration)
+        print(self.filteredArrayByDate[indexPath.row].tripDuration)
         
         cell.configureCell(ride: ride)
         return cell
@@ -112,7 +116,6 @@ class AvailableRidesViewController: UIViewController, UITableViewDelegate, UITab
         let query = docRef
             .whereField("startLocation", isGreaterThan: lesserStartLocation)
             .whereField("startLocation", isLessThan: greaterStartLocation)
-            .whereField("tripStartTime", isEqualTo: tripStartTime)
         
         query.getDocuments { snapshot, error in
             if let error = error {
@@ -128,11 +131,13 @@ class AvailableRidesViewController: UIViewController, UITableViewDelegate, UITab
                     let tripDuration = document.get("tripDuration") as? String
                     let distance = document.get("distance") as! Double
                     let numberOfSeats = document.get("numberOfSeats") as! Int
+                    let tripStartTime = document.get("tripStartTime") as! Timestamp
+                    let estimatedArrivalTime = document.get("estimatedArrivalTime") as! Timestamp
                     
                     print(startLocationGeoPoint)
                     print(endLocationGeoPoint)
                     
-                    let ride = Ride(startLocation: CLLocationCoordinate2D(latitude: startLocationGeoPoint.latitude, longitude: startLocationGeoPoint.longitude), endLocation: CLLocationCoordinate2D(latitude: endLocationGeoPoint.latitude, longitude: endLocationGeoPoint.longitude), tripStartTime: Date.init(), estimatedArrivalTime: Date.init(), tripDuration: tripDuration ?? "No value", distance: distance)
+                    let ride = Ride(startLocation: CLLocationCoordinate2D(latitude: startLocationGeoPoint.latitude, longitude: startLocationGeoPoint.longitude), endLocation: CLLocationCoordinate2D(latitude: endLocationGeoPoint.latitude, longitude: endLocationGeoPoint.longitude), tripStartTime: tripStartTime.dateValue(), estimatedArrivalTime: estimatedArrivalTime.dateValue(), tripDuration: tripDuration ?? "No value", distance: distance)
                     
                     self.ridesArray.append(ride)
                 }
@@ -144,6 +149,14 @@ class AvailableRidesViewController: UIViewController, UITableViewDelegate, UITab
                 self.filteredArrayByEndLocation = self.ridesArray.filter( {Double(($0.endLocation!.latitude)) >= lesserEndLocation.latitude && Double(($0.endLocation!.latitude)) <= greaterEndLocation.latitude}).map({ return $0 })
                 print("Filtered array is:\(self.filteredArrayByEndLocation)")
                 
+                //Filtering results by date
+                let lessertripStartTime = self.tripStartTime
+                let greatertripStartTime = self.tripStartTime?.addingTimeInterval(86400)
+                
+                self.filteredArrayByDate = self.filteredArrayByEndLocation.filter( { $0.tripStartTime! >= lessertripStartTime! && $0.tripStartTime! <= greatertripStartTime!}).map({ return $0 })
+                print("Filtered array is:\(self.filteredArrayByDate)")
+                
+                //Reload Table View with results from Firebase
                 self.tableView.reloadData()
             }
         }
@@ -176,8 +189,9 @@ class AvailableRidesViewController: UIViewController, UITableViewDelegate, UITab
         return greaterGeopoint
     }
     
-
-
+    //MARK: - Navigation
+    
+    
   
     /*
     // MARK: - Navigation

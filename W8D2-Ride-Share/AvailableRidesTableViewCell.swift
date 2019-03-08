@@ -43,9 +43,14 @@ class AvailableRidesTableViewCell: UITableViewCell {
 //        estimatedArrivalTimeLabel.text = "11:00 AM"
 //        startPointLabel.text = "Toronto ON"
 //        endPointLabel.text = "Vancouver BC"
+        dateLabel.text = stringDateFormat(from: ride.tripStartTime!)
+        startTimeLabel.text = stringHoursMinutesFormat(from: ride.tripStartTime!)
+        estimatedArrivalTimeLabel.text = stringHoursMinutesFormat(from: ride.estimatedArrivalTime!)
+        
         driverName.text = ride.tripDuration
         price.text = ride.price?.description
         distanceLabel.text = "\(Int(ride.distance)) km"
+        
         
         
 //        dateLabel.text = String(ride.tripStartTime)
@@ -58,6 +63,26 @@ class AvailableRidesTableViewCell: UITableViewCell {
 //        distanceLabel.text = ride.distance
         
         
+    }
+    
+    func stringDateFormat(from date: Date) -> String {
+        let formatter = DateFormatter()
+        // initially set the format based on your datepicker date / server String
+        formatter.dateFormat = "E - MMMM dd, yyyy"
+        // convert date to string
+        let myString = formatter.string(from: date)
+        
+        return myString
+    }
+    
+    func stringHoursMinutesFormat(from date: Date) -> String {
+        let formatter = DateFormatter()
+        // initially set the format based on your datepicker date / server String
+        formatter.dateFormat = "hh:mm a"
+        // convert date to string
+        let myString = formatter.string(from: date)
+        
+        return myString
     }
 
 }
