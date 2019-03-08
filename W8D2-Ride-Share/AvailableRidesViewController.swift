@@ -25,6 +25,7 @@ class AvailableRidesViewController: UIViewController, UITableViewDelegate, UITab
     var endLocation: CLLocationCoordinate2D?
     var tripStartTime: Date?
     var ridesArray = [Ride]()
+    var filteredArrayByEndLocation = [Ride]()
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -58,7 +59,7 @@ class AvailableRidesViewController: UIViewController, UITableViewDelegate, UITab
 //        ridesArray[0].driverPhoneNumber = "+12223334455"
         
         // Get all locations within 10 miles of startLocation
-        getDocumentNearBy(latitudeStartLocation: Double(startLocation!.latitude), longitudeEndLocation: Double(startLocation!.longitude), distance: 10)
+        getDocumentNearBy(latitudeStartLocation: Double(startLocation!.latitude), longitudeStartLocation: Double(startLocation!.longitude), latitudeEndLocation: Double(endLocation!.latitude), longitudeEndLocation: Double(endLocation!.longitude), tripStartTime: tripStartTime ?? Date(), distance: 10)
         
         // Do any additional setup after loading the view.
     }
@@ -77,7 +78,7 @@ class AvailableRidesViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-       return ridesArray.count
+       return filteredArrayByEndLocation.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
@@ -88,9 +89,9 @@ class AvailableRidesViewController: UIViewController, UITableViewDelegate, UITab
 //        ridesArray[1].driverName = "Ted"
 //        ridesArray[1].driverPhoneNumber = "+12223334455"
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellIdentifier", for: indexPath) as! AvailableRidesTableViewCell
-        let ride = self.ridesArray[indexPath.row]
+        let ride = self.filteredArrayByEndLocation[indexPath.row]
         print("IndexPathRow: \(indexPath.row)")
-        print(self.ridesArray[indexPath.row].tripDuration)
+        print(self.filteredArrayByEndLocation[indexPath.row].tripDuration)
         
         cell.configureCell(ride: ride)
         return cell
@@ -102,23 +103,21 @@ class AvailableRidesViewController: UIViewController, UITableViewDelegate, UITab
     
     //MARK: - Geo Query
     
-    func getDocumentNearBy(latitudeStartLocation: Double, longitudeEndLocation: Double, distance: Double) {
+    func getDocumentNearBy(latitudeStartLocation: Double, longitudeStartLocation: Double, latitudeEndLocation: Double, longitudeEndLocation: Double, tripStartTime: Date, distance: Double) {
         
-        let lesserGeopoint = lesserGeoPoint(latitude: latitudeStartLocation, longitude: longitudeEndLocation, distance: distance)
-        let greaterGeopoint = greaterGeoPoint(latitude: latitudeStartLocation, longitude: longitudeEndLocation, distance: distance)
+        let lesserStartLocation = lesserGeoPoint(latitude: latitudeStartLocation, longitude: longitudeStartLocation, distance: distance)
+        let greaterStartLocation = greaterGeoPoint(latitude: latitudeStartLocation, longitude: longitudeStartLocation, distance: distance)
         
         let docRef = db.collection("rides")
         let query = docRef
-            .whereField("startLocation", isGreaterThan: lesserGeopoint)
-            .whereField("startLocation", isLessThan: greaterGeopoint)
-
-        //"endLocation": <FIRGeoPoint: (45.421530, -75.697193)>
+            .whereField("startLocation", isGreaterThan: lesserStartLocation)
+            .whereField("startLocation", isLessThan: greaterStartLocation)
+            .whereField("tripStartTime", isEqualTo: tripStartTime)
         
         query.getDocuments { snapshot, error in
             if let error = error {
                 print("Error getting documents: \(error)")
             } else {
-//                var i = 0
                 for document in snapshot!.documents {
                     print("\(document.documentID) => \(document.data())")
                     print(document.get("tripDuration") as! String)
@@ -133,29 +132,17 @@ class AvailableRidesViewController: UIViewController, UITableViewDelegate, UITab
                     print(startLocationGeoPoint)
                     print(endLocationGeoPoint)
                     
-//                    self.ridesArray[i].startLocation = CLLocationCoordinate2D(latitude: startLocationGeoPoint.latitude, longitude: startLocationGeoPoint.longitude)
-//                    self.ridesArray[i].endLocation = CLLocationCoordinate2D(latitude: endLocationGeoPoint.latitude, longitude: endLocationGeoPoint.longitude)
-////                    self.ridesArray[0].tripStartTime = document.get("tripStartTime") as! Date
-////                    self.ridesArray[0].estimatedArrivalTime = document.get("estimatedArrivalTime") as! Date
-//                    self.ridesArray[i].price = price
-//                    self.ridesArray[i].tripDuration = tripDuration
-//                    self.ridesArray[i].distance = distance
-////                    self.ridesArray[0].tripStatus = document.get("tripStatus") as! TripStatus
-//                    self.ridesArray[i].numberOfSeats = numberOfSeats
-                    
                     let ride = Ride(startLocation: CLLocationCoordinate2D(latitude: startLocationGeoPoint.latitude, longitude: startLocationGeoPoint.longitude), endLocation: CLLocationCoordinate2D(latitude: endLocationGeoPoint.latitude, longitude: endLocationGeoPoint.longitude), tripStartTime: Date.init(), estimatedArrivalTime: Date.init(), tripDuration: tripDuration ?? "No value", distance: distance)
                     
                     self.ridesArray.append(ride)
-    
-//                    print(self.ridesArray[i].tripDuration)
-//                    print(self.ridesArray[i].distance)
-//                    print(i)
-//
-//                    i = i + 1
                 }
                 
-                let filteredAfterEndLocation = self.ridesArray.filter( {Double(($0.endLocation!.latitude)) >= 45.4215296 && Double(($0.endLocation!.latitude)) <= 45.5016889}).map({ return $0 })
-                print("Filtered array is:\(filteredAfterEndLocation)")
+                //Filtering results for end location from ridesArray
+                let lesserEndLocation = self.lesserGeoPoint(latitude: latitudeEndLocation, longitude: longitudeEndLocation, distance: distance)
+                let greaterEndLocation = self.greaterGeoPoint(latitude: latitudeEndLocation, longitude: longitudeEndLocation, distance: distance)
+                
+                self.filteredArrayByEndLocation = self.ridesArray.filter( {Double(($0.endLocation!.latitude)) >= lesserEndLocation.latitude && Double(($0.endLocation!.latitude)) <= greaterEndLocation.latitude}).map({ return $0 })
+                print("Filtered array is:\(self.filteredArrayByEndLocation)")
                 
                 self.tableView.reloadData()
             }
