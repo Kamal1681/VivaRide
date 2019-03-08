@@ -21,11 +21,18 @@ class AvailableRidesViewController: UIViewController, UITableViewDelegate, UITab
     var handle: AuthStateDidChangeListenerHandle? = nil
     
     //Other properties
+
+    var ride: Ride?
+//     var startLocation: CLLocationCoordinate2D?
+//     var endLocation: CLLocationCoordinate2D?
+//    var tripStartTime: Date?
+
     var startLocation: CLLocationCoordinate2D!
     var endLocation: CLLocationCoordinate2D!
     var tripStartTime: Date!
     
     //Available rides array
+
     var ridesArray = [Ride]()
     var filteredArrayByEndLocation = [Ride]()
     var filteredArrayByDate = [Ride]()
@@ -47,20 +54,7 @@ class AvailableRidesViewController: UIViewController, UITableViewDelegate, UITab
         print(endLocation)
         print(tripStartTime)
         
-//        let ride1 = Ride(startLocation: CLLocationCoordinate2D(latitude: 43.653226, longitude: -79.3831843), endLocation: CLLocationCoordinate2D(latitude: 49.2827291, longitude: -123.1207375), tripStartTime: Date.init(), estimatedArrivalTime: Date.init(), tripDuration: "1 days, 16 hours, 32 minutes", distance: 20)
-//
-//        ridesArray.append(ride1)
-//        ridesArray.append(ride1)
-//        ridesArray.append(ride1)
-//        ridesArray.append(ride1)
-//        ridesArray.append(ride1)
-//        ridesArray.append(ride1)
-//        ridesArray.append(ride1)
-//        ridesArray.append(ride1)
-//        ridesArray.append(ride1)
-//
-//        ridesArray[0].driverName = "Bod"
-//        ridesArray[0].driverPhoneNumber = "+12223334455"
+
         
         // Get all locations within 10 miles of startLocation
         getDocumentNearBy(latitudeStartLocation: Double(startLocation!.latitude), longitudeStartLocation: Double(startLocation!.longitude), latitudeEndLocation: Double(endLocation!.latitude), longitudeEndLocation: Double(endLocation!.longitude), tripStartTime: tripStartTime, distance: 10)
@@ -82,17 +76,18 @@ class AvailableRidesViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+
        return filteredArrayByDate.count
+
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
 
-//        let ride2 = Ride(startLocation: CLLocationCoordinate2D(latitude: 43.653226, longitude: -79.3831843), endLocation: CLLocationCoordinate2D(latitude: 49.2827291, longitude: -123.1207375), tripStartTime: Date.init(), estimatedArrivalTime: Date.init(), tripDuration: "1 days, 16 hours, 32 minutes", distance: 1000)
-//
-//        ridesArray.append(ride2)
-//        ridesArray[1].driverName = "Ted"
-//        ridesArray[1].driverPhoneNumber = "+12223334455"
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellIdentifier", for: indexPath) as! AvailableRidesTableViewCell
+
+        guard let ride = ride else {
+            return cell
+        }
         let ride = self.filteredArrayByDate[indexPath.row]
         print("IndexPathRow: \(indexPath.row)")
         print(self.filteredArrayByDate[indexPath.row].tripDuration)
@@ -116,6 +111,7 @@ class AvailableRidesViewController: UIViewController, UITableViewDelegate, UITab
         let query = docRef
             .whereField("startLocation", isGreaterThan: lesserStartLocation)
             .whereField("startLocation", isLessThan: greaterStartLocation)
+
         
         query.getDocuments { snapshot, error in
             if let error = error {

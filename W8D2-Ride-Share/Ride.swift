@@ -17,30 +17,7 @@ enum TripStatus: String {
     case cancelled = "cancelled"
     case finished = "finished"
     
-//    static func myStaticFunction() {
-//        
-//    }
-//    
-//    func myInstanceFunction() {
-//        
-//    }
-    
-//    static func convertTripStatus(from string: String) -> TripStatus? {
-//        switch string {
-//        case "available":
-//            return TripStatus.available
-//        case "booked":
-//            return TripStatus.available
-//        case "started":
-//            return TripStatus.available
-//        case "cancelled":
-//            return TripStatus.available
-//        case "finished":
-//            return TripStatus.available
-//        default:
-//            return nil
-//        }
-//    }
+
 }
 
 class Ride {
@@ -71,17 +48,7 @@ class Ride {
         self.distance = distance
  
         //self.stopOvers = stopOvers ?? []
-        //self.car = car
-        
-        //Trip Status convert from Firebase
-//        TripStatus.booked.rawValue
-//        TripStatus.convertTripStatus(from: "A STRING")
-//        TripStatus(rawValue: "A String")
-//
-//        TripStatus.myStaticFunction()
-//
-//        TripStatus.booked.myInstanceFunction()
-        
+
     }
     
 }
