@@ -39,10 +39,7 @@ class AvailableRidesTableViewCell: UITableViewCell {
     }
     func configureCell(ride: Ride) {
 
-        
-//        dateLabel.text = "March-03-2019"
-//        startTimeLabel.text = "9:00 PM"
-//        estimatedArrivalTimeLabel.text = "11:00 AM"
+
         getAddressFromLocation(location: ride.startLocation!, complete: { (city) in
             OperationQueue.main.addOperation {
                 self.startPointLabel.text = city
@@ -53,15 +50,19 @@ class AvailableRidesTableViewCell: UITableViewCell {
                 self.endPointLabel.text = city
             }
        })
+
+        dateLabel.text = stringDateFormat(from: ride.tripStartTime!)
+        startTimeLabel.text = stringHoursMinutesFormat(from: ride.tripStartTime!)
+        estimatedArrivalTimeLabel.text = stringHoursMinutesFormat(from: ride.estimatedArrivalTime!)
+        
         driverName.text = ride.tripDuration
         price.text = ride.price?.description
         distanceLabel.text = "\(Int(ride.distance)) km"
-        
-        
+       
     }
     
     func getAddressFromLocation (location: CLLocationCoordinate2D, complete: @escaping (String) -> Void) {
-        
+      
         var city: String? = ""
         let url = NSURL(string: "https://maps.googleapis.com/maps/api/geocode/json?latlng=\(String(describing: location.latitude)),\(String(describing: location.longitude))&location_type=APPROXIMATE&result_type=locality&language=en&key=\(Constants.googleApiKey)")
         
@@ -83,6 +84,26 @@ class AvailableRidesTableViewCell: UITableViewCell {
         }
         task.resume()
         
+    }
+    
+    func stringDateFormat(from date: Date) -> String {
+        let formatter = DateFormatter()
+        // initially set the format based on your datepicker date / server String
+        formatter.dateFormat = "E - MMMM dd, yyyy"
+        // convert date to string
+        let myString = formatter.string(from: date)
+        
+        return myString
+    }
+    
+    func stringHoursMinutesFormat(from date: Date) -> String {
+        let formatter = DateFormatter()
+        // initially set the format based on your datepicker date / server String
+        formatter.dateFormat = "hh:mm a"
+        // convert date to string
+        let myString = formatter.string(from: date)
+        
+        return myString
     }
 
 }

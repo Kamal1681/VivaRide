@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="DGe-o0-boh">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="DGe-o0-boh">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -1153,6 +1153,7 @@
                     </view>
                     <connections>
                         <outlet property="tableView" destination="1b1-J0-0Oq" id="b73-HW-uZ5"/>
+                        <segue destination="dgT-5w-1ah" kind="show" identifier="goToAvailableRideDetails" id="0Le-f7-BG2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZuU-tG-tCR" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2427,8 +2428,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="backButton" width="75" height="75"/>
-        <image name="icons8-forward-50" width="37.5" height="37.5"/>
-        <image name="profileDefaultPhoto" width="75" height="75"/>
+        <image name="backButton" width="100" height="100"/>
+        <image name="icons8-forward-50" width="50" height="50"/>
+        <image name="profileDefaultPhoto" width="100" height="100"/>
     </resources>
 </document>
