@@ -90,6 +90,10 @@ class OfferRideConfirmationViewController: UIViewController {
     
     func getDocumentNearBy(latitude: Double, longitude: Double, distance: Double) {
         
+        var rideArray = [Ride]()
+        
+        var geoPoinLocation =  rideArray[0].startLocation?.toGeopoint()
+        
         // ~1 mile of lat and lon in degrees
         let lat = 0.0144927536231884
         let lon = 0.0181818181818182
@@ -111,7 +115,17 @@ class OfferRideConfirmationViewController: UIViewController {
                 print("Error getting documents: \(error)")
             } else {
                 for document in snapshot!.documents {
-                    print("\(document.documentID) => \(document.data())")
+//                    print("\(document.documentID) => \(document.data())")
+//                    print(document.get("tripDuration") as! String)
+//                    rideArray[0].tripStartTime = document.get("tripStartTime") as! Date
+//                    rideArray[0].estimatedArrivalTime = document.get("estimatedArrivalTime") as! Date
+//                    rideArray[0].endLocation = document.get("endLocation") as!
+//                    rideArray[0].price = document.get("price") as! Float
+//                    rideArray[0].tripDuration = document.get("tripDuration") as! String
+//                    rideArray[0].startLocation = document.get("startLocation") as! String
+//                    rideArray[0].distance = document.get("distance") as! String
+//                    rideArray[0].tripStatus = document.get("tripStatus") as! String
+//                    rideArray[0].numberOfSeats = document.get("numberOfSeats") as! String
                 }
             }
         }
