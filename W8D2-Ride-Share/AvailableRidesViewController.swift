@@ -58,7 +58,7 @@ class AvailableRidesViewController: UIViewController, UITableViewDelegate, UITab
 //        ridesArray[0].driverPhoneNumber = "+12223334455"
         
         // Get all locations within 10 miles of startLocation
-        getDocumentNearBy(latitude: Double(startLocation!.latitude), longitude: Double(startLocation!.longitude), distance: 10)
+        getDocumentNearBy(latitudeStartLocation: Double(startLocation!.latitude), longitudeEndLocation: Double(startLocation!.longitude), distance: 10)
         
         // Do any additional setup after loading the view.
     }
@@ -102,25 +102,17 @@ class AvailableRidesViewController: UIViewController, UITableViewDelegate, UITab
     
     //MARK: - Geo Query
     
-    func getDocumentNearBy(latitude: Double, longitude: Double, distance: Double) {
+    func getDocumentNearBy(latitudeStartLocation: Double, longitudeEndLocation: Double, distance: Double) {
         
-        //        var geoPoinLocation =  rideArray[0].startLocation?.toGeopoint()
-        
-        // ~1 mile of lat and lon in degrees
-        let lat = 0.0144927536231884
-        let lon = 0.0181818181818182
-        
-        let lowerLat = latitude - (lat * distance)
-        let lowerLon = longitude - (lon * distance)
-        
-        let greaterLat = latitude + (lat * distance)
-        let greaterLon = longitude + (lon * distance)
-        
-        let lesserGeopoint = GeoPoint(latitude: lowerLat, longitude: lowerLon)
-        let greaterGeopoint = GeoPoint(latitude: greaterLat, longitude: greaterLon)
+        let lesserGeopoint = lesserGeoPoint(latitude: latitudeStartLocation, longitude: longitudeEndLocation, distance: distance)
+        let greaterGeopoint = greaterGeoPoint(latitude: latitudeStartLocation, longitude: longitudeEndLocation, distance: distance)
         
         let docRef = db.collection("rides")
-        let query = docRef.whereField("startLocation", isGreaterThan: lesserGeopoint).whereField("startLocation", isLessThan: greaterGeopoint)
+        let query = docRef
+            .whereField("startLocation", isGreaterThan: lesserGeopoint)
+            .whereField("startLocation", isLessThan: greaterGeopoint)
+
+        //"endLocation": <FIRGeoPoint: (45.421530, -75.697193)>
         
         query.getDocuments { snapshot, error in
             if let error = error {
@@ -154,19 +146,48 @@ class AvailableRidesViewController: UIViewController, UITableViewDelegate, UITab
                     let ride = Ride(startLocation: CLLocationCoordinate2D(latitude: startLocationGeoPoint.latitude, longitude: startLocationGeoPoint.longitude), endLocation: CLLocationCoordinate2D(latitude: endLocationGeoPoint.latitude, longitude: endLocationGeoPoint.longitude), tripStartTime: Date.init(), estimatedArrivalTime: Date.init(), tripDuration: tripDuration ?? "No value", distance: distance)
                     
                     self.ridesArray.append(ride)
-                    
-                    
+    
 //                    print(self.ridesArray[i].tripDuration)
 //                    print(self.ridesArray[i].distance)
 //                    print(i)
 //
 //                    i = i + 1
                 }
+                
+                let filteredAfterEndLocation = self.ridesArray.filter( {Double(($0.endLocation!.latitude)) >= 45.4215296 && Double(($0.endLocation!.latitude)) <= 45.5016889}).map({ return $0 })
+                print("Filtered array is:\(filteredAfterEndLocation)")
+                
                 self.tableView.reloadData()
             }
         }
     }
     
+    //MARK: - Calculating lesser and greater GeoPoints
+    func lesserGeoPoint(latitude: Double, longitude: Double, distance: Double) -> GeoPoint {
+        // ~1 mile of lat and lon in degrees
+        let lat = 0.0144927536231884
+        let lon = 0.0181818181818182
+        
+        let lowerLat = latitude - (lat * distance)
+        let lowerLon = longitude - (lon * distance)
+        
+        let lesserGeopoint = GeoPoint(latitude: lowerLat, longitude: lowerLon)
+        
+        return lesserGeopoint
+    }
+    
+    func greaterGeoPoint(latitude: Double, longitude: Double, distance: Double) -> GeoPoint {
+        // ~1 mile of lat and lon in degrees
+        let lat = 0.0144927536231884
+        let lon = 0.0181818181818182
+        
+        let greaterLat = latitude + (lat * distance)
+        let greaterLon = longitude + (lon * distance)
+
+        let greaterGeopoint = GeoPoint(latitude: greaterLat, longitude: greaterLon)
+        
+        return greaterGeopoint
+    }
     
 //    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 //        <#code#>
