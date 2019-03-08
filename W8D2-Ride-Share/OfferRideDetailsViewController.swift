@@ -81,7 +81,7 @@ class OfferRideDetailsViewController: UIViewController {
         ride.price = Float(priceLabel.text!)!
         
         //Create a new ride in Firestore
-        createRide(startPoint: GeoPoint(latitude: ride.startLocation!.latitude, longitude: ride.startLocation!.longitude), endPoint: GeoPoint(latitude: ride.endLocation!.latitude, longitude: ride.endLocation!.longitude), startTimeDate: ride.tripStartTime!, estimatedArrivalTime: ride.estimatedArrivalTime!, tripDuration: ride.tripDuration!, distance: ride.distance, numberOfSeats: ride.numberOfSeats, price: ride.price!)
+        createRide(startLocation: GeoPoint(latitude: ride.startLocation!.latitude, longitude: ride.startLocation!.longitude), endLocation: GeoPoint(latitude: ride.endLocation!.latitude, longitude: ride.endLocation!.longitude), tripStartTime: ride.tripStartTime!, estimatedArrivalTime: ride.estimatedArrivalTime!, tripDuration: ride.tripDuration!, distance: ride.distance, numberOfSeats: ride.numberOfSeats, price: ride.price!)
         
     }
     
@@ -91,7 +91,7 @@ class OfferRideDetailsViewController: UIViewController {
     
     
     //MARK: Create new ride
-    func createRide(startPoint: GeoPoint, endPoint: GeoPoint, startTimeDate: Date, estimatedArrivalTime: Date, tripDuration: String, distance: Double, numberOfSeats:Int, price: Float) {
+    func createRide(startLocation: GeoPoint, endLocation: GeoPoint, tripStartTime: Date, estimatedArrivalTime: Date, tripDuration: String, distance: Double, numberOfSeats:Int, price: Float) {
         if let user = self.user {
             //Create a new ride document in Firestore
             
@@ -99,10 +99,10 @@ class OfferRideDetailsViewController: UIViewController {
             ref = db.collection("rides").addDocument(data: [
                 "rideID": ref?.documentID ?? "noRideID",
                 "userID": user.uid,
-                "status": 1,
-                "startPoint": startPoint,
-                "endPoint": endPoint,
-                "startTimeDate": startTimeDate,
+                "status": "available",
+                "startLocation": startLocation,
+                "endLocation": endLocation,
+                "tripStartTime": tripStartTime,
                 "estimatedArrivalTime": estimatedArrivalTime,
                 "tripDuration": tripDuration,
                 "distance": distance,

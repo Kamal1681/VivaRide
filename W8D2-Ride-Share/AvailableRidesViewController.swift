@@ -40,7 +40,8 @@ class AvailableRidesViewController: UIViewController, UITableViewDelegate, UITab
         print(endPoint)
         print(tripStartTime)
         
-
+        // Get all locations within 10 miles of startPoint
+        getDocumentNearBy(latitude: Double(startPoint!.latitude), longitude: Double(startPoint!.longitude), distance: 10)
         
         // Do any additional setup after loading the view.
     }
@@ -59,21 +60,21 @@ class AvailableRidesViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-       return 2
+       return ridesArray.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let ride1 = Ride(startLocation: CLLocationCoordinate2D(latitude: 43.653226, longitude: -79.3831843), endLocation: CLLocationCoordinate2D(latitude: 49.2827291, longitude: -123.1207375), tripStartTime: Date.init(), estimatedArrivalTime: Date.init(), tripDuration: "1 days, 16 hours, 32 minutes", distance: 20)
-        
-        ridesArray.append(ride1)
-        
-        ridesArray[0].driverName = "Bod"
-        ridesArray[0].driverPhoneNumber = "+12223334455"
-        let ride2 = Ride(startLocation: CLLocationCoordinate2D(latitude: 43.653226, longitude: -79.3831843), endLocation: CLLocationCoordinate2D(latitude: 49.2827291, longitude: -123.1207375), tripStartTime: Date.init(), estimatedArrivalTime: Date.init(), tripDuration: "1 days, 16 hours, 32 minutes", distance: 1000)
-        
-        ridesArray.append(ride2)
-        ridesArray[1].driverName = "Ted"
-        ridesArray[1].driverPhoneNumber = "+12223334455"
+//        let ride1 = Ride(startLocation: CLLocationCoordinate2D(latitude: 43.653226, longitude: -79.3831843), endLocation: CLLocationCoordinate2D(latitude: 49.2827291, longitude: -123.1207375), tripStartTime: Date.init(), estimatedArrivalTime: Date.init(), tripDuration: "1 days, 16 hours, 32 minutes", distance: 20)
+//
+//        ridesArray.append(ride1)
+//
+//        ridesArray[0].driverName = "Bod"
+//        ridesArray[0].driverPhoneNumber = "+12223334455"
+//        let ride2 = Ride(startLocation: CLLocationCoordinate2D(latitude: 43.653226, longitude: -79.3831843), endLocation: CLLocationCoordinate2D(latitude: 49.2827291, longitude: -123.1207375), tripStartTime: Date.init(), estimatedArrivalTime: Date.init(), tripDuration: "1 days, 16 hours, 32 minutes", distance: 1000)
+//
+//        ridesArray.append(ride2)
+//        ridesArray[1].driverName = "Ted"
+//        ridesArray[1].driverPhoneNumber = "+12223334455"
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellIdentifier", for: indexPath) as! AvailableRidesTableViewCell
         let ride = self.ridesArray[indexPath.row]
         
@@ -115,11 +116,11 @@ class AvailableRidesViewController: UIViewController, UITableViewDelegate, UITab
                     print("\(document.documentID) => \(document.data())")
                     print(document.get("tripDuration") as! String)
                     
-                    let startLocation = document.get("startLocation") as! CLLocationCoordinate2D
-                    let endLocation = document.get("endLocation") as! CLLocationCoordinate2D
+                    let startLocation = document.get("startLocation") as! GeoPoint
+                    let endLocation = document.get("endLocation") as! GeoPoint
                     
-                    self.ridesArray[0].startLocation = startLocation
-                    self.ridesArray[0].endLocation = endLocation
+                    self.ridesArray[0].startLocation = startLocation.toCLLocationCoordinate2D()
+                    self.ridesArray[0].endLocation = endLocation.toCLLocationCoordinate2D()
                     
                     self.ridesArray[0].tripStartTime = document.get("tripStartTime") as! Date
                     self.ridesArray[0].estimatedArrivalTime = document.get("estimatedArrivalTime") as! Date
@@ -133,13 +134,6 @@ class AvailableRidesViewController: UIViewController, UITableViewDelegate, UITab
             }
         }
         
-    }
-    
-    
-    @IBAction func queryButton(_ sender: UIButton) {
-        // Get all locations within 10 miles of startPoint
-        getDocumentNearBy(latitude: 43.653226, longitude: -79.3831843, distance: 10)
-        print("Query button tapped.")
     }
     
     
