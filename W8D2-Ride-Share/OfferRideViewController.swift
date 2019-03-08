@@ -43,7 +43,7 @@ class OfferRideViewController: UIViewController, UISearchBarDelegate, LocateOnTh
         super.viewDidAppear(animated)
         if (!saveLine) {
             self.googleMapsView = GMSMapView(frame: self.mapView.frame)
-            tripStartTime = tripDate.date
+            tripStartTime = tripDate.date.rounded(minutes: 15).rounded(seconds: 60)
             self.view.addSubview(self.googleMapsView)
         }
         searchResultController = SearchResultsController()

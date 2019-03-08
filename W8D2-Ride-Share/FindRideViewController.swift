@@ -15,7 +15,7 @@ class FindRideViewController: UIViewController, UISearchBarDelegate, LocateOnThe
     var searchResultController: SearchResultsController!
     var resultsArray = [String]() //autocomplete results
     var startPointEndPointFlag: Bool = false
-    var tripStartTime: Date?
+    var tripStartTime: Date!
     var startPoint: CLLocationCoordinate2D?
     var endPoint: CLLocationCoordinate2D?
 
@@ -26,12 +26,23 @@ class FindRideViewController: UIViewController, UISearchBarDelegate, LocateOnThe
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        tripDate.minimumDate = Date().rounded(minutes: 15, rounding: .ceil)
+        tripDate.date = Date().rounded(minutes: 15, rounding: .floor)
+        
+        if tripDate.date != nil {
+            tripStartTime = tripDate.date.rounded(minutes: 15).rounded(seconds: 60)
+        }
+        else {
+            tripStartTime = Date()
+        }
         // Do any additional setup after loading the view.
     }
    override func viewDidAppear(_ animated: Bool) {
-    searchResultController = SearchResultsController()
-    searchResultController.delegate = self
+        super.viewDidAppear(true)
+    
+        searchResultController = SearchResultsController()
+        searchResultController.delegate = self
    
     }
     
@@ -58,6 +69,7 @@ class FindRideViewController: UIViewController, UISearchBarDelegate, LocateOnThe
         availableRidesViewController.startLocation = startPoint
         availableRidesViewController.endLocation = endPoint
         availableRidesViewController.tripStartTime = tripStartTime
+        print(tripStartTime)
         }
     }
     @IBAction func backButton(_ sender: Any) {
@@ -65,7 +77,13 @@ class FindRideViewController: UIViewController, UISearchBarDelegate, LocateOnThe
     }
     
     @IBAction func setStartTime(_ sender: Any) {
-            tripStartTime = tripDate.date
+        if tripDate.date != nil {
+            tripStartTime = tripDate.date.rounded(minutes: 15).rounded(seconds: 60)
+        }
+        else {
+            tripStartTime = Date()
+        }
+        
 
     }
     
