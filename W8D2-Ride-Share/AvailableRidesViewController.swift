@@ -21,10 +21,12 @@ class AvailableRidesViewController: UIViewController, UITableViewDelegate, UITab
     var handle: AuthStateDidChangeListenerHandle? = nil
     
     //Other properties
-    var startPoint: CLLocationCoordinate2D?
-    var endPoint: CLLocationCoordinate2D?
+    var startLocation: CLLocationCoordinate2D?
+    var endLocation: CLLocationCoordinate2D?
     var tripStartTime: Date?
     var ridesArray = [Ride]()
+    
+    @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,12 +38,27 @@ class AvailableRidesViewController: UIViewController, UITableViewDelegate, UITab
         // END setup for Firestore
         
         //Print data from previous VC
-        print(startPoint)
-        print(endPoint)
+        print(startLocation)
+        print(endLocation)
         print(tripStartTime)
         
-        // Get all locations within 10 miles of startPoint
-        getDocumentNearBy(latitude: Double(startPoint!.latitude), longitude: Double(startPoint!.longitude), distance: 10)
+        let ride1 = Ride(startLocation: CLLocationCoordinate2D(latitude: 43.653226, longitude: -79.3831843), endLocation: CLLocationCoordinate2D(latitude: 49.2827291, longitude: -123.1207375), tripStartTime: Date.init(), estimatedArrivalTime: Date.init(), tripDuration: "1 days, 16 hours, 32 minutes", distance: 20)
+        
+        ridesArray.append(ride1)
+        ridesArray.append(ride1)
+        ridesArray.append(ride1)
+        ridesArray.append(ride1)
+        ridesArray.append(ride1)
+        ridesArray.append(ride1)
+        ridesArray.append(ride1)
+        ridesArray.append(ride1)
+        ridesArray.append(ride1)
+        
+        ridesArray[0].driverName = "Bod"
+        ridesArray[0].driverPhoneNumber = "+12223334455"
+        
+        // Get all locations within 10 miles of startLocation
+        getDocumentNearBy(latitude: Double(startLocation!.latitude), longitude: Double(startLocation!.longitude), distance: 10)
         
         // Do any additional setup after loading the view.
     }
@@ -64,12 +81,7 @@ class AvailableRidesViewController: UIViewController, UITableViewDelegate, UITab
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-//        let ride1 = Ride(startLocation: CLLocationCoordinate2D(latitude: 43.653226, longitude: -79.3831843), endLocation: CLLocationCoordinate2D(latitude: 49.2827291, longitude: -123.1207375), tripStartTime: Date.init(), estimatedArrivalTime: Date.init(), tripDuration: "1 days, 16 hours, 32 minutes", distance: 20)
-//
-//        ridesArray.append(ride1)
-//
-//        ridesArray[0].driverName = "Bod"
-//        ridesArray[0].driverPhoneNumber = "+12223334455"
+
 //        let ride2 = Ride(startLocation: CLLocationCoordinate2D(latitude: 43.653226, longitude: -79.3831843), endLocation: CLLocationCoordinate2D(latitude: 49.2827291, longitude: -123.1207375), tripStartTime: Date.init(), estimatedArrivalTime: Date.init(), tripDuration: "1 days, 16 hours, 32 minutes", distance: 1000)
 //
 //        ridesArray.append(ride2)
@@ -106,34 +118,44 @@ class AvailableRidesViewController: UIViewController, UITableViewDelegate, UITab
         let greaterGeopoint = GeoPoint(latitude: greaterLat, longitude: greaterLon)
         
         let docRef = db.collection("rides")
-        let query = docRef.whereField("startPoint", isGreaterThan: lesserGeopoint).whereField("startPoint", isLessThan: greaterGeopoint)
+        let query = docRef.whereField("startLocation", isGreaterThan: lesserGeopoint).whereField("startLocation", isLessThan: greaterGeopoint)
         
         query.getDocuments { snapshot, error in
             if let error = error {
                 print("Error getting documents: \(error)")
             } else {
+                var i = 0
                 for document in snapshot!.documents {
                     print("\(document.documentID) => \(document.data())")
                     print(document.get("tripDuration") as! String)
                     
-                    let startLocation = document.get("startLocation") as! GeoPoint
-                    let endLocation = document.get("endLocation") as! GeoPoint
+                    let startLocationGeoPoint = document.get("startLocation") as! GeoPoint
+                    let endLocationGeoPoint = document.get("endLocation") as! GeoPoint
+                    print(startLocationGeoPoint)
+                    print(endLocationGeoPoint)
                     
-                    self.ridesArray[0].startLocation = startLocation.toCLLocationCoordinate2D()
-                    self.ridesArray[0].endLocation = endLocation.toCLLocationCoordinate2D()
+                    self.ridesArray[i].startLocation = CLLocationCoordinate2D(latitude: startLocationGeoPoint.latitude, longitude: startLocationGeoPoint.longitude)
+                    self.ridesArray[i].endLocation = CLLocationCoordinate2D(latitude: endLocationGeoPoint.latitude, longitude: endLocationGeoPoint.longitude)
                     
-                    self.ridesArray[0].tripStartTime = document.get("tripStartTime") as! Date
-                    self.ridesArray[0].estimatedArrivalTime = document.get("estimatedArrivalTime") as! Date
+//                    self.ridesArray[0].tripStartTime = document.get("tripStartTime") as! Date
+//                    self.ridesArray[0].estimatedArrivalTime = document.get("estimatedArrivalTime") as! Date
 
-                    self.ridesArray[0].price = document.get("price") as! Float
-                    self.ridesArray[0].tripDuration = document.get("tripDuration") as! String
-                    self.ridesArray[0].distance = document.get("distance") as! Double
-                    self.ridesArray[0].tripStatus = document.get("tripStatus") as! TripStatus
-                    self.ridesArray[0].numberOfSeats = document.get("numberOfSeats") as! Int
+                    self.ridesArray[i].price = document.get("price") as? Float
+                    self.ridesArray[i].tripDuration = document.get("tripDuration") as? String
+                    self.ridesArray[i].distance = document.get("distance") as! Double
+                    print(self.ridesArray[i].distance)
+                    
+                    
+//                    self.ridesArray[0].tripStatus = document.get("tripStatus") as! TripStatus
+                    self.ridesArray[i].numberOfSeats = document.get("numberOfSeats") as! Int
+                    i = i + 1
+                    print(i)
+                    
+                    
                 }
+                self.tableView.reloadData()
             }
         }
-        
     }
     
     

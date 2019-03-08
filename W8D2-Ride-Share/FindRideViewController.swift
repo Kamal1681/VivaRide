@@ -55,8 +55,8 @@ class FindRideViewController: UIViewController, UISearchBarDelegate, LocateOnThe
  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if segue.identifier == "search" {
         let availableRidesViewController: AvailableRidesViewController = segue.destination as! AvailableRidesViewController
-        availableRidesViewController.startPoint = startPoint
-        availableRidesViewController.endPoint = endPoint
+        availableRidesViewController.startLocation = startPoint
+        availableRidesViewController.endLocation = endPoint
         availableRidesViewController.tripStartTime = tripStartTime
         }
     }
