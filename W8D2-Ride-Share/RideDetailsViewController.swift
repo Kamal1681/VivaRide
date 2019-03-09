@@ -9,10 +9,13 @@
 import UIKit
 
 class RideDetailsViewController: UIViewController {
-
+    
+    var ride: Ride!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        print("Distance is: \(ride!.distance)")
         // Do any additional setup after loading the view.
     }
     

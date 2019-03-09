@@ -183,7 +183,33 @@ class AvailableRidesViewController: UIViewController, UITableViewDelegate, UITab
         return greaterGeopoint
     }
     
-    //MARK: - Navigation
+    // MARK: - Navigation
+    
+    // method to run when table view cell is tapped
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        // Segue to the second view controller
+        self.performSegue(withIdentifier: "goToAvailableRideDetails", sender: self)
+    }
+    
+    // This function is called before the segue
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "goToAvailableRideDetails", let destinationVC = segue.destination as? RideDetailsViewController {
+            if let indexPath = tableView.indexPathForSelectedRow {
+                destinationVC.ride = filteredArrayByDate[indexPath.row]
+            }
+            
+        }
+        
+//        // get a reference to the second view controller
+//        let destinationVC = segue.destination as! RideDetailsViewController
+//        
+//        // set a variable in the second view controller with the data to pass
+//        let arrayIndex = tableView.indexPathForSelectedRow!.row
+//        destinationVC.ride = filteredArrayByDate[arrayIndex]
+    }
+    
     
     
   
