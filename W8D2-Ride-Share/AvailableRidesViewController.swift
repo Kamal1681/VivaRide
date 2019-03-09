@@ -81,14 +81,12 @@ class AvailableRidesViewController: UIViewController, UITableViewDelegate, UITab
 
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellIdentifier", for: indexPath) as! AvailableRidesTableViewCell
-
+        ride = self.filteredArrayByDate[indexPath.row]
         guard let ride = ride else {
             return cell
         }
-        let ride = self.filteredArrayByDate[indexPath.row]
+        
         print("IndexPathRow: \(indexPath.row)")
         print(self.filteredArrayByDate[indexPath.row].tripDuration)
         
