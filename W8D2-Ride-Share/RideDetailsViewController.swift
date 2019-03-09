@@ -32,6 +32,7 @@ class RideDetailsViewController: UIViewController {
         super.viewDidLoad()
         
         print("Distance is: \(ride!.distance)")
+        print("Name is \(ride!.userInfo?.name)")
         
         //Setting labels and other UI
         getAddressFromLocation(location: ride.startLocation!, complete: { (city) in
