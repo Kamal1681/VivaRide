@@ -79,20 +79,17 @@ class AvailableRidesViewController: UIViewController, UITableViewDelegate, UITab
 
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellIdentifier", for: indexPath) as! AvailableRidesTableViewCell
 
-
         ride = self.filteredArrayByDate[indexPath.row]
-        
-        print("IndexPathRow: \(indexPath.row)")
-        print(self.filteredArrayByDate[indexPath.row].tripDuration)
         
         guard let ride = ride else {
             return cell
         }
         
+        print("IndexPathRow: \(indexPath.row)")
+        print(self.filteredArrayByDate[indexPath.row].tripDuration)
+
         cell.configureCell(ride: ride)
         return cell
     }
@@ -186,7 +183,33 @@ class AvailableRidesViewController: UIViewController, UITableViewDelegate, UITab
         return greaterGeopoint
     }
     
-    //MARK: - Navigation
+    // MARK: - Navigation
+    
+    // method to run when table view cell is tapped
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        // Segue to the second view controller
+        self.performSegue(withIdentifier: "goToAvailableRideDetails", sender: self)
+    }
+    
+    // This function is called before the segue
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "goToAvailableRideDetails", let destinationVC = segue.destination as? RideDetailsViewController {
+            if let indexPath = tableView.indexPathForSelectedRow {
+                destinationVC.ride = filteredArrayByDate[indexPath.row]
+            }
+            
+        }
+        
+//        // get a reference to the second view controller
+//        let destinationVC = segue.destination as! RideDetailsViewController
+//        
+//        // set a variable in the second view controller with the data to pass
+//        let arrayIndex = tableView.indexPathForSelectedRow!.row
+//        destinationVC.ride = filteredArrayByDate[arrayIndex]
+    }
+    
     
     
   
