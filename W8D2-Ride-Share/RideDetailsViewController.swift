@@ -50,8 +50,10 @@ class RideDetailsViewController: UIViewController {
         tripStartTimeLabel.text = stringHoursMinutesFormat(from: ride.tripStartTime!)
         estimatedArrivalTimeLabel.text = stringHoursMinutesFormat(from: ride.estimatedArrivalTime!)
         
-        driverNameLabel.text = ride.tripDuration
+        driverNameLabel.text = ride.userInfo?.name
         price.text = ride.price?.description
+        carModelLabel.text = ride.userInfo?.carModel
+        carColorLabel.text = ride.userInfo?.carColor
         additionalInfoTextView.text = "Additional information will apperar in that field and distance of the ride is \(ride.distance)."
         
         // Do any additional setup after loading the view.
@@ -108,6 +110,20 @@ class RideDetailsViewController: UIViewController {
         return myString
     }
 
+    // MARK: - Navigation
+    
+    @IBAction func continueButtonDidTap(_ sender: UIButton) {
+        self.performSegue(withIdentifier: "goToBookRideConfirmation", sender: self)
+    }
+    
+    // This function is called before the segue
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "goToBookRideConfirmation", let destinationVC = segue.destination as? BookRideConfirmationViewController {
+                destinationVC.ride = self.ride
+        }
+    }
+    
     /*
     // MARK: - Navigation
 

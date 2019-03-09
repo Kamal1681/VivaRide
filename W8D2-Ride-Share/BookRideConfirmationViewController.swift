@@ -9,10 +9,15 @@
 import UIKit
 
 class BookRideConfirmationViewController: UIViewController {
-
+    //Passing properties
+    var ride: Ride!
+    
+    //UI properties
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        print(ride.userInfo?.name ?? "Did not pass driver name throuht sefue")
         // Do any additional setup after loading the view.
     }
     
