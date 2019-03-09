@@ -72,16 +72,30 @@ class OfferRideDetailsViewController: UIViewController {
         ride?.numberOfSeats = Int(sender.value)
         
     }
+    
     @IBAction func confirm(_ sender: Any) {
-        guard  let ride = ride, let numberOfSeatsLabel = numberOfSeatsLabel, let priceLabel = priceLabel else {
-            return
-        }
-        ride.tripStatus = TripStatus.available
-        ride.numberOfSeats = Int(numberOfSeatsLabel.text!)!
-        ride.price = Float(priceLabel.text!)!
         
-        //Create a new ride in Firestore
-        createRide(startLocation: GeoPoint(latitude: ride.startLocation!.latitude, longitude: ride.startLocation!.longitude), endLocation: GeoPoint(latitude: ride.endLocation!.latitude, longitude: ride.endLocation!.longitude), tripStartTime: ride.tripStartTime!, estimatedArrivalTime: ride.estimatedArrivalTime!, tripDuration: ride.tripDuration!, distance: ride.distance, numberOfSeats: ride.numberOfSeats, price: ride.price!)
+        let alert = UIAlertController(title: "Confirm", message: "Confirm Ride Details", preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { alert -> Void in
+        
+            guard  let ride = self.ride, let numberOfSeatsLabel = self.numberOfSeatsLabel, let priceLabel = self.priceLabel else {
+                return
+            }
+            ride.tripStatus = TripStatus.available
+            ride.numberOfSeats = Int(numberOfSeatsLabel.text!)!
+            ride.price = Float(priceLabel.text!)!
+            
+            //Create a new ride in Firestore
+            self.createRide(startLocation: GeoPoint(latitude: ride.startLocation!.latitude, longitude: ride.startLocation!.longitude), endLocation: GeoPoint(latitude: ride.endLocation!.latitude, longitude: ride.endLocation!.longitude), tripStartTime: ride.tripStartTime!, estimatedArrivalTime: ride.estimatedArrivalTime!, tripDuration: ride.tripDuration!, distance: ride.distance, numberOfSeats: ride.numberOfSeats, price: ride.price!)
+            self.dismiss(animated: true, completion: nil)
+            
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { alert -> Void in
+                self.dismiss(animated: true, completion: nil)
+        }))
+     
+            self.present(alert, animated: true, completion: nil)
         
     }
     
