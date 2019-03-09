@@ -28,7 +28,7 @@ class OfferRideViewController: UIViewController, UISearchBarDelegate, LocateOnTh
     var tripStartTime: Date?
     var estimatedArrivalTime: Date?
     var tripDuration: String? = ""
-    var distance: Double?
+    var distance: String?
     var saveLine: Bool = false
     
 
@@ -55,7 +55,7 @@ class OfferRideViewController: UIViewController, UISearchBarDelegate, LocateOnTh
     @IBAction func setStartTime(_ sender: Any) {
 
         tripStartTime = tripDate.date
-        calculateEstimatedTime()
+        calculateDistanceAndEstimatedTime()
     }
     @IBAction func backButton(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
@@ -193,7 +193,7 @@ class OfferRideViewController: UIViewController, UISearchBarDelegate, LocateOnTh
             }
         }
             task.resume()
-            calculateDistance()
+
     }
     
 
@@ -218,20 +218,8 @@ class OfferRideViewController: UIViewController, UISearchBarDelegate, LocateOnTh
 
     }
     
-    func calculateDistance() {
-        
-        guard let startPoint = startPoint, let endPoint = endPoint else {
-                return
-        }
-        
-        let startLocation = CLLocation(latitude: startPoint.latitude, longitude: startPoint.longitude)
-        let endLocation = CLLocation(latitude: endPoint.latitude, longitude: endPoint.longitude)
-        distance = (startLocation.distance(from: endLocation) / 1000.0)
-
-
-    }
     
-    func calculateEstimatedTime() {
+    func calculateDistanceAndEstimatedTime() {
         
         guard let startPoint = startPoint, let endPoint = endPoint else {
             return
@@ -246,13 +234,17 @@ class OfferRideViewController: UIViewController, UISearchBarDelegate, LocateOnTh
                     
                     let routes = dict["routes"] as! NSArray
                     let legs = routes.value(forKey: "legs") as! NSArray
-                    //let city = results[0].address_components value(forKey: "address_components")
+                    let dist = legs.value(forKey: "distance") as! NSArray
+                    self.distance = ((dist.object(at: 0) as! NSArray)[0] as AnyObject).value(forKey: "text") as? String
+                    
                     let duration = legs.value(forKey: "duration") as! NSArray
+                    
                     let timeInSeconds = ((duration.object(at: 0) as! NSArray).value(forKey: "value") as! Array<Int>)[0]
-                    print(timeInSeconds)
+                    
+                    self.tripDuration = ((duration.object(at: 0) as! NSArray)[0] as AnyObject).value(forKey: "text") as? String
                     
                     self.calculateEndTime(timeInSeconds: timeInSeconds)
-                    self.calculateDuration(timeInSeconds: timeInSeconds)
+  
                 }
             }
             catch {
@@ -275,23 +267,8 @@ class OfferRideViewController: UIViewController, UISearchBarDelegate, LocateOnTh
             self.nextButtton.alpha = 1.0
         }
 
-
-
     }
-    
-    func calculateDuration(timeInSeconds: Int){
-        
-            let days = timeInSeconds / 86400
-            let hours = (timeInSeconds % 86400) / 3600
-            let minutes = ((timeInSeconds % 86400) % 3600) / 60
-        if days != 0 {
-            tripDuration = "\(days) days, \(hours) hours, \(minutes) minutes"
-        } else if hours != 0 {
-            tripDuration = "\(hours) hours, \(minutes) minutes"
-        } else {
-            tripDuration = "\(minutes) minutes"
-        }
-    }
+
 
     /*
     // MARK: - Navigation

@@ -57,7 +57,7 @@ class AvailableRidesTableViewCell: UITableViewCell {
         
         driverName.text = ride.tripDuration
         price.text = ride.price?.description
-        distanceLabel.text = "\(Int(ride.distance)) km"
+        distanceLabel.text = ride.distance ?? "0 km"
        
     }
     

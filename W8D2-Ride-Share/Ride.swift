@@ -33,13 +33,13 @@ class Ride {
     var driverPhoneNumber: String?
     var driverPhoto: String?
 
-    var distance: Double = 0.0
+    var distance: String = ""
     var numberOfSeats: Int = 3
     var tripStatus: TripStatus?
     var price: Float?
     
     
-    init(startLocation: CLLocationCoordinate2D, endLocation: CLLocationCoordinate2D, tripStartTime: Date, estimatedArrivalTime: Date, tripDuration: String, distance: Double) {
+    init(startLocation: CLLocationCoordinate2D, endLocation: CLLocationCoordinate2D, tripStartTime: Date, estimatedArrivalTime: Date, tripDuration: String, distance: String) {
         self.startLocation = startLocation
         self.endLocation = endLocation
         self.tripStartTime = tripStartTime

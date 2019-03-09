@@ -91,7 +91,7 @@ class OfferRideDetailsViewController: UIViewController {
     
     
     //MARK: Create new ride
-    func createRide(startLocation: GeoPoint, endLocation: GeoPoint, tripStartTime: Date, estimatedArrivalTime: Date, tripDuration: String, distance: Double, numberOfSeats:Int, price: Float) {
+    func createRide(startLocation: GeoPoint, endLocation: GeoPoint, tripStartTime: Date, estimatedArrivalTime: Date, tripDuration: String, distance: String, numberOfSeats:Int, price: Float) {
         if let user = self.user {
             //Create a new ride document in Firestore
             
