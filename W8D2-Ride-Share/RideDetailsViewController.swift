@@ -51,7 +51,7 @@ class RideDetailsViewController: UIViewController {
         
         driverNameLabel.text = ride.tripDuration
         price.text = ride.price?.description
-        additionalInfoTextView.text = "Additional information will apperar in that field and distance of the ride is \(Int(ride.distance)) km."
+        additionalInfoTextView.text = "Additional information will apperar in that field and distance of the ride is \(ride.distance)."
         
         // Do any additional setup after loading the view.
     }
