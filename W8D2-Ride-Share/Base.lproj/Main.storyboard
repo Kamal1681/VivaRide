@@ -1311,6 +1311,9 @@
                                             <constraint firstAttribute="height" constant="30" id="ULS-r8-JP5"/>
                                         </constraints>
                                         <state key="normal" title="Back" image="backButton"/>
+                                        <connections>
+                                            <action selector="backButton:" destination="dgT-5w-1ah" eventType="touchUpInside" id="VWG-ic-RJA"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ride details" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WxH-GG-vuP">
                                         <rect key="frame" x="40" y="2.5" width="295" height="25.5"/>
@@ -1354,6 +1357,20 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="9Mj-5Q-Iks"/>
                     </view>
+                    <connections>
+                        <outlet property="additionalInfoTextView" destination="PQD-O5-kVi" id="Cac-1u-eXs"/>
+                        <outlet property="carColorLabel" destination="TOu-Mg-6nU" id="wZ6-CD-6rJ"/>
+                        <outlet property="carModelLabel" destination="Duz-qW-uet" id="Ulb-RU-568"/>
+                        <outlet property="dateLabel" destination="21L-Fe-7WJ" id="Zdn-Lb-ZXg"/>
+                        <outlet property="driverNameLabel" destination="HFF-qM-nAB" id="dLn-fQ-JeN"/>
+                        <outlet property="driverPhotoImageView" destination="oyF-Lg-5Iv" id="wg9-V5-HgH"/>
+                        <outlet property="endLocationLabel" destination="RxY-az-Q5Z" id="qFs-zF-KdJ"/>
+                        <outlet property="estimatedArrivalTimeLabel" destination="l8o-Xi-bh7" id="1Da-5T-gNB"/>
+                        <outlet property="numberOfAvailableSeats" destination="3l0-12-Pi4" id="fNi-LZ-Nat"/>
+                        <outlet property="price" destination="VgB-FQ-NSu" id="NgN-uz-d5y"/>
+                        <outlet property="startLocationLabel" destination="B8F-8e-Mu2" id="syh-ZH-bU2"/>
+                        <outlet property="tripStartTimeLabel" destination="Wbr-i0-LY8" id="r4x-Ad-Aa4"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m4f-Gy-QxM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
