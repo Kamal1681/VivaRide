@@ -23,9 +23,7 @@ class AvailableRidesViewController: UIViewController, UITableViewDelegate, UITab
     //Other properties
 
     var ride: Ride?
-//     var startLocation: CLLocationCoordinate2D?
-//     var endLocation: CLLocationCoordinate2D?
-//    var tripStartTime: Date?
+
 
     var startLocation: CLLocationCoordinate2D!
     var endLocation: CLLocationCoordinate2D!
@@ -82,14 +80,16 @@ class AvailableRidesViewController: UIViewController, UITableViewDelegate, UITab
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellIdentifier", for: indexPath) as! AvailableRidesTableViewCell
+
         ride = self.filteredArrayByDate[indexPath.row]
+        
         guard let ride = ride else {
             return cell
         }
         
         print("IndexPathRow: \(indexPath.row)")
         print(self.filteredArrayByDate[indexPath.row].tripDuration)
-        
+
         cell.configureCell(ride: ride)
         return cell
     }
@@ -123,7 +123,7 @@ class AvailableRidesViewController: UIViewController, UITableViewDelegate, UITab
                     let endLocationGeoPoint = document.get("endLocation") as! GeoPoint
                     let price = document.get("price") as? Float
                     let tripDuration = document.get("tripDuration") as? String
-                    let distance = document.get("distance") as! Double
+                    let distance = document.get("distance") as! String
                     let numberOfSeats = document.get("numberOfSeats") as! Int
                     let tripStartTime = document.get("tripStartTime") as! Timestamp
                     let estimatedArrivalTime = document.get("estimatedArrivalTime") as! Timestamp
