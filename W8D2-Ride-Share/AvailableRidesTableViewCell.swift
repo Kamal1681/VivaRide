@@ -55,8 +55,8 @@ class AvailableRidesTableViewCell: UITableViewCell {
         startTimeLabel.text = stringHoursMinutesFormat(from: ride.tripStartTime!)
         estimatedArrivalTimeLabel.text = stringHoursMinutesFormat(from: ride.estimatedArrivalTime!)
         
-        driverName.text = ride.tripDuration
-        price.text = ride.price?.description
+        driverName.text = ride.userInfo?.name
+        price.text = String(format:"%.2f", ride.price ?? 999.99)
         distanceLabel.text = ride.distance ?? "0 km"
        
     }

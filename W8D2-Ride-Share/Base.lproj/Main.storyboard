@@ -1298,6 +1298,9 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r6M-Mw-ElS">
                                         <rect key="frame" x="0.0" y="0.0" width="335" height="30"/>
                                         <state key="normal" title="Continue"/>
+                                        <connections>
+                                            <action selector="continueButtonDidTap:" destination="dgT-5w-1ah" eventType="touchUpInside" id="3yS-4y-gFW"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -1370,6 +1373,7 @@
                         <outlet property="price" destination="VgB-FQ-NSu" id="NgN-uz-d5y"/>
                         <outlet property="startLocationLabel" destination="B8F-8e-Mu2" id="syh-ZH-bU2"/>
                         <outlet property="tripStartTimeLabel" destination="Wbr-i0-LY8" id="r4x-Ad-Aa4"/>
+                        <segue destination="zPa-DA-Xtw" kind="show" identifier="goToBookRideConfirmation" id="5cy-rl-kyS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m4f-Gy-QxM" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1472,7 +1476,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5zI-by-cIP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2846" y="130"/>
+            <point key="canvasLocation" x="2894" y="132"/>
         </scene>
         <!--Offer Ride View Controller-->
         <scene sceneID="Tw2-M3-A2e">

@@ -109,7 +109,6 @@ class AvailableRidesViewController: UIViewController, UITableViewDelegate, UITab
         let query = docRef
             .whereField("startLocation", isGreaterThan: lesserStartLocation)
             .whereField("startLocation", isLessThan: greaterStartLocation)
-
         
         query.getDocuments { snapshot, error in
             if let error = error {
@@ -127,13 +126,46 @@ class AvailableRidesViewController: UIViewController, UITableViewDelegate, UITab
                     let numberOfSeats = document.get("numberOfSeats") as! Int
                     let tripStartTime = document.get("tripStartTime") as! Timestamp
                     let estimatedArrivalTime = document.get("estimatedArrivalTime") as! Timestamp
+                    let userID = document.get("userID") as! String
                     
                     print(startLocationGeoPoint)
                     print(endLocationGeoPoint)
+                    print(userID)
                     
-                    let ride = Ride(startLocation: CLLocationCoordinate2D(latitude: startLocationGeoPoint.latitude, longitude: startLocationGeoPoint.longitude), endLocation: CLLocationCoordinate2D(latitude: endLocationGeoPoint.latitude, longitude: endLocationGeoPoint.longitude), tripStartTime: tripStartTime.dateValue(), estimatedArrivalTime: estimatedArrivalTime.dateValue(), tripDuration: tripDuration ?? "No value", distance: distance)
+                    let ride = Ride(startLocation: CLLocationCoordinate2D(latitude: startLocationGeoPoint.latitude, longitude: startLocationGeoPoint.longitude), endLocation: CLLocationCoordinate2D(latitude: endLocationGeoPoint.latitude, longitude: endLocationGeoPoint.longitude), tripStartTime: tripStartTime.dateValue(), estimatedArrivalTime: estimatedArrivalTime.dateValue(), tripDuration: tripDuration ?? "No value", distance: distance, userID: userID, userInfo: nil, price: Float(price!))
                     
                     self.ridesArray.append(ride)
+                }
+                
+                //Get information about driver from Firestore
+                
+                
+                for index in 0..<self.ridesArray.count {
+                    var userInfo: UserInfo?
+                    let userID = self.ridesArray[index].userID
+                    
+                    let driver = self.db.collection("users").whereField("uid", isEqualTo: userID as! String)
+                    
+                    driver.getDocuments { snapshot, error in
+                        if let error = error {
+                            print("Error getting documents: \(error)")
+                        } else {
+                            let userUID = snapshot!.documents.first?.get("uid") as! String
+                            let name = snapshot!.documents.first?.get("name") as! String
+                            let phoneNumber = snapshot!.documents.first?.get("phoneNumber") as! String
+                            let carModel = snapshot!.documents.first?.get("carModel") as! String
+                            let carColor = snapshot!.documents.first?.get("carColor") as! String
+                            
+                            userInfo = UserInfo(userID: userUID, name: name, phoneNumber: phoneNumber, carModel: carModel, carColor: carColor, photo: nil)
+                            
+                            print(snapshot!.documents.first?.get("name") as! String)
+                            print(userInfo?.name as! String)
+                            self.ridesArray[index].userInfo = userInfo
+                            
+                            
+                        }
+                        self.tableView.reloadData()
+                    }
                 }
                 
                 //Filtering results for end location from ridesArray
@@ -149,6 +181,9 @@ class AvailableRidesViewController: UIViewController, UITableViewDelegate, UITab
                 
                 self.filteredArrayByDate = self.filteredArrayByEndLocation.filter( { $0.tripStartTime! >= lessertripStartTime! && $0.tripStartTime! <= greatertripStartTime!}).map({ return $0 })
                 print("Filtered array is:\(self.filteredArrayByDate)")
+                
+                //Get driver infromation from Firestore user collection
+                
                 
                 //Reload Table View with results from Firebase
                 self.tableView.reloadData()
@@ -201,13 +236,6 @@ class AvailableRidesViewController: UIViewController, UITableViewDelegate, UITab
             }
             
         }
-        
-//        // get a reference to the second view controller
-//        let destinationVC = segue.destination as! RideDetailsViewController
-//        
-//        // set a variable in the second view controller with the data to pass
-//        let arrayIndex = tableView.indexPathForSelectedRow!.row
-//        destinationVC.ride = filteredArrayByDate[arrayIndex]
     }
     
     
