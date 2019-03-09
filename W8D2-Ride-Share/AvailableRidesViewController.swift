@@ -124,6 +124,7 @@ class AvailableRidesViewController: UIViewController, UITableViewDelegate, UITab
                     let tripDuration = document.get("tripDuration") as? String
                     let distance = document.get("distance") as! String
                     let numberOfSeats = document.get("numberOfSeats") as! Int
+                    let numberOfAvailableSeats = document.get("numberOfAvailableSeats") as! Int
                     let tripStartTime = document.get("tripStartTime") as! Timestamp
                     let estimatedArrivalTime = document.get("estimatedArrivalTime") as! Timestamp
                     let userID = document.get("userID") as! String
@@ -131,8 +132,9 @@ class AvailableRidesViewController: UIViewController, UITableViewDelegate, UITab
                     print(startLocationGeoPoint)
                     print(endLocationGeoPoint)
                     print(userID)
+                    print(price as! Float)
                     
-                    let ride = Ride(startLocation: CLLocationCoordinate2D(latitude: startLocationGeoPoint.latitude, longitude: startLocationGeoPoint.longitude), endLocation: CLLocationCoordinate2D(latitude: endLocationGeoPoint.latitude, longitude: endLocationGeoPoint.longitude), tripStartTime: tripStartTime.dateValue(), estimatedArrivalTime: estimatedArrivalTime.dateValue(), tripDuration: tripDuration ?? "No value", distance: distance, userID: userID, userInfo: nil, price: Float(price!))
+                    let ride = Ride(startLocation: CLLocationCoordinate2D(latitude: startLocationGeoPoint.latitude, longitude: startLocationGeoPoint.longitude), endLocation: CLLocationCoordinate2D(latitude: endLocationGeoPoint.latitude, longitude: endLocationGeoPoint.longitude), tripStartTime: tripStartTime.dateValue(), estimatedArrivalTime: estimatedArrivalTime.dateValue(), tripDuration: tripDuration ?? "No value", distance: distance, userID: userID, userInfo: nil, price: price, numberOfSeats: numberOfSeats, numberOfAvailableSeats: numberOfAvailableSeats)
                     
                     self.ridesArray.append(ride)
                 }
@@ -161,8 +163,6 @@ class AvailableRidesViewController: UIViewController, UITableViewDelegate, UITab
                             print(snapshot!.documents.first?.get("name") as! String)
                             print(userInfo?.name as! String)
                             self.ridesArray[index].userInfo = userInfo
-                            
-                            
                         }
                         self.tableView.reloadData()
                     }
