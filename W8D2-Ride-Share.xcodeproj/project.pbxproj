@@ -115,6 +115,8 @@
 		E9BBA8D222347E070023452C /* Offer Ride VCs */ = {
 			isa = PBXGroup;
 			children = (
+				E90D3D1622285FC30083BAB8 /* OfferRideViewController.swift */,
+				E90D3D1822285FE20083BAB8 /* OfferRideDetailsViewController.swift */,
 				E90D3D2C222865050083BAB8 /* StopoversTableViewCell.swift */,
 				E90D3D1A222860030083BAB8 /* OfferRideConfirmationViewController.swift */,
 			);
@@ -195,8 +197,6 @@
 				15B2CA3B2229CC2700ADFF46 /* UserProfile.swift */,
 				15B2CA3D2229CC3A00ADFF46 /* Ride.swift */,
 				E90D3D0C22285EFB0083BAB8 /* MenuViewController.swift */,
-				E90D3D1622285FC30083BAB8 /* OfferRideViewController.swift */,
-				E90D3D1822285FE20083BAB8 /* OfferRideDetailsViewController.swift */,
 				E9BBA8D122347D920023452C /* Find Ride VCs */,
 				E9BBA8D222347E070023452C /* Offer Ride VCs */,
 				E9BBA8D422347E920023452C /* User VCs */,
@@ -556,7 +556,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = X6GVVL7554;
+				DEVELOPMENT_TEAM = X7247USMTY;
 				INFOPLIST_FILE = "W8D2-Ride-Share/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -576,7 +576,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = X6GVVL7554;
+				DEVELOPMENT_TEAM = X7247USMTY;
 				INFOPLIST_FILE = "W8D2-Ride-Share/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
