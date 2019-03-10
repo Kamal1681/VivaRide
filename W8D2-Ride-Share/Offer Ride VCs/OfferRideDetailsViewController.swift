@@ -88,7 +88,7 @@ class OfferRideDetailsViewController: UIViewController {
             ride.price = Float(priceLabel.text!)!
             
             //Create a new ride in Firestore
-            self.createRide(startLocation: GeoPoint(latitude: ride.startLocation!.latitude, longitude: ride.startLocation!.longitude), endLocation: GeoPoint(latitude: ride.endLocation!.latitude, longitude: ride.endLocation!.longitude), tripStartTime: ride.tripStartTime!, estimatedArrivalTime: ride.estimatedArrivalTime!, tripDuration: ride.tripDuration!, distance: ride.distance, numberOfSeats: ride.numberOfSeats!, numberOfAvailableSeats: ride.numberOfAvailableSeats!, price: ride.price!)
+            self.createRide(startLocation: GeoPoint(latitude: ride.startLocation!.latitude, longitude: ride.startLocation!.longitude), endLocation: GeoPoint(latitude: ride.endLocation!.latitude, longitude: ride.endLocation!.longitude), tripStartTime: ride.tripStartTime!, estimatedArrivalTime: ride.estimatedArrivalTime!, tripDuration: ride.tripDuration!, distance: ride.distance, numberOfSeats: ride.numberOfSeats!, numberOfAvailableSeats: ride.numberOfAvailableSeats!, price: ride.price!, tripStatus: TripStatus.available.rawValue)
             self.dismiss(animated: true, completion: nil)
             
         }))
@@ -106,7 +106,7 @@ class OfferRideDetailsViewController: UIViewController {
     
     
     //MARK: Create new ride
-    func createRide(startLocation: GeoPoint, endLocation: GeoPoint, tripStartTime: Date, estimatedArrivalTime: Date, tripDuration: String, distance: String, numberOfSeats:Int, numberOfAvailableSeats: Int, price: Float) {
+    func createRide(startLocation: GeoPoint, endLocation: GeoPoint, tripStartTime: Date, estimatedArrivalTime: Date, tripDuration: String, distance: String, numberOfSeats:Int, numberOfAvailableSeats: Int, price: Float, tripStatus: TripStatus.RawValue) {
         if let user = self.user {
             //Create a new ride document in Firestore
             
@@ -114,7 +114,7 @@ class OfferRideDetailsViewController: UIViewController {
             ref = db.collection("rides").addDocument(data: [
                 "rideID": ref?.documentID ?? "noRideID",
                 "userID": user.uid,
-                "status": "available",
+                "status": tripStatus,
                 "startLocation": startLocation,
                 "endLocation": endLocation,
                 "tripStartTime": tripStartTime,

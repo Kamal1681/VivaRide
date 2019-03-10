@@ -47,7 +47,7 @@ class Ride {
     var price: Float?
     
     
-    init(startLocation: CLLocationCoordinate2D, endLocation: CLLocationCoordinate2D, tripStartTime: Date, estimatedArrivalTime: Date, tripDuration: String, distance: String, userID: String?, rideID: String?, userInfo: UserInfo?, price:Float?, numberOfSeats: Int?, numberOfAvailableSeats: Int?) {
+    init(startLocation: CLLocationCoordinate2D, endLocation: CLLocationCoordinate2D, tripStartTime: Date, estimatedArrivalTime: Date, tripDuration: String, distance: String, userID: String?, rideID: String?, userInfo: UserInfo?, price:Float?, numberOfSeats: Int?, numberOfAvailableSeats: Int?, tripStatus: TripStatus?) {
         self.startLocation = startLocation
         self.endLocation = endLocation
         self.tripStartTime = tripStartTime
@@ -60,6 +60,7 @@ class Ride {
         self.price = price
         self.numberOfSeats = numberOfSeats
         self.numberOfAvailableSeats = numberOfAvailableSeats
+        self.tripStatus = tripStatus
  
         //self.stopOvers = stopOvers ?? []
 
