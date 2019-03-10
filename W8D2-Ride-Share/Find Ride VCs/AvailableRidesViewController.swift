@@ -51,13 +51,7 @@ class AvailableRidesViewController: UIViewController, UITableViewDelegate, UITab
         print(startLocation)
         print(endLocation)
         print(tripStartTime)
-        
 
-        
-        // Get all locations within 10 miles of startLocation
-        getDocumentNearBy(latitudeStartLocation: Double(startLocation!.latitude), longitudeStartLocation: Double(startLocation!.longitude), latitudeEndLocation: Double(endLocation!.latitude), longitudeEndLocation: Double(endLocation!.longitude), tripStartTime: tripStartTime, distance: 10)
-        
-        // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -67,6 +61,14 @@ class AvailableRidesViewController: UIViewController, UITableViewDelegate, UITab
             self.user = user
         }
         // END auth_listener
+        
+        //Make arrays empty when view appear in case user came from ride details VC
+        ridesArray = []
+        filteredArrayByEndLocation = []
+        filteredArrayByDate = []
+        
+        // Get all locations within 10 miles of startLocation
+        getDocumentNearBy(latitudeStartLocation: Double(startLocation!.latitude), longitudeStartLocation: Double(startLocation!.longitude), latitudeEndLocation: Double(endLocation!.latitude), longitudeEndLocation: Double(endLocation!.longitude), tripStartTime: tripStartTime, distance: 10)
     }
     
     @IBAction func backButton(_ sender: Any) {
@@ -128,13 +130,14 @@ class AvailableRidesViewController: UIViewController, UITableViewDelegate, UITab
                     let tripStartTime = document.get("tripStartTime") as! Timestamp
                     let estimatedArrivalTime = document.get("estimatedArrivalTime") as! Timestamp
                     let userID = document.get("userID") as! String
+                    let rideID = document.get("rideID") as! String
                     
                     print(startLocationGeoPoint)
                     print(endLocationGeoPoint)
                     print(userID)
                     print(price as! Float)
                     
-                    let ride = Ride(startLocation: CLLocationCoordinate2D(latitude: startLocationGeoPoint.latitude, longitude: startLocationGeoPoint.longitude), endLocation: CLLocationCoordinate2D(latitude: endLocationGeoPoint.latitude, longitude: endLocationGeoPoint.longitude), tripStartTime: tripStartTime.dateValue(), estimatedArrivalTime: estimatedArrivalTime.dateValue(), tripDuration: tripDuration ?? "No value", distance: distance, userID: userID, userInfo: nil, price: price, numberOfSeats: numberOfSeats, numberOfAvailableSeats: numberOfAvailableSeats)
+                    let ride = Ride(startLocation: CLLocationCoordinate2D(latitude: startLocationGeoPoint.latitude, longitude: startLocationGeoPoint.longitude), endLocation: CLLocationCoordinate2D(latitude: endLocationGeoPoint.latitude, longitude: endLocationGeoPoint.longitude), tripStartTime: tripStartTime.dateValue(), estimatedArrivalTime: estimatedArrivalTime.dateValue(), tripDuration: tripDuration ?? "No value", distance: distance, userID: userID, rideID: rideID, userInfo: nil, price: price, numberOfSeats: numberOfSeats, numberOfAvailableSeats: numberOfAvailableSeats)
                     
                     self.ridesArray.append(ride)
                 }

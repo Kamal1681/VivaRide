@@ -1315,7 +1315,7 @@
                                         </constraints>
                                         <state key="normal" title="Back" image="backButton"/>
                                         <connections>
-                                            <action selector="backButton:" destination="dgT-5w-1ah" eventType="touchUpInside" id="VWG-ic-RJA"/>
+                                            <action selector="backButton:" destination="dgT-5w-1ah" eventType="touchUpInside" id="2u2-Pq-Sk8"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ride details" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WxH-GG-vuP">
@@ -1405,6 +1405,9 @@
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                         <state key="normal" title="-"/>
+                                        <connections>
+                                            <action selector="minusButtonDidTap:" destination="zPa-DA-Xtw" eventType="touchUpInside" id="EPL-Td-VlH"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E2I-bo-2Hm">
                                         <rect key="frame" x="82" y="6" width="27" height="30"/>
@@ -1420,6 +1423,9 @@
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                         <state key="normal" title="+"/>
+                                        <connections>
+                                            <action selector="plusButtonDidTap:" destination="zPa-DA-Xtw" eventType="touchUpInside" id="gfE-9t-X04"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -1432,6 +1438,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SOG-u3-bLl">
                                 <rect key="frame" x="20" y="171.5" width="335" height="30"/>
                                 <state key="normal" title="Book the ride"/>
+                                <connections>
+                                    <action selector="bookButtonDidTap:" destination="zPa-DA-Xtw" eventType="touchUpInside" id="DX7-pE-WiW"/>
+                                </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="vAI-QE-BEj" userLabel="Head Stack View">
                                 <rect key="frame" x="20" y="30" width="335" height="30"/>
@@ -1443,6 +1452,9 @@
                                             <constraint firstAttribute="width" constant="30" id="y4s-a1-eya"/>
                                         </constraints>
                                         <state key="normal" title="Back" image="backButton"/>
+                                        <connections>
+                                            <action selector="backButtonDidTap:" destination="zPa-DA-Xtw" eventType="touchUpInside" id="J9G-XP-JsV"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Book the ride - Confirmation" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yh3-1s-sWe">
                                         <rect key="frame" x="40" y="2.5" width="295" height="25.5"/>
@@ -1473,6 +1485,10 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="c0H-o5-VT5"/>
                     </view>
+                    <connections>
+                        <outlet property="numberOfBookingSeatsLabel" destination="E2I-bo-2Hm" id="oTr-dV-gMY"/>
+                        <outlet property="totalPriceLabel" destination="CiO-Ro-b6O" id="e8c-zs-GpR"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5zI-by-cIP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

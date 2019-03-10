@@ -100,6 +100,77 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		E9BBA8D122347D920023452C /* Find Ride VCs */ = {
+			isa = PBXGroup;
+			children = (
+				E90D3D0E22285F3B0083BAB8 /* FindRideViewController.swift */,
+				E90D3D1022285F570083BAB8 /* AvailableRidesViewController.swift */,
+				E90D3D2A222864C40083BAB8 /* AvailableRidesTableViewCell.swift */,
+				E90D3D1222285F700083BAB8 /* RideDetailsViewController.swift */,
+				E90D3D1C222860260083BAB8 /* BookRideConfirmationViewController.swift */,
+			);
+			path = "Find Ride VCs";
+			sourceTree = "<group>";
+		};
+		E9BBA8D222347E070023452C /* Offer Ride VCs */ = {
+			isa = PBXGroup;
+			children = (
+				E90D3D1622285FC30083BAB8 /* OfferRideViewController.swift */,
+				E90D3D2C222865050083BAB8 /* StopoversTableViewCell.swift */,
+				E90D3D1822285FE20083BAB8 /* OfferRideDetailsViewController.swift */,
+				E90D3D1A222860030083BAB8 /* OfferRideConfirmationViewController.swift */,
+			);
+			path = "Offer Ride VCs";
+			sourceTree = "<group>";
+		};
+		E9BBA8D322347E6E0023452C /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				E9C701DC22320F9D00607639 /* Extentions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		E9BBA8D422347E920023452C /* User VCs */ = {
+			isa = PBXGroup;
+			children = (
+				E90D3D0A22285D280083BAB8 /* LoginViewController.swift */,
+				E995BA80222A215F00E9CA40 /* RegisterEmailViewController.swift */,
+				E90D3D262228614B0083BAB8 /* ProfileViewController.swift */,
+			);
+			path = "User VCs";
+			sourceTree = "<group>";
+		};
+		E9BBA8D522347EF20023452C /* Rides Booked VCs */ = {
+			isa = PBXGroup;
+			children = (
+				E90D3D1E222860640083BAB8 /* RidesBookedViewController.swift */,
+				E90D3D2E222865270083BAB8 /* RidesBookedTableViewCell.swift */,
+				E90D3D20222860ED0083BAB8 /* BookedRideDetailsViewController.swift */,
+			);
+			path = "Rides Booked VCs";
+			sourceTree = "<group>";
+		};
+		E9BBA8D622347F610023452C /* Rides Offered VCs */ = {
+			isa = PBXGroup;
+			children = (
+				E90D3D22222861080083BAB8 /* RidesOfferedViewController.swift */,
+				E90D3D30222865480083BAB8 /* RidesOfferedTableViewCell.swift */,
+				E90D3D24222861340083BAB8 /* OfferedRideDetailsViewController.swift */,
+				E90D3D322228656B0083BAB8 /* PassengersListTableViewCell.swift */,
+			);
+			path = "Rides Offered VCs";
+			sourceTree = "<group>";
+		};
+		E9BBA8D722348D000023452C /* Search Results VC */ = {
+			isa = PBXGroup;
+			children = (
+				15B2CA3F2229FEB300ADFF46 /* SearchResultsController.swift */,
+				E90D3D28222864A30083BAB8 /* SearchHistoryTableViewCell.swift */,
+			);
+			path = "Search Results VC";
+			sourceTree = "<group>";
+		};
 		E9EAEE3E2225A4AD001DB057 = {
 			isa = PBXGroup;
 			children = (
@@ -125,31 +196,16 @@
 				E9EAEE4E2225A4AD001DB057 /* Main.storyboard */,
 				15B2CA3B2229CC2700ADFF46 /* UserProfile.swift */,
 				15B2CA3D2229CC3A00ADFF46 /* Ride.swift */,
-				E90D3D0A22285D280083BAB8 /* LoginViewController.swift */,
 				E90D3D0C22285EFB0083BAB8 /* MenuViewController.swift */,
-				E90D3D0E22285F3B0083BAB8 /* FindRideViewController.swift */,
-				15B2CA3F2229FEB300ADFF46 /* SearchResultsController.swift */,
-				E90D3D28222864A30083BAB8 /* SearchHistoryTableViewCell.swift */,
-				E90D3D1022285F570083BAB8 /* AvailableRidesViewController.swift */,
-				E9C701DC22320F9D00607639 /* Extentions.swift */,
-				E90D3D2A222864C40083BAB8 /* AvailableRidesTableViewCell.swift */,
-				E90D3D1222285F700083BAB8 /* RideDetailsViewController.swift */,
-				E90D3D1622285FC30083BAB8 /* OfferRideViewController.swift */,
-				E90D3D2C222865050083BAB8 /* StopoversTableViewCell.swift */,
-				E90D3D1822285FE20083BAB8 /* OfferRideDetailsViewController.swift */,
-				E90D3D1C222860260083BAB8 /* BookRideConfirmationViewController.swift */,
-				E90D3D1A222860030083BAB8 /* OfferRideConfirmationViewController.swift */,
-				E90D3D1E222860640083BAB8 /* RidesBookedViewController.swift */,
-				E90D3D2E222865270083BAB8 /* RidesBookedTableViewCell.swift */,
-				E90D3D20222860ED0083BAB8 /* BookedRideDetailsViewController.swift */,
-				E90D3D22222861080083BAB8 /* RidesOfferedViewController.swift */,
-				E90D3D30222865480083BAB8 /* RidesOfferedTableViewCell.swift */,
-				E90D3D24222861340083BAB8 /* OfferedRideDetailsViewController.swift */,
-				E90D3D322228656B0083BAB8 /* PassengersListTableViewCell.swift */,
-				E90D3D262228614B0083BAB8 /* ProfileViewController.swift */,
-				E995BA80222A215F00E9CA40 /* RegisterEmailViewController.swift */,
-				E9EAEE542225A4AF001DB057 /* Assets.xcassets */,
+				E9BBA8D122347D920023452C /* Find Ride VCs */,
+				E9BBA8D222347E070023452C /* Offer Ride VCs */,
+				E9BBA8D422347E920023452C /* User VCs */,
+				E9BBA8D522347EF20023452C /* Rides Booked VCs */,
+				E9BBA8D622347F610023452C /* Rides Offered VCs */,
+				E9BBA8D322347E6E0023452C /* Extensions */,
+				E9BBA8D722348D000023452C /* Search Results VC */,
 				E9EAEE562225A4AF001DB057 /* LaunchScreen.storyboard */,
+				E9EAEE542225A4AF001DB057 /* Assets.xcassets */,
 				E95E06C92229AAD400EA7D07 /* GoogleService-Info.plist */,
 				E9EAEE592225A4AF001DB057 /* Info.plist */,
 				E9EAEE512225A4AE001DB057 /* W8D2_Ride_Share.xcdatamodeld */,
