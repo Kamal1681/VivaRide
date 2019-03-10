@@ -29,8 +29,8 @@ class OfferRideViewController: UIViewController, UISearchBarDelegate, LocateOnTh
     var estimatedArrivalTime: Date?
     var tripDuration: String? = ""
     var distance: String?
-    var saveLine: Bool = false
-    
+    var saveLineFlag: Bool = false
+    var singleLine: GMSPolyline?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,8 +41,9 @@ class OfferRideViewController: UIViewController, UISearchBarDelegate, LocateOnTh
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        if (!saveLine) {
+        if (!saveLineFlag) {
             self.googleMapsView = GMSMapView(frame: self.mapView.frame)
+
             tripStartTime = tripDate.date.rounded(minutes: 15).rounded(seconds: 60)
             self.view.addSubview(self.googleMapsView)
         }
@@ -56,6 +57,7 @@ class OfferRideViewController: UIViewController, UISearchBarDelegate, LocateOnTh
 
         tripStartTime = tripDate.date
         calculateDistanceAndEstimatedTime()
+        
     }
     @IBAction func backButton(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
@@ -64,12 +66,14 @@ class OfferRideViewController: UIViewController, UISearchBarDelegate, LocateOnTh
     @IBAction func searchForPickUpLocation(_ sender: Any) {
 
         startPointEndPointFlag = false
+
         showSearchController(self)
         
     }
     
     @IBAction func searchForDropOffLocation(_ sender: Any) {
         startPointEndPointFlag = true
+
         showSearchController(self)
         
     }
@@ -82,8 +86,9 @@ class OfferRideViewController: UIViewController, UISearchBarDelegate, LocateOnTh
     }
     
     func locateWithLongitude(lon: Double, andLatitude lat: Double, andTitle title: String) {
-        
+
         DispatchQueue.main.async { () -> Void in
+
             let position = CLLocationCoordinate2DMake(lat, lon)
             let marker = GMSMarker(position: position)
             
@@ -98,13 +103,15 @@ class OfferRideViewController: UIViewController, UISearchBarDelegate, LocateOnTh
         
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        calculateDistanceAndEstimatedTime()
         guard let startPoint = startPoint, let endPoint = endPoint, let tripStartTime = tripStartTime, let estimatedArrivalTime = estimatedArrivalTime, let tripDuration = tripDuration, let distance = distance else {
             return
         }
         if segue.identifier == "showNextSteps"
         {
+
             let ride = Ride.init(startLocation: startPoint, endLocation: endPoint, tripStartTime: tripStartTime, estimatedArrivalTime: estimatedArrivalTime, tripDuration: tripDuration, distance: distance, userID: nil, rideID: nil, userInfo: nil, price: nil, numberOfSeats: nil, numberOfAvailableSeats: nil, tripStatus: nil)
-            
+        
             let offerRideDetailViewController: OfferRideDetailsViewController = segue.destination as! OfferRideDetailsViewController
             
             offerRideDetailViewController.ride = ride
@@ -124,8 +131,9 @@ class OfferRideViewController: UIViewController, UISearchBarDelegate, LocateOnTh
     }
 
     func createPath(position: CLLocationCoordinate2D, title: String) {
- 
-        
+
+        self.singleLine?.map = nil
+
         if(!startPointEndPointFlag) {
             startPoint = position
             let marker1 = GMSMarker(position: startPoint!)
@@ -137,27 +145,19 @@ class OfferRideViewController: UIViewController, UISearchBarDelegate, LocateOnTh
             let marker2 = GMSMarker(position: endPoint!)
             self.destinationAddress.title = title
             marker2.map = googleMapsView
-            
         }
-        
+
         guard let startPoint = startPoint, let endPoint = endPoint else {
             return
         }
-            
             let path = GMSMutablePath()
             path.add(CLLocationCoordinate2D(latitude: (startPoint.latitude), longitude: (startPoint.longitude)))
             path.add(CLLocationCoordinate2D(latitude: (endPoint.latitude), longitude: (endPoint.longitude)))
-            
-            let rectangle = GMSPolyline(path: path)
-            rectangle.strokeWidth = 2
-            rectangle.map = googleMapsView
-            self.mapView = googleMapsView
-            
-
-            
+        
+        
             let url = NSURL(string: "https://maps.googleapis.com/maps/api/directions/json?origin=\(String(describing: startPoint.latitude)),\(String(describing: startPoint.longitude))&destination=\(String(describing: endPoint.latitude)),\(String(describing: endPoint.longitude))&key=\(Constants.googleApiKey)")
         
-            let task = URLSession.shared.dataTask(with: url! as URL) { (data, response, error) -> Void in
+            let task = URLSession.shared.dataTask(with: url! as URL) { [weak self] (data, response, error) -> Void in
                 
                 do {
                     if data != nil {
@@ -167,24 +167,26 @@ class OfferRideViewController: UIViewController, UISearchBarDelegate, LocateOnTh
                         var routesArray:String!
                         if status == "OK" {
                             routesArray = ((((dict["routes"]!as! [Any])[0] as! [String:Any])["overview_polyline"] as! [String:Any])["points"] as! String)
-                            //print("routesArray: \(String(describing: routesArray))")
+
                         }
                         guard let linesArray = routesArray else {
                             print("Not Found")
                             return
                         }
+                        
                          DispatchQueue.main.async {
+                            
                             let path = GMSPath.init(fromEncodedPath: linesArray)
-                            let singleLine = GMSPolyline.init(path: path)
-                            singleLine.strokeWidth = 3.0
-                            singleLine.strokeColor = .red
-                            singleLine.map = self.googleMapsView
+                            self?.singleLine = GMSPolyline.init(path: path)
+                            self?.singleLine?.strokeWidth = 3.0
+                            self?.singleLine?.strokeColor = .red
+                            self?.singleLine?.map = self?.googleMapsView
                             let cameraBounds = GMSCoordinateBounds.init(coordinate: startPoint, coordinate: endPoint)
                             let camera = GMSCameraUpdate.fit(cameraBounds)
                             GMSCameraUpdate.fit(cameraBounds)
 
-                            self.googleMapsView.animate(with: camera)
-                            self.saveLine = true
+                            self?.googleMapsView.animate(with: camera)
+                            self?.saveLineFlag = true
                             
                         }
                     }
@@ -193,10 +195,7 @@ class OfferRideViewController: UIViewController, UISearchBarDelegate, LocateOnTh
             }
         }
             task.resume()
-
     }
-    
-
     
     func searchBar(_ searchBar: UISearchBar,
                    textDidChange searchText: String){
@@ -215,10 +214,7 @@ class OfferRideViewController: UIViewController, UISearchBarDelegate, LocateOnTh
             }
             self.searchResultController.reloadDataWithArray(array: self.resultsArray)
         }
-
     }
-    
-    
     func calculateDistanceAndEstimatedTime() {
         
         guard let startPoint = startPoint, let endPoint = endPoint else {
@@ -244,6 +240,7 @@ class OfferRideViewController: UIViewController, UISearchBarDelegate, LocateOnTh
                     self.tripDuration = ((duration.object(at: 0) as! NSArray)[0] as AnyObject).value(forKey: "text") as? String
                     
                     self.calculateEndTime(timeInSeconds: timeInSeconds)
+                    
   
                 }
             }
