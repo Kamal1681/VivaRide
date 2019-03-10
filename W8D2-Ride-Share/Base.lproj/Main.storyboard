@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="DGe-o0-boh">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="DGe-o0-boh">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -1701,7 +1701,7 @@
                                     </attributedString>
                                 </state>
                                 <connections>
-                                    <segue destination="K7Y-Eo-2HH" kind="presentation" identifier="showNextSteps" id="TW6-xG-f5U"/>
+                                    <action selector="nextButton:" destination="Wb3-4H-icj" eventType="touchUpInside" id="R6J-gx-SZZ"/>
                                 </connections>
                             </button>
                             <datePicker contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="top" datePickerMode="dateAndTime" minuteInterval="15" translatesAutoresizingMaskIntoConstraints="NO" id="HaD-hZ-fUd">
@@ -1748,6 +1748,7 @@
                         <outlet property="nextButtton" destination="3Je-Bh-G5Y" id="arF-T6-TsU"/>
                         <outlet property="startAddress" destination="pVg-E8-PaQ" id="hmn-Xf-gzH"/>
                         <outlet property="tripDate" destination="HaD-hZ-fUd" id="Ymz-7e-1HB"/>
+                        <segue destination="K7Y-Eo-2HH" kind="show" identifier="showNextSteps" id="igP-Py-U5r"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XdP-fR-EXU" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2159,7 +2160,7 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="2" minimumValue="1" maximumValue="3" translatesAutoresizingMaskIntoConstraints="NO" id="V30-z5-KPY">
+                                    <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="2" minimumValue="1" maximumValue="7" translatesAutoresizingMaskIntoConstraints="NO" id="V30-z5-KPY">
                                         <rect key="frame" x="241" y="0.0" width="94" height="29"/>
                                         <connections>
                                             <action selector="editNumberOfSeats:" destination="K7Y-Eo-2HH" eventType="valueChanged" id="MAo-eG-hzv"/>
@@ -2320,7 +2321,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6FB-YM-lpD">
-                                <rect key="frame" x="173" y="155" width="24" height="20.5"/>
+                                <rect key="frame" x="173" y="155" width="55" height="20.5"/>
                                 <attributedString key="attributedText">
                                     <fragment content="000">
                                         <attributes>
@@ -2340,7 +2341,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="apY-vb-bJI" firstAttribute="leading" secondItem="6FB-YM-lpD" secondAttribute="trailing" constant="64" id="1fm-I1-WH5"/>
+                            <constraint firstItem="apY-vb-bJI" firstAttribute="leading" secondItem="6FB-YM-lpD" secondAttribute="trailing" constant="33" id="1fm-I1-WH5"/>
                             <constraint firstItem="OQZ-FW-bkI" firstAttribute="trailing" secondItem="i1U-sg-yib" secondAttribute="trailing" constant="99" id="36P-Tr-lxx"/>
                             <constraint firstItem="OQZ-FW-bkI" firstAttribute="trailing" secondItem="QSZ-qJ-VhQ" secondAttribute="trailing" constant="20" id="7aP-Ck-rHm"/>
                             <constraint firstItem="QSZ-qJ-VhQ" firstAttribute="leading" secondItem="OQZ-FW-bkI" secondAttribute="leading" constant="20" id="9TF-jN-GFB"/>
@@ -2471,8 +2472,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="backButton" width="75" height="75"/>
-        <image name="icons8-forward-50" width="37.5" height="37.5"/>
-        <image name="profileDefaultPhoto" width="75" height="75"/>
+        <image name="backButton" width="100" height="100"/>
+        <image name="icons8-forward-50" width="50" height="50"/>
+        <image name="profileDefaultPhoto" width="100" height="100"/>
     </resources>
 </document>

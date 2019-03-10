@@ -56,7 +56,7 @@ class OfferRideViewController: UIViewController, UISearchBarDelegate, LocateOnTh
     @IBAction func setStartTime(_ sender: Any) {
 
         tripStartTime = tripDate.date
-        calculateDistanceAndEstimatedTime()
+        calculateDistanceAndEstimatedTime(segue: false)
         
     }
     @IBAction func backButton(_ sender: Any) {
@@ -103,7 +103,7 @@ class OfferRideViewController: UIViewController, UISearchBarDelegate, LocateOnTh
         
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        calculateDistanceAndEstimatedTime()
+        calculateDistanceAndEstimatedTime(segue: false)
         guard let startPoint = startPoint, let endPoint = endPoint, let tripStartTime = tripStartTime, let estimatedArrivalTime = estimatedArrivalTime, let tripDuration = tripDuration, let distance = distance else {
             return
         }
@@ -215,7 +215,7 @@ class OfferRideViewController: UIViewController, UISearchBarDelegate, LocateOnTh
             self.searchResultController.reloadDataWithArray(array: self.resultsArray)
         }
     }
-    func calculateDistanceAndEstimatedTime() {
+    func calculateDistanceAndEstimatedTime(segue: Bool) {
         
         guard let startPoint = startPoint, let endPoint = endPoint else {
             return
@@ -241,7 +241,12 @@ class OfferRideViewController: UIViewController, UISearchBarDelegate, LocateOnTh
                     
                     self.calculateEndTime(timeInSeconds: timeInSeconds)
                     
-  
+                    DispatchQueue.main.async {
+                        if segue {
+                            self.performSegue(withIdentifier: "showNextSteps", sender: self)
+                        }
+                    }
+
                 }
             }
             catch {
@@ -266,7 +271,11 @@ class OfferRideViewController: UIViewController, UISearchBarDelegate, LocateOnTh
 
     }
 
-
+    
+    @IBAction func nextButton(_ sender: UIButton) {
+        calculateDistanceAndEstimatedTime(segue: true)
+    }
+    
     /*
     // MARK: - Navigation
 
