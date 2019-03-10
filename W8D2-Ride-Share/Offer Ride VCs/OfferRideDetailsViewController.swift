@@ -34,6 +34,7 @@ class OfferRideDetailsViewController: UIViewController {
     @IBOutlet weak var startTimeLabel: UILabel!
     @IBOutlet weak var estimatedArrivalTimeLabel: UILabel!
     @IBOutlet weak var tripDurationLabel: UILabel!
+    @IBOutlet weak var distanceLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,6 +44,7 @@ class OfferRideDetailsViewController: UIViewController {
         startTimeLabel.text = startTimeText
         estimatedArrivalTimeLabel.text = estimatedArrivalTimeText
         tripDurationLabel.text = tripDuration
+        distanceLabel.text = ride?.distance
         
         // START setup for Firestore
         settings = FirestoreSettings()
