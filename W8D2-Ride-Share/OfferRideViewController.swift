@@ -103,12 +103,13 @@ class OfferRideViewController: UIViewController, UISearchBarDelegate, LocateOnTh
         
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        calculateDistanceAndEstimatedTime()
         guard let startPoint = startPoint, let endPoint = endPoint, let tripStartTime = tripStartTime, let estimatedArrivalTime = estimatedArrivalTime, let tripDuration = tripDuration, let distance = distance else {
             return
         }
         if segue.identifier == "showNextSteps"
         {
-            calculateDistanceAndEstimatedTime()
+            
             let ride = Ride.init(startLocation: startPoint, endLocation: endPoint, tripStartTime: tripStartTime, estimatedArrivalTime: estimatedArrivalTime, tripDuration: tripDuration, distance: distance, userID: nil, userInfo: nil, price: nil)
             
             let offerRideDetailViewController: OfferRideDetailsViewController = segue.destination as! OfferRideDetailsViewController
@@ -239,6 +240,7 @@ class OfferRideViewController: UIViewController, UISearchBarDelegate, LocateOnTh
                     self.tripDuration = ((duration.object(at: 0) as! NSArray)[0] as AnyObject).value(forKey: "text") as? String
                     
                     self.calculateEndTime(timeInSeconds: timeInSeconds)
+                    
   
                 }
             }
