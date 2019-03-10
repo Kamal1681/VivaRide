@@ -1,5 +1,5 @@
 //
-//  RideDetailsViewController.swift
+//  AvailableRidesTableViewCell.swift
 //  W8D2-Ride-Share
 //
 //  Created by Pavel on 2019-02-28.
@@ -8,65 +8,62 @@
 
 import UIKit
 import GoogleMaps
-import Firebase
 
-class RideDetailsViewController: UIViewController {
-    //Passing properties
-    var ride: Ride!
-    
-    //IBOutlet properties
+class AvailableRidesTableViewCell: UITableViewCell {
     @IBOutlet weak var dateLabel: UILabel!
-    @IBOutlet weak var tripStartTimeLabel: UILabel!
-    @IBOutlet weak var startLocationLabel: UILabel!
-    @IBOutlet weak var estimatedArrivalTimeLabel: UILabel!
-    @IBOutlet weak var endLocationLabel: UILabel!
-    @IBOutlet weak var numberOfAvailableSeats: UILabel!
-    @IBOutlet weak var price: UILabel!
-    @IBOutlet weak var driverPhotoImageView: UIImageView!
-    @IBOutlet weak var driverNameLabel: UILabel!
-    @IBOutlet weak var carModelLabel: UILabel!
-    @IBOutlet weak var carColorLabel: UILabel!
-    @IBOutlet weak var additionalInfoTextView: UITextView!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        print("Distance is: \(ride!.distance)")
-        print("Name is \(ride!.userInfo?.name)")
-        
-        //Setting labels and other UI
+    @IBOutlet weak var startTimeLabel: UILabel!
+    
+    @IBOutlet weak var estimatedArrivalTimeLabel: UILabel!
+    
+    @IBOutlet weak var startPointLabel: UILabel!
+    
+    @IBOutlet weak var endPointLabel: UILabel!
+    
+
+    @IBOutlet weak var driverName: UILabel!
+    
+    @IBOutlet weak var price: UILabel!
+    
+    @IBOutlet weak var distanceLabel: UILabel!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        // Initialization code
+    }
+
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+
+        // Configure the view for the selected state
+    }
+    func configureCell(ride: Ride) {
+
+
         getAddressFromLocation(location: ride.startLocation!, complete: { (city) in
             OperationQueue.main.addOperation {
-                self.startLocationLabel.text = city
+                self.startPointLabel.text = city
             }
         })
         getAddressFromLocation(location: ride.endLocation!, complete: { (city) in
             OperationQueue.main.addOperation {
-                self.endLocationLabel.text = city
+                self.endPointLabel.text = city
             }
-        })
-        
+       })
+
         dateLabel.text = stringDateFormat(from: ride.tripStartTime!)
-        tripStartTimeLabel.text = stringHoursMinutesFormat(from: ride.tripStartTime!)
+        startTimeLabel.text = stringHoursMinutesFormat(from: ride.tripStartTime!)
         estimatedArrivalTimeLabel.text = stringHoursMinutesFormat(from: ride.estimatedArrivalTime!)
         
-        driverNameLabel.text = ride.userInfo?.name
-        price.text = ride.price?.description
-        carModelLabel.text = ride.userInfo?.carModel
-        carColorLabel.text = ride.userInfo?.carColor
-        additionalInfoTextView.text = "Additional information will apperar in that field and distance of the ride is \(ride.distance)."
-        
-        // Do any additional setup after loading the view.
+        driverName.text = ride.userInfo?.name
+        let priceFormated = String(format:"%.2f", ride.price ?? 999.99)
+        price.text = "CAD \(priceFormated)"
+        distanceLabel.text = ride.distance 
+       
     }
     
-    //MARK: - Navigation
-    @IBAction func backButton(_ sender: UIButton) {
-        self.dismiss(animated: true, completion: nil)
-    }
-    
-    //MARK: - Functions
     func getAddressFromLocation (location: CLLocationCoordinate2D, complete: @escaping (String) -> Void) {
-        
+      
         var city: String? = ""
         let url = NSURL(string: "https://maps.googleapis.com/maps/api/geocode/json?latlng=\(String(describing: location.latitude)),\(String(describing: location.longitude))&location_type=APPROXIMATE&result_type=locality&language=en&key=\(Constants.googleApiKey)")
         
@@ -79,7 +76,7 @@ class RideDetailsViewController: UIViewController {
                     let addressComponents = results.value(forKey: "address_components") as! NSArray
                     let components = (addressComponents[0] as! NSArray)[0] as! NSDictionary
                     city = (components.value(forKey: "long_name") as! String)
-                    
+            
                     complete(city ?? "")
                 }
             }catch {
@@ -110,28 +107,9 @@ class RideDetailsViewController: UIViewController {
         return myString
     }
 
-    // MARK: - Navigation
-    
-    @IBAction func continueButtonDidTap(_ sender: UIButton) {
-        self.performSegue(withIdentifier: "goToBookRideConfirmation", sender: self)
-    }
-    
-    // This function is called before the segue
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        if segue.identifier == "goToBookRideConfirmation", let destinationVC = segue.destination as? BookRideConfirmationViewController {
-                destinationVC.ride = self.ride
-        }
-    }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
+    
+        
+
+
+
