@@ -76,7 +76,6 @@ class UserInfo {
     var carColor: String?
     var photo: String?
     
-    
     init(userID: String, name: String, phoneNumber: String, carModel: String?, carColor: String?, photo: String?) {
         self.userID = userID
         self.name = name

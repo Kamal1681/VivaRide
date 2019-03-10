@@ -24,6 +24,9 @@ class SearchResultsController: UITableViewController {
 
         self.searchResults = Array()
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cellIdentifier")
+
+        self.tableView.backgroundColor = UIColor.lightGray
+        
     }
 
     // MARK: - Table view data source
@@ -41,7 +44,7 @@ class SearchResultsController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellIdentifier", for: indexPath)
-
+        cell.backgroundColor = UIColor.gray
         cell.textLabel?.text = self.searchResults[indexPath.row]
         return cell
     }
