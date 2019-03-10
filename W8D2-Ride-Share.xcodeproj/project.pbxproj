@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1508113E2235990000499CD6 /* 022215-commute-thumb.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1508113D2235990000499CD6 /* 022215-commute-thumb.jpg */; };
 		15B2CA3C2229CC2700ADFF46 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15B2CA3B2229CC2700ADFF46 /* UserProfile.swift */; };
 		15B2CA3E2229CC3A00ADFF46 /* Ride.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15B2CA3D2229CC3A00ADFF46 /* Ride.swift */; };
 		15B2CA402229FEB300ADFF46 /* SearchResultsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15B2CA3F2229FEB300ADFF46 /* SearchResultsController.swift */; };
@@ -42,6 +43,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1508113D2235990000499CD6 /* 022215-commute-thumb.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "022215-commute-thumb.jpg"; sourceTree = "<group>"; };
 		15B2CA3B2229CC2700ADFF46 /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		15B2CA3D2229CC3A00ADFF46 /* Ride.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ride.swift; sourceTree = "<group>"; };
 		15B2CA3F2229FEB300ADFF46 /* SearchResultsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsController.swift; sourceTree = "<group>"; };
@@ -206,6 +208,7 @@
 				E9BBA8D722348D000023452C /* Search Results VC */,
 				E9EAEE562225A4AF001DB057 /* LaunchScreen.storyboard */,
 				E9EAEE542225A4AF001DB057 /* Assets.xcassets */,
+				1508113D2235990000499CD6 /* 022215-commute-thumb.jpg */,
 				E95E06C92229AAD400EA7D07 /* GoogleService-Info.plist */,
 				E9EAEE592225A4AF001DB057 /* Info.plist */,
 				E9EAEE512225A4AE001DB057 /* W8D2_Ride_Share.xcdatamodeld */,
@@ -284,6 +287,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E9EAEE582225A4AF001DB057 /* LaunchScreen.storyboard in Resources */,
+				1508113E2235990000499CD6 /* 022215-commute-thumb.jpg in Resources */,
 				E95E06CA2229AAD400EA7D07 /* GoogleService-Info.plist in Resources */,
 				E9EAEE552225A4AF001DB057 /* Assets.xcassets in Resources */,
 				E9EAEE502225A4AD001DB057 /* Main.storyboard in Resources */,
@@ -556,7 +560,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = X7247USMTY;
+				DEVELOPMENT_TEAM = X6GVVL7554;
 				INFOPLIST_FILE = "W8D2-Ride-Share/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -576,7 +580,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = X7247USMTY;
+				DEVELOPMENT_TEAM = X6GVVL7554;
 				INFOPLIST_FILE = "W8D2-Ride-Share/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (

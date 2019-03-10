@@ -183,8 +183,6 @@ class OfferRideViewController: UIViewController, UISearchBarDelegate, LocateOnTh
                             self?.singleLine?.map = self?.googleMapsView
                             let cameraBounds = GMSCoordinateBounds.init(coordinate: startPoint, coordinate: endPoint)
                             let camera = GMSCameraUpdate.fit(cameraBounds)
-                            GMSCameraUpdate.fit(cameraBounds)
-
                             self?.googleMapsView.animate(with: camera)
                             self?.saveLineFlag = true
                             
@@ -273,6 +271,7 @@ class OfferRideViewController: UIViewController, UISearchBarDelegate, LocateOnTh
 
     
     @IBAction func nextButton(_ sender: UIButton) {
+        sender.pressed()
         calculateDistanceAndEstimatedTime(segue: true)
     }
     
