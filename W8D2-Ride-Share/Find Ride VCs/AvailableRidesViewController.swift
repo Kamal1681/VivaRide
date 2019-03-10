@@ -34,6 +34,7 @@ class AvailableRidesViewController: UIViewController, UITableViewDelegate, UITab
     var ridesArray = [Ride]()
     var filteredArrayByEndLocation = [Ride]()
     var filteredArrayByDate = [Ride]()
+    var filteredArrayByStatus = [Ride]()
     
     //TableView
     @IBOutlet weak var tableView: UITableView!
@@ -51,13 +52,7 @@ class AvailableRidesViewController: UIViewController, UITableViewDelegate, UITab
         print(startLocation)
         print(endLocation)
         print(tripStartTime)
-        
 
-        
-        // Get all locations within 10 miles of startLocation
-        getDocumentNearBy(latitudeStartLocation: Double(startLocation!.latitude), longitudeStartLocation: Double(startLocation!.longitude), latitudeEndLocation: Double(endLocation!.latitude), longitudeEndLocation: Double(endLocation!.longitude), tripStartTime: tripStartTime, distance: 10)
-        
-        // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -67,6 +62,15 @@ class AvailableRidesViewController: UIViewController, UITableViewDelegate, UITab
             self.user = user
         }
         // END auth_listener
+        
+        //Make arrays empty when view appear in case user came from ride details VC
+        ridesArray = []
+        filteredArrayByEndLocation = []
+        filteredArrayByDate = []
+        filteredArrayByStatus = []
+        
+        // Get all locations within 10 miles of startLocation
+        getDocumentNearBy(latitudeStartLocation: Double(startLocation!.latitude), longitudeStartLocation: Double(startLocation!.longitude), latitudeEndLocation: Double(endLocation!.latitude), longitudeEndLocation: Double(endLocation!.longitude), tripStartTime: tripStartTime, distance: 10)
     }
     
     @IBAction func backButton(_ sender: Any) {
@@ -75,26 +79,26 @@ class AvailableRidesViewController: UIViewController, UITableViewDelegate, UITab
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
-       return filteredArrayByDate.count
+       return filteredArrayByStatus.count
 
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellIdentifier", for: indexPath) as! AvailableRidesTableViewCell
 
-        ride = self.filteredArrayByDate[indexPath.row]
+        ride = self.filteredArrayByStatus[indexPath.row]
         
         guard let ride = ride else {
             return cell
         }
         
         print("IndexPathRow: \(indexPath.row)")
-        print(self.filteredArrayByDate[indexPath.row].tripDuration)
+        print(self.filteredArrayByStatus[indexPath.row].tripDuration)
 
         cell.configureCell(ride: ride)
         return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 200
+        return 150
     }
     
     
@@ -118,28 +122,36 @@ class AvailableRidesViewController: UIViewController, UITableViewDelegate, UITab
                     print("\(document.documentID) => \(document.data())")
                     print(document.get("tripDuration") as! String)
                     
-                    let startLocationGeoPoint = document.get("startLocation") as! GeoPoint
-                    let endLocationGeoPoint = document.get("endLocation") as! GeoPoint
-                    let price = document.get("price") as? Float
-                    let tripDuration = document.get("tripDuration") as? String
-                    let distance = document.get("distance") as! String
-                    let numberOfSeats = document.get("numberOfSeats") as! Int
-                    let tripStartTime = document.get("tripStartTime") as! Timestamp
-                    let estimatedArrivalTime = document.get("estimatedArrivalTime") as! Timestamp
-                    let userID = document.get("userID") as! String
-                    
+                    guard
+                        let startLocationGeoPoint = document.get("startLocation") as? GeoPoint,
+                        let endLocationGeoPoint = document.get("endLocation") as? GeoPoint,
+                        let price = document.get("price") as? Float,
+                        let tripDuration = document.get("tripDuration") as? String,
+                        let distance = document.get("distance") as? String,
+                        let numberOfSeats = document.get("numberOfSeats") as? Int,
+                        let numberOfAvailableSeats = document.get("numberOfAvailableSeats") as? Int,
+                        let tripStatusRawValue = document.get("status") as? String,
+                        let tripStatus = TripStatus(rawValue: tripStatusRawValue),
+                        let tripStartTime = document.get("tripStartTime") as? Timestamp,
+                        let estimatedArrivalTime = document.get("estimatedArrivalTime") as? Timestamp,
+                        let userID = document.get("userID") as? String,
+                        let rideID = document.get("rideID") as? String
+                        else {
+                            print("Error! Can not get data from Rides document.")
+                            return
+                    }
+                   
                     print(startLocationGeoPoint)
                     print(endLocationGeoPoint)
                     print(userID)
+                    print(price as! Float)
                     
-                    let ride = Ride(startLocation: CLLocationCoordinate2D(latitude: startLocationGeoPoint.latitude, longitude: startLocationGeoPoint.longitude), endLocation: CLLocationCoordinate2D(latitude: endLocationGeoPoint.latitude, longitude: endLocationGeoPoint.longitude), tripStartTime: tripStartTime.dateValue(), estimatedArrivalTime: estimatedArrivalTime.dateValue(), tripDuration: tripDuration ?? "No value", distance: distance, userID: userID, userInfo: nil, price: Float(price!))
+                    let ride = Ride(startLocation: CLLocationCoordinate2D(latitude: startLocationGeoPoint.latitude, longitude: startLocationGeoPoint.longitude), endLocation: CLLocationCoordinate2D(latitude: endLocationGeoPoint.latitude, longitude: endLocationGeoPoint.longitude), tripStartTime: tripStartTime.dateValue(), estimatedArrivalTime: estimatedArrivalTime.dateValue(), tripDuration: tripDuration, distance: distance, userID: userID, rideID: rideID, userInfo: nil, price: price, numberOfSeats: numberOfSeats, numberOfAvailableSeats: numberOfAvailableSeats, tripStatus: tripStatus)
                     
                     self.ridesArray.append(ride)
                 }
                 
-                //Get information about driver from Firestore
-                
-                
+                //Get driver infromation from Firestore user collection
                 for index in 0..<self.ridesArray.count {
                     var userInfo: UserInfo?
                     let userID = self.ridesArray[index].userID
@@ -161,8 +173,6 @@ class AvailableRidesViewController: UIViewController, UITableViewDelegate, UITab
                             print(snapshot!.documents.first?.get("name") as! String)
                             print(userInfo?.name as! String)
                             self.ridesArray[index].userInfo = userInfo
-                            
-                            
                         }
                         self.tableView.reloadData()
                     }
@@ -182,8 +192,9 @@ class AvailableRidesViewController: UIViewController, UITableViewDelegate, UITab
                 self.filteredArrayByDate = self.filteredArrayByEndLocation.filter( { $0.tripStartTime! >= lessertripStartTime! && $0.tripStartTime! <= greatertripStartTime!}).map({ return $0 })
                 print("Filtered array is:\(self.filteredArrayByDate)")
                 
-                //Get driver infromation from Firestore user collection
-                
+                //Filterring results by status
+                self.filteredArrayByStatus = self.filteredArrayByDate.filter( { $0.tripStatus == TripStatus.available}).map({ return $0 })
+                print("Filtered array is:\(self.filteredArrayByStatus)")
                 
                 //Reload Table View with results from Firebase
                 self.tableView.reloadData()
@@ -232,7 +243,7 @@ class AvailableRidesViewController: UIViewController, UITableViewDelegate, UITab
         
         if segue.identifier == "goToAvailableRideDetails", let destinationVC = segue.destination as? RideDetailsViewController {
             if let indexPath = tableView.indexPathForSelectedRow {
-                destinationVC.ride = filteredArrayByDate[indexPath.row]
+                destinationVC.ride = filteredArrayByStatus[indexPath.row]
             }
             
         }
