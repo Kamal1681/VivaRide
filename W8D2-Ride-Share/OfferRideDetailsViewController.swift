@@ -56,6 +56,7 @@ class OfferRideDetailsViewController: UIViewController {
         // START auth_listener
         handle = Auth.auth().addStateDidChangeListener { (auth, user) in
             self.user = user
+            self.calculatePrice()
         }
         // END auth_listener
     }
@@ -91,6 +92,7 @@ class OfferRideDetailsViewController: UIViewController {
             self.dismiss(animated: true, completion: nil)
             
         }))
+        
         alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { alert -> Void in
                 self.dismiss(animated: true, completion: nil)
         }))
@@ -100,12 +102,13 @@ class OfferRideDetailsViewController: UIViewController {
     }
     
     @IBAction func editPrice(_ sender: UIStepper!) {
-        priceLabel.text = String(sender.value)
+        priceLabel.text = "\(Int(ride?.price ?? 0) + Int(sender.value))"
     }
     
     
     //MARK: Create new ride
     func createRide(startLocation: GeoPoint, endLocation: GeoPoint, tripStartTime: Date, estimatedArrivalTime: Date, tripDuration: String, distance: String, numberOfSeats:Int, price: Float) {
+
         if let user = self.user {
             //Create a new ride document in Firestore
             
@@ -146,6 +149,20 @@ class OfferRideDetailsViewController: UIViewController {
                 print("RideID successfully written!")
             }
         }
+    }
+    
+    func calculatePrice() {
+        let distanceInKm = ((ride?.distance as! NSString).replacingOccurrences(of: ",", with: "") as! NSString).floatValue
+        if (distanceInKm < 50) {
+            ride?.price = distanceInKm * 0.5
+        }
+        if (distanceInKm > 50 && distanceInKm < 100) {
+            ride?.price = distanceInKm * 0.25
+        }
+        if (distanceInKm > 100) {
+            ride?.price = distanceInKm * 0.1
+        }
+        priceLabel.text = "\(Int(ride?.price ?? 0))"
     }
     
     /*

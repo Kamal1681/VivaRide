@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="DGe-o0-boh">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="DGe-o0-boh">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -1509,6 +1509,7 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cBR-vc-NO8">
                                         <rect key="frame" x="0.0" y="0.0" width="335" height="42"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                         <state key="normal" title="Find a ride"/>
                                         <connections>
@@ -1517,6 +1518,7 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nim-2i-eUy">
                                         <rect key="frame" x="0.0" y="64" width="335" height="42"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                         <state key="normal" title="Offer a ride"/>
                                         <connections>
@@ -1525,12 +1527,15 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g8k-oW-fcT">
                                         <rect key="frame" x="0.0" y="128" width="335" height="42"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                         <state key="normal" title="Rides booked"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Csu-Fm-O0C">
                                         <rect key="frame" x="0.0" y="192" width="335" height="42"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                        <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="Rides offered"/>
                                     </button>
                                 </subviews>
@@ -1547,7 +1552,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.66422420739999999" green="0.66424006219999998" blue="0.66423153879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Bbp-Dg-FZL" firstAttribute="trailing" secondItem="SVi-X7-8ET" secondAttribute="trailing" constant="20" id="AAl-QI-GRv"/>
                             <constraint firstItem="ypz-AP-sb3" firstAttribute="centerY" secondItem="Apv-TV-Scy" secondAttribute="centerY" id="CFD-YO-zJC"/>
@@ -2163,37 +2168,6 @@
                                     </switch>
                                 </subviews>
                             </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="fUk-0M-YLp">
-                                <rect key="frame" x="20" y="135" width="335" height="29"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Price: $" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gej-zw-X6c">
-                                        <rect key="frame" x="0.0" y="0.0" width="177" height="29"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="29" id="PqS-Hk-fIx"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6FB-YM-lpD">
-                                        <rect key="frame" x="197" y="0.0" width="24" height="29"/>
-                                        <attributedString key="attributedText">
-                                            <fragment content="0.0">
-                                                <attributes>
-                                                    <font key="NSFont" metaFont="system" size="17"/>
-                                                </attributes>
-                                            </fragment>
-                                        </attributedString>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <stepper opaque="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="10" minimumValue="10" maximumValue="1000" stepValue="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="apY-vb-bJI">
-                                        <rect key="frame" x="241" y="0.0" width="94" height="29"/>
-                                        <connections>
-                                            <action selector="editPrice:" destination="K7Y-Eo-2HH" eventType="valueChanged" id="WO5-4m-EnL"/>
-                                        </connections>
-                                    </stepper>
-                                </subviews>
-                            </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ride details" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cC4-QT-12e">
                                 <rect key="frame" x="20" y="209" width="335" height="20.5"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
@@ -2239,7 +2213,7 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" alignment="center" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="r6g-h7-fFb">
-                                <rect key="frame" x="37.5" y="260" width="300" height="336"/>
+                                <rect key="frame" x="38" y="260" width="300" height="336"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Start Address" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="anz-zw-fQ1">
@@ -2319,26 +2293,58 @@
                                     </label>
                                 </subviews>
                             </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Price: $" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gej-zw-X6c">
+                                <rect key="frame" x="20" y="146" width="177" height="29"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="29" id="PqS-Hk-fIx"/>
+                                    <constraint firstAttribute="width" constant="177" id="g1Y-ht-ihQ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6FB-YM-lpD">
+                                <rect key="frame" x="173" y="155" width="24" height="20.5"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="000">
+                                        <attributes>
+                                            <font key="NSFont" metaFont="system" size="17"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stepper opaque="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" minimumValue="-1000" maximumValue="1000" translatesAutoresizingMaskIntoConstraints="NO" id="apY-vb-bJI">
+                                <rect key="frame" x="261" y="146" width="94" height="29"/>
+                                <connections>
+                                    <action selector="editPrice:" destination="K7Y-Eo-2HH" eventType="valueChanged" id="WO5-4m-EnL"/>
+                                </connections>
+                            </stepper>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="apY-vb-bJI" firstAttribute="leading" secondItem="6FB-YM-lpD" secondAttribute="trailing" constant="64" id="1fm-I1-WH5"/>
                             <constraint firstItem="OQZ-FW-bkI" firstAttribute="trailing" secondItem="i1U-sg-yib" secondAttribute="trailing" constant="99" id="36P-Tr-lxx"/>
                             <constraint firstItem="OQZ-FW-bkI" firstAttribute="trailing" secondItem="QSZ-qJ-VhQ" secondAttribute="trailing" constant="20" id="7aP-Ck-rHm"/>
                             <constraint firstItem="QSZ-qJ-VhQ" firstAttribute="leading" secondItem="OQZ-FW-bkI" secondAttribute="leading" constant="20" id="9TF-jN-GFB"/>
                             <constraint firstItem="i1U-sg-yib" firstAttribute="leading" secondItem="OQZ-FW-bkI" secondAttribute="leading" constant="99" id="AOg-1n-Qpo"/>
                             <constraint firstItem="KMS-SY-pXw" firstAttribute="leading" secondItem="OQZ-FW-bkI" secondAttribute="leading" constant="20" id="CM5-fP-ckG"/>
                             <constraint firstItem="cC4-QT-12e" firstAttribute="leading" secondItem="OQZ-FW-bkI" secondAttribute="leading" constant="20" id="CYw-i4-Z27"/>
+                            <constraint firstItem="6FB-YM-lpD" firstAttribute="leading" secondItem="OQZ-FW-bkI" secondAttribute="leading" constant="173" id="Cv6-OX-yn5"/>
                             <constraint firstItem="OQZ-FW-bkI" firstAttribute="trailing" secondItem="0Tx-H5-N1b" secondAttribute="trailing" constant="20" id="J4S-IV-y5y"/>
+                            <constraint firstItem="6FB-YM-lpD" firstAttribute="top" secondItem="QSZ-qJ-VhQ" secondAttribute="bottom" constant="25" id="KAv-IV-Qj0"/>
                             <constraint firstItem="OQZ-FW-bkI" firstAttribute="bottom" secondItem="i1U-sg-yib" secondAttribute="bottom" constant="27.5" id="LDO-gF-81D"/>
                             <constraint firstItem="OQZ-FW-bkI" firstAttribute="trailing" secondItem="cC4-QT-12e" secondAttribute="trailing" constant="20" id="Pcc-m5-xs0"/>
                             <constraint firstItem="0Tx-H5-N1b" firstAttribute="leading" secondItem="OQZ-FW-bkI" secondAttribute="leading" constant="20" id="QIH-RC-uxX"/>
-                            <constraint firstItem="cC4-QT-12e" firstAttribute="top" secondItem="fUk-0M-YLp" secondAttribute="bottom" constant="45" id="Rt0-rN-opf"/>
-                            <constraint firstItem="OQZ-FW-bkI" firstAttribute="trailing" secondItem="fUk-0M-YLp" secondAttribute="trailing" constant="20" id="Uig-p6-vbu"/>
+                            <constraint firstItem="gej-zw-X6c" firstAttribute="top" secondItem="apY-vb-bJI" secondAttribute="top" id="brw-rG-w1E"/>
+                            <constraint firstItem="gej-zw-X6c" firstAttribute="top" secondItem="QSZ-qJ-VhQ" secondAttribute="bottom" constant="16" id="d6T-8q-IOl"/>
                             <constraint firstItem="OQZ-FW-bkI" firstAttribute="trailing" secondItem="KMS-SY-pXw" secondAttribute="trailing" constant="20" id="dbf-D2-L2b"/>
+                            <constraint firstItem="cC4-QT-12e" firstAttribute="top" secondItem="gej-zw-X6c" secondAttribute="bottom" constant="34" id="fzm-fC-RhZ"/>
+                            <constraint firstItem="gej-zw-X6c" firstAttribute="leading" secondItem="QSZ-qJ-VhQ" secondAttribute="leading" id="hW2-sM-zht"/>
                             <constraint firstItem="0Tx-H5-N1b" firstAttribute="top" secondItem="KMS-SY-pXw" secondAttribute="bottom" constant="5" id="hph-fd-qbe"/>
                             <constraint firstItem="QSZ-qJ-VhQ" firstAttribute="top" secondItem="0Tx-H5-N1b" secondAttribute="bottom" constant="5" id="lek-74-tpa"/>
-                            <constraint firstItem="fUk-0M-YLp" firstAttribute="top" secondItem="QSZ-qJ-VhQ" secondAttribute="bottom" constant="5" id="n9i-jY-dVx"/>
-                            <constraint firstItem="fUk-0M-YLp" firstAttribute="leading" secondItem="OQZ-FW-bkI" secondAttribute="leading" constant="20" id="pbi-od-04b"/>
+                            <constraint firstItem="apY-vb-bJI" firstAttribute="trailing" secondItem="QSZ-qJ-VhQ" secondAttribute="trailing" id="tbs-s4-ibg"/>
                             <constraint firstItem="KMS-SY-pXw" firstAttribute="top" secondItem="OQZ-FW-bkI" secondAttribute="top" constant="10" id="uRE-x4-iHc"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="OQZ-FW-bkI"/>
@@ -2449,8 +2455,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="backButton" width="100" height="100"/>
-        <image name="icons8-forward-50" width="50" height="50"/>
-        <image name="profileDefaultPhoto" width="100" height="100"/>
+        <image name="backButton" width="75" height="75"/>
+        <image name="icons8-forward-50" width="37.5" height="37.5"/>
+        <image name="profileDefaultPhoto" width="75" height="75"/>
     </resources>
 </document>
