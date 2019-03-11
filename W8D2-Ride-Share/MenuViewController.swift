@@ -77,29 +77,7 @@ class MenuViewController: UIViewController {
         sender.pressed()
         
         sendPushNotification()
-//        sendPushNotification2()
-    }
-    
-    func sendPushNotification2() {
-        let message = [
-            "to" : "eKUBk_ra58Q:APA91bGKXmQbkwR73haVgvX0LPILpKoQEuwDxQzebmTGuKkNcWQRWvWtRQaOFm1XMiSNeCqQ4E97yy9D8U6KhujfuGmX-fJqXExwz9EZppBr_DF0s2vPSE7xlhdiw_UGlaDGacbnoC1L",
-            "notification": [
-                "title" : "not title",
-                "body"  : "not body",
-                "icon"  : "not icon"
-            ],
-            "data": [
-                //More notification data.
-            ]
-            ] as [String : Any]
-        let to = "457157237254@gcm.googleapis.com"
-        let messageId = "dfdlsfjlksd324cmnclkelf"
-        let ttl: Int64 = 60
-        
-        Messaging.messaging().sendMessage(message,
-                                          to: to,
-                                          withMessageID: messageId,
-                                          timeToLive: ttl)
+
     }
     
     func sendPushNotification() {
@@ -145,6 +123,28 @@ class MenuViewController: UIViewController {
         ridesBooked.configure(button: ridesBooked)
         ridesOffered.configure(button: ridesOffered)
     }
+    
+//    func sendUpstreamPushNotification() {
+//        let message = [
+//            "to" : "eKUBk_ra58Q:APA91bGKXmQbkwR73haVgvX0LPILpKoQEuwDxQzebmTGuKkNcWQRWvWtRQaOFm1XMiSNeCqQ4E97yy9D8U6KhujfuGmX-fJqXExwz9EZppBr_DF0s2vPSE7xlhdiw_UGlaDGacbnoC1L",
+//            "title" : "not title",
+//            "body"  : "not body"
+//
+//            ] as [String : Any]
+//        let to = "457157237254@gcm.googleapis.com"
+//        let messageId = "\(Int.random(in: 0...99999))\(Int.random(in: 0...99999))\(Int.random(in: 0...99999))"
+//        let ttl: Int64 = 6
+//
+//        Messaging.messaging().sendMessage(message,
+//                                          to: to,
+//                                          withMessageID: messageId,
+//                                          timeToLive: ttl)
+//        print("Button pushed")
+//
+//    }
+    
+    
+    
     /*
      @IBAction func ridesBooked(_ sender: Any) {
      }
