@@ -11,6 +11,7 @@
 		15B2CA3C2229CC2700ADFF46 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15B2CA3B2229CC2700ADFF46 /* UserProfile.swift */; };
 		15B2CA3E2229CC3A00ADFF46 /* Ride.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15B2CA3D2229CC3A00ADFF46 /* Ride.swift */; };
 		15B2CA402229FEB300ADFF46 /* SearchResultsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15B2CA3F2229FEB300ADFF46 /* SearchResultsController.swift */; };
+		15C1DE232235C5D500D7F586 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 15C1DE222235C5D500D7F586 /* GoogleService-Info.plist */; };
 		67C677BD2B3304C9352D604E /* Pods_W8D2_Ride_Share.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 440F169039B18D25F1EAF42E /* Pods_W8D2_Ride_Share.framework */; };
 		E9088D522235CF5C004ECF9A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E9088D512235CF5C004ECF9A /* GoogleService-Info.plist */; };
 		E90D3D0B22285D280083BAB8 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90D3D0A22285D280083BAB8 /* LoginViewController.swift */; };
@@ -47,6 +48,7 @@
 		15B2CA3B2229CC2700ADFF46 /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		15B2CA3D2229CC3A00ADFF46 /* Ride.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ride.swift; sourceTree = "<group>"; };
 		15B2CA3F2229FEB300ADFF46 /* SearchResultsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsController.swift; sourceTree = "<group>"; };
+		15C1DE222235C5D500D7F586 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		440F169039B18D25F1EAF42E /* Pods_W8D2_Ride_Share.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_W8D2_Ride_Share.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9177AEE06E859116CE515D6E /* Pods-W8D2-Ride-Share.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-W8D2-Ride-Share.release.xcconfig"; path = "Target Support Files/Pods-W8D2-Ride-Share/Pods-W8D2-Ride-Share.release.xcconfig"; sourceTree = "<group>"; };
 		9338C7A9C089044CE4207DD5 /* Pods-W8D2-Ride-Share.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-W8D2-Ride-Share.debug.xcconfig"; path = "Target Support Files/Pods-W8D2-Ride-Share/Pods-W8D2-Ride-Share.debug.xcconfig"; sourceTree = "<group>"; };
@@ -213,6 +215,7 @@
 				1508113D2235990000499CD6 /* 022215-commute-thumb.jpg */,
 				E9088D512235CF5C004ECF9A /* GoogleService-Info.plist */,
 				E9EAEE592225A4AF001DB057 /* Info.plist */,
+				15C1DE222235C5D500D7F586 /* GoogleService-Info.plist */,
 				E9EAEE512225A4AE001DB057 /* W8D2_Ride_Share.xcdatamodeld */,
 			);
 			path = "W8D2-Ride-Share";
@@ -298,7 +301,7 @@
 			files = (
 				E9EAEE582225A4AF001DB057 /* LaunchScreen.storyboard in Resources */,
 				1508113E2235990000499CD6 /* 022215-commute-thumb.jpg in Resources */,
-				E9088D522235CF5C004ECF9A /* GoogleService-Info.plist in Resources */,
+				15C1DE232235C5D500D7F586 /* GoogleService-Info.plist in Resources */,
 				E9EAEE552225A4AF001DB057 /* Assets.xcassets in Resources */,
 				E9EAEE502225A4AD001DB057 /* Main.storyboard in Resources */,
 			);

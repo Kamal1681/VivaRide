@@ -10,13 +10,23 @@ import UIKit
 
 class BookedRideDetailsViewController: UIViewController {
 
+    @IBOutlet weak var contactTheDriverButton: UIButton!
+    
+    @IBOutlet weak var cancelButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        cancelButton.configure(button: cancelButton)
+        contactTheDriverButton.configure(button: contactTheDriverButton)
         // Do any additional setup after loading the view.
     }
     
-
+    @IBAction func cancelPressed(_ sender: UIButton) {
+        sender.pressed()
+    }
+    @IBAction func contactDriverPressed(_ sender: UIButton) {
+        sender.pressed()
+    }
+    
     /*
     // MARK: - Navigation
 

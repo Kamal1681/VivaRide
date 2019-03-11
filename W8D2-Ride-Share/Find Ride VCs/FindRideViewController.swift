@@ -24,6 +24,7 @@ class FindRideViewController: UIViewController, UISearchBarDelegate, LocateOnThe
     @IBOutlet weak var startAddress: UINavigationItem!
     @IBOutlet weak var destinationAddress: UINavigationItem!
     
+    @IBOutlet weak var searchButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -36,6 +37,7 @@ class FindRideViewController: UIViewController, UISearchBarDelegate, LocateOnThe
         else {
             tripStartTime = Date()
         }
+        searchButton.configure(button: searchButton)
         // Do any additional setup after loading the view.
     }
    override func viewDidAppear(_ animated: Bool) {
@@ -123,6 +125,11 @@ class FindRideViewController: UIViewController, UISearchBarDelegate, LocateOnThe
             self.searchResultController.reloadDataWithArray(array: self.resultsArray)
         }
         
+    }
+    
+    @IBAction func searchButton(_ sender: UIButton) {
+        
+        sender.pressed()
     }
     /*
     // MARK: - Navigation
