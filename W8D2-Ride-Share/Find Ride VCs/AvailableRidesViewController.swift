@@ -70,7 +70,10 @@ class AvailableRidesViewController: UIViewController, UITableViewDelegate, UITab
         filteredArrayByStatus = []
         
         // Get all locations within 10 miles of startLocation
-        getDocumentNearBy(latitudeStartLocation: Double(startLocation!.latitude), longitudeStartLocation: Double(startLocation!.longitude), latitudeEndLocation: Double(endLocation!.latitude), longitudeEndLocation: Double(endLocation!.longitude), tripStartTime: tripStartTime, distance: 10)
+        guard let startLocation = startLocation, let endLocation = endLocation, let tripstartTime = tripStartTime else {
+            return
+        }
+        getDocumentNearBy(latitudeStartLocation: Double(startLocation.latitude), longitudeStartLocation: Double(startLocation.longitude), latitudeEndLocation: Double(endLocation.latitude), longitudeEndLocation: Double(endLocation.longitude), tripStartTime: tripStartTime, distance: 10)
     }
     
     @IBAction func backButton(_ sender: Any) {
@@ -197,7 +200,18 @@ class AvailableRidesViewController: UIViewController, UITableViewDelegate, UITab
                 print("Filtered array is:\(self.filteredArrayByStatus)")
                 
                 //Reload Table View with results from Firebase
-                self.tableView.reloadData()
+                if self.filteredArrayByStatus.count == 0 {
+                    let alert = UIAlertController(title: "No Rides", message: "No rides Available", preferredStyle: UIAlertController.Style.alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: {(alert: UIAlertAction!) in
+                        self.dismiss(animated: true, completion: nil)
+                    }))
+                    self.present(alert, animated: true, completion: nil)
+                    
+                }
+                else {
+                    self.tableView.reloadData()
+                }
+                
             }
         }
     }

@@ -17,6 +17,20 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var photoLabel: UIImageView!
     @IBOutlet weak var carModelLabel: UILabel!
     @IBOutlet weak var carColorLabel: UILabel!
+ 
+    @IBOutlet weak var editNameButton: UIButton!
+    
+    @IBOutlet weak var editEmailButton: UIButton!
+    
+    @IBOutlet weak var editPhoneButton: UIButton!
+    
+    @IBOutlet weak var editCarModelButton: UIButton!
+    
+    @IBOutlet weak var editCarColorButton: UIButton!
+    
+    @IBOutlet weak var changePasswordButton: UIButton!
+    
+    @IBOutlet weak var signOutButton: UIButton!
     
     var db: Firestore!
     
@@ -44,6 +58,7 @@ class ProfileViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        configureButtons()
         // START auth_listener
         handle = Auth.auth().addStateDidChangeListener { (auth, user) in
             self.user = user
@@ -66,6 +81,7 @@ class ProfileViewController: UIViewController {
     }
     
     @IBAction func signOutButtonDidTap(_ sender: UIButton) {
+        sender.pressed()
         let firebaseAuth = Auth.auth()
         do {
             try firebaseAuth.signOut()
@@ -76,30 +92,36 @@ class ProfileViewController: UIViewController {
     }
     
     @IBAction func changePasswordButtonDidTap(_ sender: UIButton) {
+        sender.pressed()
         updatePassword(alertTitle: "Edit your password", alertFirstPlaceHolder: "Enter your new password", alertSecondPlaceHolder: "Repeat your new password")
     }
     
     @IBAction func editPhoto(_ sender: UIButton) {
     }
     
-    @IBAction func editNameButton(_ sender: Any) {
+    @IBAction func editNameButton(_ sender: UIButton) {
+        sender.pressed()
         editAlert(alertTitle: "Edit your name", alertPlaceHolder: "Enter your name", fieldName: "name", label: nameLabel)
     }
     
     
-    @IBAction func editEmailButton(_ sender: Any) {
+    @IBAction func editEmailButton(_ sender: UIButton) {
+        sender.pressed()
         updateEmail(alertTitle: "Edit your email", alertPlaceHolder: "Enter your email")
     }
     
-    @IBAction func editPhoneNumberButton(_ sender: Any) {
+    @IBAction func editPhoneNumberButton(_ sender: UIButton) {
+        sender.pressed()
         editAlert(alertTitle: "Edit your phone number", alertPlaceHolder: "Enter your  phone number", fieldName: "phoneNumber", label: phoneNumberLabel)
     }
     
-    @IBAction func editCarModelButton(_ sender: Any) {
+    @IBAction func editCarModelButton(_ sender: UIButton) {
+        sender.pressed()
         editAlert(alertTitle: "Edit your car model", alertPlaceHolder: "Enter your car model", fieldName: "carModel", label: carModelLabel)
     }
     
-    @IBAction func editCarColorButton(_ sender: Any) {
+    @IBAction func editCarColorButton(_ sender: UIButton) {
+        sender.pressed()
         editAlert(alertTitle: "Edit your car color", alertPlaceHolder: "Enter your car color", fieldName: "carColor", label: carColorLabel)
     }
     
@@ -279,7 +301,15 @@ class ProfileViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
-    
+    func configureButtons() {
+        editNameButton.configure(button: editNameButton)
+        editEmailButton.configure(button: editEmailButton)
+        editPhoneButton.configure(button: editPhoneButton)
+        editCarModelButton.configure(button: editCarModelButton)
+        editCarColorButton.configure(button: editCarColorButton)
+        changePasswordButton.configure(button: changePasswordButton)
+        signOutButton.configure(button: signOutButton)
+    }
     /*
     // MARK: - Navigation
 
