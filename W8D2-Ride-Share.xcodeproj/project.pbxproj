@@ -12,6 +12,7 @@
 		15B2CA3E2229CC3A00ADFF46 /* Ride.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15B2CA3D2229CC3A00ADFF46 /* Ride.swift */; };
 		15B2CA402229FEB300ADFF46 /* SearchResultsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15B2CA3F2229FEB300ADFF46 /* SearchResultsController.swift */; };
 		67C677BD2B3304C9352D604E /* Pods_W8D2_Ride_Share.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 440F169039B18D25F1EAF42E /* Pods_W8D2_Ride_Share.framework */; };
+		E9088D522235CF5C004ECF9A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E9088D512235CF5C004ECF9A /* GoogleService-Info.plist */; };
 		E90D3D0B22285D280083BAB8 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90D3D0A22285D280083BAB8 /* LoginViewController.swift */; };
 		E90D3D0D22285EFB0083BAB8 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90D3D0C22285EFB0083BAB8 /* MenuViewController.swift */; };
 		E90D3D0F22285F3B0083BAB8 /* FindRideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90D3D0E22285F3B0083BAB8 /* FindRideViewController.swift */; };
@@ -32,7 +33,6 @@
 		E90D3D2F222865270083BAB8 /* RidesBookedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90D3D2E222865270083BAB8 /* RidesBookedTableViewCell.swift */; };
 		E90D3D31222865480083BAB8 /* RidesOfferedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90D3D30222865480083BAB8 /* RidesOfferedTableViewCell.swift */; };
 		E90D3D332228656B0083BAB8 /* PassengersListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90D3D322228656B0083BAB8 /* PassengersListTableViewCell.swift */; };
-		E989D4092235120A0090664C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E989D408223512090090664C /* GoogleService-Info.plist */; };
 		E995BA81222A215F00E9CA40 /* RegisterEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E995BA80222A215F00E9CA40 /* RegisterEmailViewController.swift */; };
 		E9C701DD22320F9D00607639 /* Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C701DC22320F9D00607639 /* Extentions.swift */; };
 		E9EAEE4B2225A4AD001DB057 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9EAEE4A2225A4AD001DB057 /* AppDelegate.swift */; };
@@ -50,6 +50,7 @@
 		440F169039B18D25F1EAF42E /* Pods_W8D2_Ride_Share.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_W8D2_Ride_Share.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9177AEE06E859116CE515D6E /* Pods-W8D2-Ride-Share.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-W8D2-Ride-Share.release.xcconfig"; path = "Target Support Files/Pods-W8D2-Ride-Share/Pods-W8D2-Ride-Share.release.xcconfig"; sourceTree = "<group>"; };
 		9338C7A9C089044CE4207DD5 /* Pods-W8D2-Ride-Share.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-W8D2-Ride-Share.debug.xcconfig"; path = "Target Support Files/Pods-W8D2-Ride-Share/Pods-W8D2-Ride-Share.debug.xcconfig"; sourceTree = "<group>"; };
+		E9088D512235CF5C004ECF9A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E90D3D0A22285D280083BAB8 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		E90D3D0C22285EFB0083BAB8 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		E90D3D0E22285F3B0083BAB8 /* FindRideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindRideViewController.swift; sourceTree = "<group>"; };
@@ -71,7 +72,6 @@
 		E90D3D30222865480083BAB8 /* RidesOfferedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RidesOfferedTableViewCell.swift; sourceTree = "<group>"; };
 		E90D3D322228656B0083BAB8 /* PassengersListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassengersListTableViewCell.swift; sourceTree = "<group>"; };
 		E989D407223507CD0090664C /* W8D2-Ride-Share.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "W8D2-Ride-Share.entitlements"; sourceTree = "<group>"; };
-		E989D408223512090090664C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		E995BA80222A215F00E9CA40 /* RegisterEmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterEmailViewController.swift; sourceTree = "<group>"; };
 		E9C701DC22320F9D00607639 /* Extentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extentions.swift; sourceTree = "<group>"; };
 		E9EAEE472225A4AD001DB057 /* W8D2-Ride-Share.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "W8D2-Ride-Share.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -210,9 +210,8 @@
 				E9BBA8D722348D000023452C /* Search Results VC */,
 				E9EAEE562225A4AF001DB057 /* LaunchScreen.storyboard */,
 				E9EAEE542225A4AF001DB057 /* Assets.xcassets */,
-
-				E989D408223512090090664C /* GoogleService-Info.plist */,
 				1508113D2235990000499CD6 /* 022215-commute-thumb.jpg */,
+				E9088D512235CF5C004ECF9A /* GoogleService-Info.plist */,
 				E9EAEE592225A4AF001DB057 /* Info.plist */,
 				E9EAEE512225A4AE001DB057 /* W8D2_Ride_Share.xcdatamodeld */,
 			);
@@ -298,8 +297,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				E9EAEE582225A4AF001DB057 /* LaunchScreen.storyboard in Resources */,
-				E989D4092235120A0090664C /* GoogleService-Info.plist in Resources */,
 				1508113E2235990000499CD6 /* 022215-commute-thumb.jpg in Resources */,
+				E9088D522235CF5C004ECF9A /* GoogleService-Info.plist in Resources */,
 				E9EAEE552225A4AF001DB057 /* Assets.xcassets in Resources */,
 				E9EAEE502225A4AD001DB057 /* Main.storyboard in Resources */,
 			);
@@ -572,7 +571,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "W8D2-Ride-Share/W8D2-Ride-Share.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = X6GVVL7554;
+				DEVELOPMENT_TEAM = X7247USMTY;
 				INFOPLIST_FILE = "W8D2-Ride-Share/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -593,7 +592,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "W8D2-Ride-Share/W8D2-Ride-Share.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = X6GVVL7554;
+				DEVELOPMENT_TEAM = X7247USMTY;
 				INFOPLIST_FILE = "W8D2-Ride-Share/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (

@@ -39,21 +39,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // [START set_messaging_delegate]
         Messaging.messaging().delegate = self
+        // [END set_messaging_delegate]
+        
         Messaging.messaging().shouldEstablishDirectChannel = true
         
-//        //Sending a notification
-//        let message = ["collapse_key": "ru.owlsoft.viva-ride"]
-//        let to = "457157237254@gcm.googleapis.com"
-//        let messageId = " "
-//        let ttl = 60
-//
-//        Messaging.messaging().sendMessage(message,
-//                                          to: to,
-//                                          withMessageID: messageId,
-//                                          timeToLive: Int64(ttl))
+        //        //Sending a notification
+        //        let message = ["collapse_key": "ru.owlsoft.viva-ride"]
+        //        let to = "457157237254@gcm.googleapis.com"
+        //        let messageId = " "
+        //        let ttl = 60
+        //
+        //        Messaging.messaging().sendMessage(message,
+        //                                          to: to,
+        //                                          withMessageID: messageId,
+        //                                          timeToLive: Int64(ttl))
         
-        
-        // [END set_messaging_delegate]
         // Register for remote notifications. This shows a permission dialog on first run, to
         // show the dialog at a more appropriate time move this registration accordingly.
         // [START register_for_notifications]
