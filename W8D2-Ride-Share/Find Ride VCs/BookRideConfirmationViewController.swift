@@ -25,6 +25,8 @@ class BookRideConfirmationViewController: UIViewController {
     @IBOutlet weak var numberOfBookingSeatsLabel: UILabel!
     @IBOutlet weak var totalPriceLabel: UILabel!
     
+    @IBAction func bookButton(_ sender: Any) {
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -102,26 +104,38 @@ class BookRideConfirmationViewController: UIViewController {
     
     //MARK: - Booking
     @IBAction func bookButtonDidTap(_ sender: UIButton) {
+        
+        let alert = UIAlertController(title: "Confirm", message: "Confirm Booking", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { alert -> Void in
         guard
-            let rideID = ride.rideID,
-            let numberOfBookingSeats = Int(numberOfBookingSeatsLabel.text!),
+            let rideID = self.ride.rideID,
+            let numberOfBookingSeats = Int(self.numberOfBookingSeatsLabel.text!),
 //            let numberOfSeats = ride.numberOfSeats,
-            let numberOfAvailableSeats = ride.numberOfAvailableSeats
+            let numberOfAvailableSeats = self.ride.numberOfAvailableSeats
             else {
                 print("Error in book button did tap method! Can not assign rideID and numberOfBookingSeats to the variables.")
                 return
         }
         let status = "confirmed" //By now all rides will be automatically confirmed
         if numberOfAvailableSeats > 0 && numberOfBookingSeats <= numberOfAvailableSeats {
-            bookRide(rideID: rideID, numberOfBookingSeats: numberOfBookingSeats, numberOfAvailableSeats: numberOfAvailableSeats, bookingStatus: status)
+            self.bookRide(rideID: rideID, numberOfBookingSeats: numberOfBookingSeats, numberOfAvailableSeats: numberOfAvailableSeats, bookingStatus: status)
         }
         else if numberOfAvailableSeats == 0 {
-            errorAlert(errorMessage: "Sorry, but there are not available seats for this ride! Please, look for another ride.")
+            self.errorAlert(errorMessage: "Sorry, but there are not available seats for this ride! Please, look for another ride.")
         }
         else if numberOfBookingSeats > numberOfAvailableSeats {
-            errorAlert(errorMessage: "Number of seats that you are trying to book is bigger than number of available seats. Please, reduce number of booking seats or find another ride.")
+            self.errorAlert(errorMessage: "Number of seats that you are trying to book is bigger than number of available seats. Please, reduce number of booking seats or find another ride.")
         }
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { alert -> Void in
+            self.dismiss(animated: true, completion: nil)
+        }))
+        
+        self.present(alert, animated: true, completion: nil)
+        
     }
+
     
     //MARK: Book the ride function
     func bookRide(rideID: String, numberOfBookingSeats: Int, numberOfAvailableSeats: Int, bookingStatus: String) {

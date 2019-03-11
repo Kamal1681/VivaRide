@@ -16,8 +16,9 @@ class OfferRideViewController: UIViewController, UISearchBarDelegate, LocateOnTh
     @IBOutlet weak var mapView: UIView!
     @IBOutlet weak var startAddress: UINavigationItem!
     @IBOutlet weak var destinationAddress: UINavigationItem!
-    @IBOutlet weak var nextButtton: UIButton!
+ 
 
+    @IBOutlet weak var continueButton: UIButton!
     
     var searchResultController: SearchResultsController!
     var resultsArray = [String]() //autocomplete results
@@ -34,8 +35,9 @@ class OfferRideViewController: UIViewController, UISearchBarDelegate, LocateOnTh
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.nextButtton.isUserInteractionEnabled = false
-        
+
+        continueButton.configure(button: continueButton)
+        self.continueButton.isUserInteractionEnabled = false
         // Do any additional setup after loading the view.
     }
     
@@ -66,16 +68,12 @@ class OfferRideViewController: UIViewController, UISearchBarDelegate, LocateOnTh
     @IBAction func searchForPickUpLocation(_ sender: Any) {
 
         startPointEndPointFlag = false
-
         showSearchController(self)
-        
     }
     
     @IBAction func searchForDropOffLocation(_ sender: Any) {
         startPointEndPointFlag = true
-
         showSearchController(self)
-        
     }
     
     func showSearchController(_ sender: AnyObject) {
@@ -263,18 +261,17 @@ class OfferRideViewController: UIViewController, UISearchBarDelegate, LocateOnTh
         estimatedArrivalTime = Calendar.current.date(byAdding: .second, value: timeInSeconds, to: tripStartTime)
         
         DispatchQueue.main.async {
-            self.nextButtton.isUserInteractionEnabled = true
-            self.nextButtton.alpha = 1.0
+
+            self.continueButton.isUserInteractionEnabled = true
+            self.continueButton.alpha = 1.0
         }
 
     }
-
     
-    @IBAction func nextButton(_ sender: UIButton) {
+    @IBAction func continueButtonPressed(_ sender: UIButton) {
         sender.pressed()
         calculateDistanceAndEstimatedTime(segue: true)
     }
-    
     /*
     // MARK: - Navigation
 

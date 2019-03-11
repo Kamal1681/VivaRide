@@ -10,13 +10,17 @@ import UIKit
 
 class OfferedRideDetailsViewController: UIViewController {
 
+    @IBOutlet weak var cancelButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        cancelButton.configure(button: cancelButton)
         // Do any additional setup after loading the view.
     }
     
 
+    @IBAction func cancelButtonPressed(_ sender: UIButton) {
+        sender.pressed()
+    }
     /*
     // MARK: - Navigation
 

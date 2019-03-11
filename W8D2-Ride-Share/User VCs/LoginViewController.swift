@@ -24,7 +24,7 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        configureButtons()
         //If keyboard appears/hide view size will change
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -45,7 +45,7 @@ class LoginViewController: UIViewController {
 //    }
     
     @IBAction func signInButton(_ sender: UIButton) {
-        
+        sender.pressed()
         guard let email = self.emailField.text, let password = self.passwordField.text else {
             print("Error")
             return
@@ -73,10 +73,12 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func signUpButton(_ sender: UIButton) {
+        sender.pressed()
     }
     
     
     @IBAction func fogotPassButton(_ sender: UIButton) {
+        sender.pressed()
     }
     
     
@@ -105,6 +107,11 @@ class LoginViewController: UIViewController {
     }
     @IBAction func passwordEditingDidEnd(_ sender: Any) {
         passwordField.resignFirstResponder()
+    }
+    func configureButtons() {
+        signInButton.configure(button: signInButton)
+        signUpButton.configure(button: signUpButton)
+        fogotPassButton.configure(button: fogotPassButton)
     }
     /*
     // MARK: - Navigation

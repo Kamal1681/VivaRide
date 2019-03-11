@@ -22,15 +22,14 @@ class MenuViewController: UIViewController {
     
     @IBOutlet weak var ridesOffered: UIButton!
     
+    @IBOutlet weak var profileButton: UIButton!
     var viewToAnimate = [UIButton]()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        findARide.configure(button: findARide)
-        offerARide.configure(button: offerARide)
-        ridesBooked.configure(button: ridesBooked)
-        ridesOffered.configure(button: ridesOffered)
+        configureButtons()
+        
 
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -77,7 +76,12 @@ class MenuViewController: UIViewController {
     @IBAction func ridesOffered(_ sender: UIButton) {
         sender.pressed()
     }
-    
+    func configureButtons() {
+        findARide.configure(button: findARide)
+        offerARide.configure(button: offerARide)
+        ridesBooked.configure(button: ridesBooked)
+        ridesOffered.configure(button: ridesOffered)
+    }
     /*
      @IBAction func ridesBooked(_ sender: Any) {
      }

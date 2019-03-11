@@ -70,7 +70,10 @@ class AvailableRidesViewController: UIViewController, UITableViewDelegate, UITab
         filteredArrayByStatus = []
         
         // Get all locations within 10 miles of startLocation
-        getDocumentNearBy(latitudeStartLocation: Double(startLocation!.latitude), longitudeStartLocation: Double(startLocation!.longitude), latitudeEndLocation: Double(endLocation!.latitude), longitudeEndLocation: Double(endLocation!.longitude), tripStartTime: tripStartTime, distance: 10)
+        guard let startLocation = startLocation, let endLocation = endLocation, let tripstartTime = tripStartTime else {
+            return
+        }
+        getDocumentNearBy(latitudeStartLocation: Double(startLocation.latitude), longitudeStartLocation: Double(startLocation.longitude), latitudeEndLocation: Double(endLocation.latitude), longitudeEndLocation: Double(endLocation.longitude), tripStartTime: tripStartTime, distance: 10)
     }
     
     @IBAction func backButton(_ sender: Any) {

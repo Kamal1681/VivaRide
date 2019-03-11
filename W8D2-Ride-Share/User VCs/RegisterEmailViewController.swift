@@ -17,12 +17,12 @@ class RegisterEmailViewController: UIViewController {
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var repeatPasswordField: UITextField!
     @IBOutlet weak var phoneNumberField: UITextField!
-    
+    @IBOutlet weak var signUpButton: UIButton!
     var db: Firestore!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        signUpButton.configure(button: signUpButton)
         // [START setup]
         let settings = FirestoreSettings()
         
@@ -35,11 +35,12 @@ class RegisterEmailViewController: UIViewController {
     }
     
     @IBAction func backButtonDidTap(_ sender: UIButton) {
+        
         self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func signUpButtonDidTap(_ sender: UIButton) {
-        
+        sender.pressed()
         let name = nameField.text
         let email = emailField.text
         let password = passwordField.text

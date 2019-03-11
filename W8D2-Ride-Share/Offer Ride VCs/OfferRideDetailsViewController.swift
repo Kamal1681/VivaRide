@@ -36,9 +36,10 @@ class OfferRideDetailsViewController: UIViewController {
     @IBOutlet weak var tripDurationLabel: UILabel!
     @IBOutlet weak var distanceLabel: UILabel!
     
+    @IBOutlet weak var confirmButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        confirmButton.configure(button: confirmButton)
         startAddressLabel.text =  startAddress
         destinationAddressLabel.text = destinationAddress
         startTimeLabel.text = startTimeText
@@ -76,8 +77,8 @@ class OfferRideDetailsViewController: UIViewController {
         
     }
     
-    @IBAction func confirm(_ sender: Any) {
-        
+    @IBAction func confirm(_ sender: UIButton) {
+        sender.pressed()
         let alert = UIAlertController(title: "Confirm", message: "Confirm Ride Details", preferredStyle: .alert)
         
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { alert -> Void in
