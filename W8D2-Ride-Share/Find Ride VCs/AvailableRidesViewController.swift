@@ -200,7 +200,18 @@ class AvailableRidesViewController: UIViewController, UITableViewDelegate, UITab
                 print("Filtered array is:\(self.filteredArrayByStatus)")
                 
                 //Reload Table View with results from Firebase
-                self.tableView.reloadData()
+                if self.filteredArrayByStatus.count == 0 {
+                    let alert = UIAlertController(title: "No Rides", message: "No rides Available", preferredStyle: UIAlertController.Style.alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: {(alert: UIAlertAction!) in
+                        self.dismiss(animated: true, completion: nil)
+                    }))
+                    self.present(alert, animated: true, completion: nil)
+                    
+                }
+                else {
+                    self.tableView.reloadData()
+                }
+                
             }
         }
     }
