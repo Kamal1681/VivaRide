@@ -77,10 +77,33 @@ class MenuViewController: UIViewController {
         sender.pressed()
         
         sendPushNotification()
+//        sendPushNotification2()
+    }
+    
+    func sendPushNotification2() {
+        let message = [
+            "to" : "eKUBk_ra58Q:APA91bGKXmQbkwR73haVgvX0LPILpKoQEuwDxQzebmTGuKkNcWQRWvWtRQaOFm1XMiSNeCqQ4E97yy9D8U6KhujfuGmX-fJqXExwz9EZppBr_DF0s2vPSE7xlhdiw_UGlaDGacbnoC1L",
+            "notification": [
+                "title" : "not title",
+                "body"  : "not body",
+                "icon"  : "not icon"
+            ],
+            "data": [
+                //More notification data.
+            ]
+            ] as [String : Any]
+        let to = "457157237254@gcm.googleapis.com"
+        let messageId = "dfdlsfjlksd324cmnclkelf"
+        let ttl: Int64 = 60
+        
+        Messaging.messaging().sendMessage(message,
+                                          to: to,
+                                          withMessageID: messageId,
+                                          timeToLive: ttl)
     }
     
     func sendPushNotification() {
-        let webAPI = "AIzaSyD3IFJNzMqDlbDZpJb9VeE41G9woOyTGVU"
+        let webAPI = "AAAAanCx2gY:APA91bGnjSawGhpNZua0NTRAUJYJHM2tnTiSG7wHpeXDrLbHGz9_EfDb9jsSPAb-qzixTKauTZ3P_oQOBINfAZDL7oJhb5QqIrnJc8hUhppzFrHBiXSx35JEBKLDiTuRlM0LSLODcTmn"
         
         let token = Messaging.messaging().fcmToken
         
@@ -93,12 +116,9 @@ class MenuViewController: UIViewController {
         var notData: [String: Any] = [
             "to" : "eKUBk_ra58Q:APA91bGKXmQbkwR73haVgvX0LPILpKoQEuwDxQzebmTGuKkNcWQRWvWtRQaOFm1XMiSNeCqQ4E97yy9D8U6KhujfuGmX-fJqXExwz9EZppBr_DF0s2vPSE7xlhdiw_UGlaDGacbnoC1L",
             "notification": [
-                "title" : "not title",
-                "body"  : "not body",
+                "title" : "Test from app",
+                "body"  : "Working!",
                 "icon"  : "not icon"
-            ],
-            "data": [
-                //More notification data.
             ]
         ]
         
