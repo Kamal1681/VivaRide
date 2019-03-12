@@ -71,6 +71,7 @@ class MenuViewController: UIViewController {
     
     @IBAction func ridesBooked(_ sender: UIButton) {
         sender.pressed()
+        performSegue(withIdentifier: "goToRidesBookedVC", sender: nil)
     }
     
     @IBAction func ridesOffered(_ sender: UIButton) {

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="DGe-o0-boh">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="DGe-o0-boh">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -126,7 +126,7 @@
                                 <rect key="frame" x="20" y="65" width="335" height="582"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="133" id="AZl-z0-eJz" customClass="RidesBookedTableViewCell" customModule="W8D2_Ride_Share" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ridesBookedTableViewCell" rowHeight="133" id="AZl-z0-eJz" customClass="RidesBookedTableViewCell" customModule="W8D2_Ride_Share" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="335" height="133"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="AZl-z0-eJz" id="DZH-Uh-Occ">
@@ -227,6 +227,15 @@
                                                 <constraint firstItem="5M8-3v-4tG" firstAttribute="leading" secondItem="DZH-Uh-Occ" secondAttribute="leading" id="z3g-k9-cKf"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="dateLabel" destination="5M8-3v-4tG" id="9CB-8y-XiO"/>
+                                            <outlet property="driverNameLabel" destination="y8q-aw-Mz5" id="anY-Mg-OK7"/>
+                                            <outlet property="endPointLabel" destination="GPn-ha-33G" id="BXi-Te-jr0"/>
+                                            <outlet property="estimatedArrivalTimeLabel" destination="0XK-Mv-fFO" id="iE7-vt-sco"/>
+                                            <outlet property="priceLabel" destination="gnf-au-SmD" id="daj-Ke-Nlz"/>
+                                            <outlet property="startPointLabel" destination="8n2-9F-5mC" id="vfK-bo-2Ie"/>
+                                            <outlet property="startTimeLabel" destination="aJG-B0-Wtp" id="uaf-vo-oP0"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -240,6 +249,9 @@
                                             <constraint firstAttribute="width" constant="30" id="xoo-6R-alz"/>
                                         </constraints>
                                         <state key="normal" title="Back" image="backButton"/>
+                                        <connections>
+                                            <action selector="backButton:" destination="1kQ-kt-bpc" eventType="touchUpInside" id="g3I-ko-825"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rides booked" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kl7-dd-hZH">
                                         <rect key="frame" x="40" y="2.5" width="295" height="25.5"/>
@@ -262,6 +274,10 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="iql-mF-Scs"/>
                     </view>
+                    <connections>
+                        <outlet property="ridesBookedTableView" destination="qID-Mw-4Ly" id="0BR-Zs-JO6"/>
+                        <segue destination="qw6-o4-Ytn" kind="show" identifier="goToBookedRideDetails" id="LFF-Ce-reZ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7by-mA-2Vw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -383,10 +399,10 @@
                                 </constraints>
                             </stackView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="8E6-t7-XJp">
-                                <rect key="frame" x="20" y="247" width="335" height="150"/>
+                                <rect key="frame" x="20" y="247" width="335" height="0.0"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="150" id="dYN-0p-dt4"/>
+                                    <constraint firstAttribute="height" id="dYN-0p-dt4"/>
                                 </constraints>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -402,6 +418,9 @@
                                             <constraint firstAttribute="height" constant="30" id="nan-3H-XS5"/>
                                         </constraints>
                                         <state key="normal" title="Back" image="backButton"/>
+                                        <connections>
+                                            <action selector="backButton:" destination="qw6-o4-Ytn" eventType="touchUpInside" id="N0i-Pa-acr"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Booked ride details" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e42-qw-jKP">
                                         <rect key="frame" x="40" y="2.5" width="295" height="25.5"/>
@@ -412,7 +431,7 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wiY-wD-uii">
-                                <rect key="frame" x="99" y="478" width="177" height="35.5"/>
+                                <rect key="frame" x="99" y="328" width="177" height="36"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="Cancel the ride"/>
                                 <connections>
@@ -420,7 +439,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B3y-Q1-Oss">
-                                <rect key="frame" x="68" y="420" width="238" height="38"/>
+                                <rect key="frame" x="68" y="270" width="238" height="38"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="238" id="wOq-eS-4FO"/>
                                 </constraints>
@@ -465,8 +484,19 @@
                         <viewLayoutGuide key="safeArea" id="ya6-2Y-uAq"/>
                     </view>
                     <connections>
+                        <outlet property="additionalInfoLabel" destination="8E6-t7-XJp" id="DiN-qh-d11"/>
                         <outlet property="cancelButton" destination="wiY-wD-uii" id="3c9-RZ-7I3"/>
+                        <outlet property="carColorLabel" destination="ADg-4u-8vF" id="i8a-X8-Fnr"/>
+                        <outlet property="carModelLabel" destination="Jyo-sn-3pK" id="QGV-cY-gns"/>
                         <outlet property="contactTheDriverButton" destination="B3y-Q1-Oss" id="zMF-0u-Fa6"/>
+                        <outlet property="driverNameLabel" destination="kNa-Sb-dKE" id="R6O-JO-tKr"/>
+                        <outlet property="endLocationLabel" destination="DIg-oh-boY" id="jNe-hJ-a5F"/>
+                        <outlet property="endTimeLabel" destination="9pe-tv-Xwr" id="dyj-Se-txC"/>
+                        <outlet property="numberOfBookingSeatsLabel" destination="ftX-GK-X1A" id="Pe8-ku-gBj"/>
+                        <outlet property="priceLabel" destination="ob2-5J-9oh" id="WbM-F4-wy1"/>
+                        <outlet property="startDateLabel" destination="o8G-as-k94" id="JOp-vP-JZE"/>
+                        <outlet property="startLocationLabel" destination="36e-UN-2gM" id="NcG-Y4-jIo"/>
+                        <outlet property="startTimeLabel" destination="4Ci-Ua-bWW" id="dgQ-Vy-zKS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BEW-fa-BIu" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1517,6 +1547,7 @@
                         <outlet property="ridesBooked" destination="g8k-oW-fcT" id="zPc-9O-nRL"/>
                         <outlet property="ridesOffered" destination="Csu-Fm-O0C" id="nLs-dx-Vrz"/>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="goLoginVC" id="Aa9-e7-8Cv"/>
+                        <segue destination="1kQ-kt-bpc" kind="show" identifier="goToRidesBookedVC" id="uhr-OH-oYF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iZ8-E1-wsS" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2332,7 +2363,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="backButton" width="75" height="75"/>
-        <image name="profileDefaultPhoto" width="75" height="75"/>
+        <image name="backButton" width="100" height="100"/>
+        <image name="profileDefaultPhoto" width="100" height="100"/>
     </resources>
 </document>

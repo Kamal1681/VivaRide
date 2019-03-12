@@ -100,3 +100,23 @@ class StopOver {
         self.pickUpTime = pickUpTime
     }
 }
+
+class Booking {
+    var bookingID: String?
+    var passengerID: String?
+    var rideID: String?
+    var numberOfBookingSeats: Int?
+    var status: String?
+    var rideInfo: Ride?
+    var driverInfo: UserInfo?
+    
+    init(bookingID: String?, passengerID: String?, rideID: String?, rideInfo: Ride?, numberOfBookingSeats: Int?, status: String?, driverInfo: UserInfo?) {
+        self.bookingID = bookingID
+        self.passengerID = passengerID
+        self.rideID = rideID
+        self.rideInfo = rideInfo
+        self.numberOfBookingSeats = numberOfBookingSeats
+        self.status = status
+        self.driverInfo = driverInfo
+    }
+}
