@@ -248,6 +248,7 @@
                                             <constraint firstAttribute="height" constant="30" id="ZKo-Ul-RqJ"/>
                                             <constraint firstAttribute="width" constant="30" id="xoo-6R-alz"/>
                                         </constraints>
+                                        <color key="tintColor" red="0.66274509800000003" green="0.66274509800000003" blue="0.66274509800000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="Back" image="backButton"/>
                                         <connections>
                                             <action selector="backButton:" destination="1kQ-kt-bpc" eventType="touchUpInside" id="g3I-ko-825"/>
@@ -417,6 +418,7 @@
                                             <constraint firstAttribute="width" constant="30" id="OW6-gx-iVb"/>
                                             <constraint firstAttribute="height" constant="30" id="nan-3H-XS5"/>
                                         </constraints>
+                                        <color key="tintColor" red="0.66274509800000003" green="0.66274509800000003" blue="0.66274509800000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="Back" image="backButton"/>
                                         <connections>
                                             <action selector="backButton:" destination="qw6-o4-Ytn" eventType="touchUpInside" id="N0i-Pa-acr"/>
@@ -602,6 +604,7 @@
                                             <constraint firstAttribute="width" constant="30" id="Eox-vo-Shg"/>
                                             <constraint firstAttribute="height" constant="30" id="dTj-6c-y5p"/>
                                         </constraints>
+                                        <color key="tintColor" red="0.66274509800000003" green="0.66274509800000003" blue="0.66274509800000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="Back" image="backButton"/>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rides offered" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hlu-Od-VlN">
@@ -779,6 +782,7 @@
                                             <constraint firstAttribute="width" constant="30" id="0HT-1q-Rb3"/>
                                             <constraint firstAttribute="height" constant="30" id="Reo-ME-zH0"/>
                                         </constraints>
+                                        <color key="tintColor" red="0.66274509800000003" green="0.66274509800000003" blue="0.66274509800000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="Back" image="backButton"/>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Offered ride details" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vDZ-Ai-IJt">
@@ -864,6 +868,7 @@
                                             <constraint firstAttribute="height" constant="30" id="LSc-hg-Eh6"/>
                                             <constraint firstAttribute="width" constant="30" id="ofy-p9-yKz"/>
                                         </constraints>
+                                        <color key="tintColor" red="0.66274509803921566" green="0.66274509803921566" blue="0.66274509803921566" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="Back" image="backButton"/>
                                         <connections>
                                             <action selector="backButton:" destination="gL2-Ny-mbN" eventType="touchUpInside" id="yQS-Sf-o48"/>
@@ -1135,6 +1140,7 @@
                                             <constraint firstAttribute="height" constant="30" id="4Or-nN-spC"/>
                                             <constraint firstAttribute="width" constant="30" id="HPC-GU-wlV"/>
                                         </constraints>
+                                        <color key="tintColor" red="0.66274509803921566" green="0.66274509803921566" blue="0.66274509803921566" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="Back" image="backButton"/>
                                         <connections>
                                             <action selector="backButton:" destination="QrE-Re-Gbd" eventType="touchUpInside" id="BRf-2J-ts4"/>
@@ -1294,6 +1300,7 @@
                                             <constraint firstAttribute="width" constant="30" id="Bbl-r5-zZv"/>
                                             <constraint firstAttribute="height" constant="30" id="ULS-r8-JP5"/>
                                         </constraints>
+                                        <color key="tintColor" red="0.66274509803921566" green="0.66274509803921566" blue="0.66274509803921566" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="Back" image="backButton"/>
                                         <connections>
                                             <action selector="backButton:" destination="dgT-5w-1ah" eventType="touchUpInside" id="2u2-Pq-Sk8"/>
@@ -1522,7 +1529,7 @@
                                     <constraint firstAttribute="width" constant="40" id="dns-xs-rvo"/>
                                     <constraint firstAttribute="height" constant="40" id="u4q-qG-dTe"/>
                                 </constraints>
-                                <color key="tintColor" red="0.66422420739999999" green="0.66424006219999998" blue="0.66423153879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" red="0.66274509803921566" green="0.66274509803921566" blue="0.66274509803921566" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Profile" image="profileDefaultPhoto"/>
                                 <connections>
                                     <segue destination="DUt-bZ-DX9" kind="show" identifier="goToProfileVC" id="YEG-8F-eGd"/>
@@ -1637,6 +1644,7 @@
                                             <constraint firstAttribute="width" constant="30" id="oH9-go-lbS"/>
                                             <constraint firstAttribute="height" constant="30" id="wdt-Cj-fk8"/>
                                         </constraints>
+                                        <color key="tintColor" red="0.66274509800000003" green="0.66274509800000003" blue="0.66274509800000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="Back" image="backButton"/>
                                         <connections>
                                             <action selector="backButton:" destination="Wb3-4H-icj" eventType="touchUpInside" id="wne-l1-YXX"/>
@@ -1734,6 +1742,7 @@
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profileDefaultPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="eO0-xY-o04">
                                 <rect key="frame" x="20" y="65" width="75" height="75"/>
+                                <color key="tintColor" red="0.66274509800000003" green="0.66274509800000003" blue="0.66274509800000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="75" id="b9m-jH-Rq9"/>
                                     <constraint firstAttribute="width" constant="75" id="cPv-D8-J0J"/>
@@ -1748,17 +1757,21 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ke2-Kj-79m">
+                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ke2-Kj-79m">
                                         <rect key="frame" x="215" y="0.0" width="35" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="35" id="d99-pl-Vxy"/>
                                         </constraints>
-                                        <state key="normal" title="Edit"/>
+                                        <color key="tintColor" red="0.66274509800000003" green="0.66274509800000003" blue="0.66274509800000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" title="Edit" image="editButtonGrey"/>
                                         <connections>
                                             <action selector="editNameButton:" destination="DUt-bZ-DX9" eventType="touchUpInside" id="NkG-yv-beW"/>
                                         </connections>
                                     </button>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="9J6-47-kqi"/>
+                                </constraints>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="y8J-4K-X1X" userLabel="Email Stack View">
                                 <rect key="frame" x="105" y="105" width="250" height="30"/>
@@ -1769,17 +1782,21 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5SE-Vg-aaX">
+                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5SE-Vg-aaX">
                                         <rect key="frame" x="215" y="0.0" width="35" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="35" id="0aG-3s-YLt"/>
                                         </constraints>
-                                        <state key="normal" title="Edit"/>
+                                        <color key="tintColor" red="0.66274509800000003" green="0.66274509800000003" blue="0.66274509800000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" title="Edit" image="editButtonGrey"/>
                                         <connections>
                                             <action selector="editEmailButton:" destination="DUt-bZ-DX9" eventType="touchUpInside" id="RAO-7k-86Y"/>
                                         </connections>
                                     </button>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="PmY-mx-zsP"/>
+                                </constraints>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="HgX-7h-zGq" userLabel="Phone Number Stack View">
                                 <rect key="frame" x="105" y="145" width="250" height="30"/>
@@ -1790,17 +1807,21 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IKo-89-UFm">
+                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IKo-89-UFm">
                                         <rect key="frame" x="215" y="0.0" width="35" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="35" id="ipQ-jO-sNC"/>
                                         </constraints>
-                                        <state key="normal" title="Edit"/>
+                                        <color key="tintColor" red="0.66274509800000003" green="0.66274509800000003" blue="0.66274509800000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" title="Edit" image="editButtonGrey"/>
                                         <connections>
                                             <action selector="editPhoneNumberButton:" destination="DUt-bZ-DX9" eventType="touchUpInside" id="nGq-hY-gTk"/>
                                         </connections>
                                     </button>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="GSN-zY-max"/>
+                                </constraints>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ak2-9L-vCE">
                                 <rect key="frame" x="20" y="145" width="75" height="30"/>
@@ -1840,6 +1861,7 @@
                                             <constraint firstAttribute="height" constant="30" id="M4I-uI-pSB"/>
                                             <constraint firstAttribute="width" constant="30" id="ohL-tq-J60"/>
                                         </constraints>
+                                        <color key="tintColor" red="0.66274509800000003" green="0.66274509800000003" blue="0.66274509800000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="Back" image="backButton"/>
                                         <connections>
                                             <action selector="backButton:" destination="DUt-bZ-DX9" eventType="touchUpInside" id="DV8-pN-iHT"/>
@@ -1862,17 +1884,21 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J4Q-bP-AoY">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J4Q-bP-AoY">
                                         <rect key="frame" x="300" y="0.0" width="35" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="35" id="iS8-kg-RiT"/>
                                         </constraints>
-                                        <state key="normal" title="Edit"/>
+                                        <color key="tintColor" red="0.66274509800000003" green="0.66274509800000003" blue="0.66274509800000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" title="Edit" image="editButtonGrey"/>
                                         <connections>
                                             <action selector="editCarModelButton:" destination="DUt-bZ-DX9" eventType="touchUpInside" id="ULy-LP-FVS"/>
                                         </connections>
                                     </button>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="VpQ-Di-IZy"/>
+                                </constraints>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="QZd-DB-Ph9" userLabel="Car Color Stack View">
                                 <rect key="frame" x="20" y="225" width="335" height="30"/>
@@ -1883,17 +1909,21 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vVF-4e-XJU">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vVF-4e-XJU">
                                         <rect key="frame" x="300" y="0.0" width="35" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="35" id="t4M-qI-RBl"/>
                                         </constraints>
-                                        <state key="normal" title="Edit"/>
+                                        <color key="tintColor" red="0.66274509800000003" green="0.66274509800000003" blue="0.66274509800000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" title="Edit" image="editButtonGrey"/>
                                         <connections>
                                             <action selector="editCarColorButton:" destination="DUt-bZ-DX9" eventType="touchUpInside" id="XYZ-2I-Aqa"/>
                                         </connections>
                                     </button>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="tgj-2R-Txc"/>
+                                </constraints>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
@@ -1963,6 +1993,7 @@
                                             <constraint firstAttribute="height" constant="30" id="h2P-dP-nqy"/>
                                             <constraint firstAttribute="width" constant="30" id="knS-ah-T9X"/>
                                         </constraints>
+                                        <color key="tintColor" red="0.66274509800000003" green="0.66274509800000003" blue="0.66274509800000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="Back" image="backButton"/>
                                         <connections>
                                             <action selector="backButton:" destination="DUt-bZ-DX9" eventType="touchUpInside" id="lPp-4w-rRB"/>
@@ -2167,6 +2198,7 @@
                                             <constraint firstAttribute="height" constant="30" id="gjc-OH-Ysw"/>
                                             <constraint firstAttribute="width" constant="30" id="srB-no-GMV"/>
                                         </constraints>
+                                        <color key="tintColor" red="0.66274509800000003" green="0.66274509800000003" blue="0.66274509800000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="Back" image="backButton"/>
                                         <connections>
                                             <action selector="backButton:" destination="K7Y-Eo-2HH" eventType="touchUpInside" id="9jX-zM-szC"/>
@@ -2364,6 +2396,7 @@
     </scenes>
     <resources>
         <image name="backButton" width="100" height="100"/>
+        <image name="editButtonGrey" width="100" height="100"/>
         <image name="profileDefaultPhoto" width="100" height="100"/>
     </resources>
 </document>
