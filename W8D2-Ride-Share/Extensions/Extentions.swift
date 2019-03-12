@@ -68,11 +68,12 @@ extension UIButton {
         button.backgroundColor = buttonColor
         button.tintColor = UIColor.white
         button.layer.cornerRadius = 7
+//        button.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .bold)
         //button.layer.borderWidth = 3
         //button.layer.borderColor = cGColorBlack.cgColor
         
         button.layer.shadowColor = cGColorBlack.cgColor
-        button.layer.shadowOffset = CGSize(width: 4, height: 4)
+        button.layer.shadowOffset = CGSize(width: 3, height: 3)
         button.layer.shadowOpacity = 0.5
         
     }

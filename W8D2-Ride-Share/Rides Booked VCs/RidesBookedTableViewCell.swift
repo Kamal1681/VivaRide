@@ -72,8 +72,9 @@ class RidesBookedTableViewCell: UITableViewCell {
             print("Error! Unable to get estimatedArrivalTimeLabel")
         }
 
-        if let price = booking.rideInfo?.price {
-            let priceFormated = String(format:"%.2f", price)
+        if let price = booking.rideInfo?.price, let numberOfBookingSeats = booking.numberOfBookingSeats {
+            let totalPrice = price * Float(numberOfBookingSeats)
+            let priceFormated = String(format:"%.2f", totalPrice)
             priceLabel.text = "CAD \(priceFormated)"
         }
         else {

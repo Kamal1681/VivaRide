@@ -28,6 +28,7 @@ class BookedRideDetailsViewController: UIViewController {
     @IBOutlet weak var carColorLabel: UILabel!
     @IBOutlet weak var contactTheDriverButton: UIButton!
     @IBOutlet weak var cancelButton: UIButton!
+    @IBOutlet weak var additionalInfoLabel: UITextView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,6 +51,9 @@ class BookedRideDetailsViewController: UIViewController {
     }
     @IBAction func contactDriverPressed(_ sender: UIButton) {
         sender.pressed()
+        if let phoneNumber = booking?.driverInfo?.phoneNumber {
+            makePhoneCall(to: phoneNumber)
+        }
     }
     
     //MARK: - Navigation
@@ -96,9 +100,11 @@ class BookedRideDetailsViewController: UIViewController {
             print("Error! Unable to get numberOfBookingSeats")
         }
         
-        if let price = booking.rideInfo?.price {
-            let priceFormated = String(format:"%.2f", price)
-            priceLabel.text = "CAD \(priceFormated)"
+        if let price = booking.rideInfo?.price, let numberOfBookingSeats = booking.numberOfBookingSeats {
+            let totalPrice = price * Float(numberOfBookingSeats)
+            let priceFormated = String(format:"%.2f", totalPrice)
+            priceLabel.numberOfLines = 0
+            priceLabel.text = "Total price:\nCAD \(priceFormated)"
         }
         else {
             print("Error! Unable to get price")
@@ -182,6 +188,17 @@ class BookedRideDetailsViewController: UIViewController {
         }
         
         return resultString
+    }
+    
+    func makePhoneCall(to phoneNumber: String) {
+        if let phoneURL = NSURL(string: ("tel://" + phoneNumber)) {
+            let alert = UIAlertController(title: ("Do you want to call the driver?"), message: nil, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Call", style: .default, handler: { (action) in
+                UIApplication.shared.open(phoneURL as URL, options: [:], completionHandler: nil)
+            }))
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
     }
 
     /*

@@ -289,6 +289,10 @@ class RideDetailsViewController: UIViewController {
     
     @IBAction func contactDriverButtonTapped(_ sender: UIButton) {
         sender.pressed()
+        
+        if let phoneNumber = ride.userInfo?.phoneNumber {
+            makePhoneCall(to: phoneNumber)
+        }
     }
     //MARK: Book the ride function
     func bookRide(rideID: String, numberOfBookingSeats: Int, numberOfAvailableSeats: Int, bookingStatus: String, driverToken: String) {
@@ -390,6 +394,17 @@ class RideDetailsViewController: UIViewController {
         }
         
         return resultString
+    }
+    
+    func makePhoneCall(to phoneNumber: String) {
+        if let phoneURL = NSURL(string: ("tel://" + phoneNumber)) {
+            let alert = UIAlertController(title: ("Do you want to call the driver?"), message: nil, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Call", style: .default, handler: { (action) in
+                UIApplication.shared.open(phoneURL as URL, options: [:], completionHandler: nil)
+            }))
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
     }
     
     /*
