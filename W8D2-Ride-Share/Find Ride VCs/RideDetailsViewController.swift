@@ -22,6 +22,11 @@ class RideDetailsViewController: UIViewController {
     //Passing properties
     var ride: Ride!
     
+    //Push Notification properties
+    var startLocation: String = "start location"
+    var endLocation: String = "end location"
+    var rideStartDate: String = "someday"
+    
     //IBOutlet properties
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var tripStartTimeLabel: UILabel!
@@ -56,11 +61,13 @@ class RideDetailsViewController: UIViewController {
         //Setting labels and other UI
         getAddressFromLocation(location: ride.startLocation!, complete: { (city) in
             OperationQueue.main.addOperation {
+                self.startLocation = city
                 self.startLocationLabel.text = city
             }
         })
         getAddressFromLocation(location: ride.endLocation!, complete: { (city) in
             OperationQueue.main.addOperation {
+                self.endLocation = city
                 self.endLocationLabel.text = city
             }
             
@@ -80,6 +87,7 @@ class RideDetailsViewController: UIViewController {
         dateLabel.text = stringDateFormat(from: ride.tripStartTime!)
         tripStartTimeLabel.text = stringHoursMinutesFormat(from: ride.tripStartTime!)
         estimatedArrivalTimeLabel.text = stringHoursMinutesFormat(from: ride.estimatedArrivalTime!)
+        rideStartDate = stringDateFormat(from: ride.tripStartTime!)
         
         //Driver name label
         driverNameLabel.text = ride.userInfo?.name
@@ -254,14 +262,15 @@ class RideDetailsViewController: UIViewController {
                 let rideID = self.ride.rideID,
                 let numberOfBookingSeats = Int(self.numberOfBookingSeatsLabel.text!),
                 //            let numberOfSeats = ride.numberOfSeats,
-                let numberOfAvailableSeats = self.ride.numberOfAvailableSeats
+                let numberOfAvailableSeats = self.ride.numberOfAvailableSeats,
+                let driverToken = self.ride.userInfo?.pushNotificationToken
                 else {
                     print("Error in book button did tap method! Can not assign rideID and numberOfBookingSeats to the variables.")
                     return
             }
             let status = "confirmed" //By now all rides will be automatically confirmed
             if numberOfAvailableSeats > 0 && numberOfBookingSeats <= numberOfAvailableSeats {
-                self.bookRide(rideID: rideID, numberOfBookingSeats: numberOfBookingSeats, numberOfAvailableSeats: numberOfAvailableSeats, bookingStatus: status)
+                self.bookRide(rideID: rideID, numberOfBookingSeats: numberOfBookingSeats, numberOfAvailableSeats: numberOfAvailableSeats, bookingStatus: status, driverToken: driverToken)
             }
             else if numberOfAvailableSeats == 0 {
                 self.errorAlert(errorMessage: "Sorry, but there are not available seats for this ride! Please, look for another ride.")
@@ -282,7 +291,7 @@ class RideDetailsViewController: UIViewController {
         sender.pressed()
     }
     //MARK: Book the ride function
-    func bookRide(rideID: String, numberOfBookingSeats: Int, numberOfAvailableSeats: Int, bookingStatus: String) {
+    func bookRide(rideID: String, numberOfBookingSeats: Int, numberOfAvailableSeats: Int, bookingStatus: String, driverToken: String) {
         if let user = self.user {
             //Create a new ride document in Firestore
             
@@ -300,7 +309,7 @@ class RideDetailsViewController: UIViewController {
                     print("Document added with ID: \(ref!.documentID)")
                     // Add rideID as a documentID
                     self.addBookingID(documentID: ref!.documentID)
-                    self.updateRideDetails(rideID: rideID, numberOfBookingSeats: numberOfBookingSeats, numberOfAvailableSeats: numberOfAvailableSeats)
+                    self.updateRideDetails(rideID: rideID, numberOfBookingSeats: numberOfBookingSeats, numberOfAvailableSeats: numberOfAvailableSeats, driverToken: driverToken)
                 }
             }
         }
@@ -321,7 +330,7 @@ class RideDetailsViewController: UIViewController {
     }
     
     //MARK: - Update number of available seats for the ride and ride status
-    func updateRideDetails(rideID: String, numberOfBookingSeats: Int, numberOfAvailableSeats: Int) {
+    func updateRideDetails(rideID: String, numberOfBookingSeats: Int, numberOfAvailableSeats: Int, driverToken: String) {
         var rideStatus: String = ""
         let newNumberOfAvailableSeats = numberOfAvailableSeats - numberOfBookingSeats
         
@@ -344,7 +353,11 @@ class RideDetailsViewController: UIViewController {
                 print("Error writing document: \(err.localizedDescription)")
             } else {
                 print("Ride for rideID \(rideID) successfully updated!")
-                self.dismiss(animated: true, completion: nil)
+                
+                //Send push notification for the driver
+                PushNotification.sendTo(token: driverToken, title: "New booking", body: "\(self.correctString(for: numberOfBookingSeats)) booked for the ride from \(self.startLocation) to \(self.endLocation) on \(self.rideStartDate)")
+                
+                self.infoAlert(title: "Confirmation", message: "Your ride was successfully booked!", dismissVC: true)
             }
         }
     }
@@ -356,6 +369,28 @@ class RideDetailsViewController: UIViewController {
         self.present(alert, animated: true, completion: nil)
     }
     
+    func infoAlert(title: String, message: String, dismissVC: Bool) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: {(alert: UIAlertAction!) in
+            if dismissVC {
+                self.dismiss(animated: true, completion: nil)
+            }
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func correctString(for numberOfBookingSeats: Int) -> String {
+        var resultString: String = ""
+        
+        if numberOfBookingSeats == 1 {
+            resultString = "1 seat was"
+        }
+        else if numberOfBookingSeats > 1 {
+            resultString = "\(numberOfBookingSeats) seats were"
+        }
+        
+        return resultString
+    }
     
     /*
     // MARK: - Navigation

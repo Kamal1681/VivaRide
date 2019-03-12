@@ -47,6 +47,12 @@ class RegisterEmailViewController: UIViewController {
         let repeatPassword = repeatPasswordField.text
         let phoneNumber = phoneNumberField.text
         
+        //Push notification token property
+        guard let pushNotificationToken = Messaging.messaging().fcmToken else {
+            print("Error! Can not receive push notofocation token in App Delegate.")
+            return
+        }
+        
         //Check email and password is empty
         if (email == "" || password == "" || repeatPassword == "") || (email == nil || password == nil || repeatPassword == nil) {
             let alert = UIAlertController(title: "Alert", message: "Email or Password can not be empty!", preferredStyle: .alert)
@@ -101,7 +107,10 @@ class RegisterEmailViewController: UIViewController {
             
             //Creating new user in Firebase
             Auth.auth().createUser(withEmail: email!, password: password!) { authResult, error in
-                guard let authResult = authResult, error == nil else {
+                if let authResult = authResult, error == nil {
+                        print("New user was created successfully!")
+                }
+                else {
                     
                     //Error during creting new user from Firebase
                     print(error!.localizedDescription)
@@ -147,7 +156,10 @@ class RegisterEmailViewController: UIViewController {
                             self.db.collection("users").document(user!.uid).setData([
                                 "uid": user!.uid,
                                 "name": name!,
-                                "phoneNumber": phoneNumber!
+                                "phoneNumber": phoneNumber!,
+                                "pushNotificationToken": pushNotificationToken,
+                                "carModel": "Not specified",
+                                "carColor": "Not specified"
                             ], merge: true) { err in
                                 if let err = err {
                                     print("Error writing document: \(err)")
@@ -157,7 +169,7 @@ class RegisterEmailViewController: UIViewController {
                             }
                             
                             //Print some information about authentification
-                            print("\(authResult.user.email!) created")
+                            print("\(authResult!.user.email!) created")
                             
                             //Make all text field white
                             self.nameField.backgroundColor = UIColor.white

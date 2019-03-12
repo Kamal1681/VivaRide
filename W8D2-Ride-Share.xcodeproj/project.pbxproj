@@ -13,7 +13,6 @@
 		15B2CA402229FEB300ADFF46 /* SearchResultsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15B2CA3F2229FEB300ADFF46 /* SearchResultsController.swift */; };
 		15C1DE232235C5D500D7F586 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 15C1DE222235C5D500D7F586 /* GoogleService-Info.plist */; };
 		67C677BD2B3304C9352D604E /* Pods_W8D2_Ride_Share.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 440F169039B18D25F1EAF42E /* Pods_W8D2_Ride_Share.framework */; };
-		E9088D522235CF5C004ECF9A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E9088D512235CF5C004ECF9A /* GoogleService-Info.plist */; };
 		E90D3D0B22285D280083BAB8 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90D3D0A22285D280083BAB8 /* LoginViewController.swift */; };
 		E90D3D0D22285EFB0083BAB8 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90D3D0C22285EFB0083BAB8 /* MenuViewController.swift */; };
 		E90D3D0F22285F3B0083BAB8 /* FindRideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90D3D0E22285F3B0083BAB8 /* FindRideViewController.swift */; };
@@ -41,6 +40,7 @@
 		E9EAEE532225A4AE001DB057 /* W8D2_Ride_Share.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E9EAEE512225A4AE001DB057 /* W8D2_Ride_Share.xcdatamodeld */; };
 		E9EAEE552225A4AF001DB057 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E9EAEE542225A4AF001DB057 /* Assets.xcassets */; };
 		E9EAEE582225A4AF001DB057 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E9EAEE562225A4AF001DB057 /* LaunchScreen.storyboard */; };
+		E9FB0BC02237017E0002B428 /* PushNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9FB0BBF2237017E0002B428 /* PushNotification.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -83,6 +83,7 @@
 		E9EAEE542225A4AF001DB057 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E9EAEE572225A4AF001DB057 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E9EAEE592225A4AF001DB057 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E9FB0BBF2237017E0002B428 /* PushNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotification.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -203,6 +204,7 @@
 				15B2CA3B2229CC2700ADFF46 /* UserProfile.swift */,
 				15B2CA3D2229CC3A00ADFF46 /* Ride.swift */,
 				E90D3D0C22285EFB0083BAB8 /* MenuViewController.swift */,
+				E9FB0BBF2237017E0002B428 /* PushNotification.swift */,
 				E9BBA8D122347D920023452C /* Find Ride VCs */,
 				E9BBA8D222347E070023452C /* Offer Ride VCs */,
 				E9BBA8D422347E920023452C /* User VCs */,
@@ -399,6 +401,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E9FB0BC02237017E0002B428 /* PushNotification.swift in Sources */,
 				E90D3D23222861080083BAB8 /* RidesOfferedViewController.swift in Sources */,
 				E90D3D0B22285D280083BAB8 /* LoginViewController.swift in Sources */,
 				E90D3D21222860ED0083BAB8 /* BookedRideDetailsViewController.swift in Sources */,

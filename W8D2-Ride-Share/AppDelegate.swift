@@ -42,18 +42,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // [END set_messaging_delegate]
         
         Messaging.messaging().shouldEstablishDirectChannel = true
-        
-        //        //Sending a notification
-        //        let message = ["collapse_key": "ru.owlsoft.viva-ride"]
-        //        let to = "457157237254@gcm.googleapis.com"
-        //        let messageId = " "
-        //        let ttl = 60
-        //
-        //        Messaging.messaging().sendMessage(message,
-        //                                          to: to,
-        //                                          withMessageID: messageId,
-        //                                          timeToLive: Int64(ttl))
-        
+      
         // Register for remote notifications. This shows a permission dialog on first run, to
         // show the dialog at a more appropriate time move this registration accordingly.
         // [START register_for_notifications]
@@ -74,6 +63,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         application.registerForRemoteNotifications()
         
         // [END register_for_notifications]
+        
+        //Update user's token for push notification in Firestore when user login
+        PushNotification.updateUserToken()
         
         return true
     }

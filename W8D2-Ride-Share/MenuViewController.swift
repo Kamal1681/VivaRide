@@ -76,55 +76,42 @@ class MenuViewController: UIViewController {
     @IBAction func ridesOffered(_ sender: UIButton) {
         sender.pressed()
         
-        sendPushNotification()
+        let token = "eKUBk_ra58Q:APA91bGKXmQbkwR73haVgvX0LPILpKoQEuwDxQzebmTGuKkNcWQRWvWtRQaOFm1XMiSNeCqQ4E97yy9D8U6KhujfuGmX-fJqXExwz9EZppBr_DF0s2vPSE7xlhdiw_UGlaDGacbnoC1L"
+        let title = "Title"
+        let body = "Message body"
+        
+        PushNotification.sendTo(token: token, title: title, body: body)
+
     }
     
-    func sendPushNotification() {
-        let webAPI = "AIzaSyD3IFJNzMqDlbDZpJb9VeE41G9woOyTGVU"
-        
-        let token = Messaging.messaging().fcmToken
-        
-        let url = URL(string: "https://fcm.googleapis.com/fcm/send")!
-        var request = URLRequest(url: url)
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.setValue("key=\(webAPI)", forHTTPHeaderField: "Authorization")
-        request.httpMethod = "POST"
-        
-        var notData: [String: Any] = [
-            "to" : "eKUBk_ra58Q:APA91bGKXmQbkwR73haVgvX0LPILpKoQEuwDxQzebmTGuKkNcWQRWvWtRQaOFm1XMiSNeCqQ4E97yy9D8U6KhujfuGmX-fJqXExwz9EZppBr_DF0s2vPSE7xlhdiw_UGlaDGacbnoC1L",
-            "notification": [
-                "title" : "not title",
-                "body"  : "not body",
-                "icon"  : "not icon"
-            ],
-            "data": [
-                //More notification data.
-            ]
-        ]
-        
-        request.httpBody = try? JSONSerialization.data(withJSONObject: notData, options: [])
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            guard let data = data, error == nil else {                                                 // check for fundamental networking error
-                print("error=\(error)")
-                return
-            }
-            
-            if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {           // check for http errors
-                print("statusCode should be 200, but is \(httpStatus.statusCode)")
-                print("response = \(response)")
-            }
-            
-            let responseString = String(data: data, encoding: .utf8)
-            print("responseString = \(responseString)")
-        }
-        task.resume()
-    }
     func configureButtons() {
         findARide.configure(button: findARide)
         offerARide.configure(button: offerARide)
         ridesBooked.configure(button: ridesBooked)
         ridesOffered.configure(button: ridesOffered)
     }
+    
+//    func sendUpstreamPushNotification() {
+//        let message = [
+//            "to" : "eKUBk_ra58Q:APA91bGKXmQbkwR73haVgvX0LPILpKoQEuwDxQzebmTGuKkNcWQRWvWtRQaOFm1XMiSNeCqQ4E97yy9D8U6KhujfuGmX-fJqXExwz9EZppBr_DF0s2vPSE7xlhdiw_UGlaDGacbnoC1L",
+//            "title" : "not title",
+//            "body"  : "not body"
+//
+//            ] as [String : Any]
+//        let to = "457157237254@gcm.googleapis.com"
+//        let messageId = "\(Int.random(in: 0...99999))\(Int.random(in: 0...99999))\(Int.random(in: 0...99999))"
+//        let ttl: Int64 = 6
+//
+//        Messaging.messaging().sendMessage(message,
+//                                          to: to,
+//                                          withMessageID: messageId,
+//                                          timeToLive: ttl)
+//        print("Button pushed")
+//
+//    }
+    
+    
+    
     /*
      @IBAction func ridesBooked(_ sender: Any) {
      }
