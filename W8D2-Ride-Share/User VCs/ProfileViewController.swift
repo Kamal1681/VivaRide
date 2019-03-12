@@ -311,11 +311,11 @@ class ProfileViewController: UIViewController {
         self.present(alert, animated: true, completion: nil)
     }
     func configureButtons() {
-        editNameButton.configure(button: editNameButton)
-        editEmailButton.configure(button: editEmailButton)
-        editPhoneButton.configure(button: editPhoneButton)
-        editCarModelButton.configure(button: editCarModelButton)
-        editCarColorButton.configure(button: editCarColorButton)
+//        editNameButton.configure(button: editNameButton)
+//        editEmailButton.configure(button: editEmailButton)
+//        editPhoneButton.configure(button: editPhoneButton)
+//        editCarModelButton.configure(button: editCarModelButton)
+//        editCarColorButton.configure(button: editCarColorButton)
         changePasswordButton.configure(button: changePasswordButton)
         signOutButton.configure(button: signOutButton)
     }
