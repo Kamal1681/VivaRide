@@ -418,6 +418,9 @@
                                             <constraint firstAttribute="height" constant="30" id="nan-3H-XS5"/>
                                         </constraints>
                                         <state key="normal" title="Back" image="backButton"/>
+                                        <connections>
+                                            <action selector="backButton:" destination="qw6-o4-Ytn" eventType="touchUpInside" id="N0i-Pa-acr"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Booked ride details" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e42-qw-jKP">
                                         <rect key="frame" x="40" y="2.5" width="295" height="25.5"/>
@@ -482,7 +485,17 @@
                     </view>
                     <connections>
                         <outlet property="cancelButton" destination="wiY-wD-uii" id="3c9-RZ-7I3"/>
+                        <outlet property="carColorLabel" destination="ADg-4u-8vF" id="i8a-X8-Fnr"/>
+                        <outlet property="carModelLabel" destination="Jyo-sn-3pK" id="QGV-cY-gns"/>
                         <outlet property="contactTheDriverButton" destination="B3y-Q1-Oss" id="zMF-0u-Fa6"/>
+                        <outlet property="driverNameLabel" destination="kNa-Sb-dKE" id="R6O-JO-tKr"/>
+                        <outlet property="endLocationLabel" destination="DIg-oh-boY" id="jNe-hJ-a5F"/>
+                        <outlet property="endTimeLabel" destination="9pe-tv-Xwr" id="dyj-Se-txC"/>
+                        <outlet property="numberOfBookingSeatsLabel" destination="ftX-GK-X1A" id="Pe8-ku-gBj"/>
+                        <outlet property="priceLabel" destination="ob2-5J-9oh" id="WbM-F4-wy1"/>
+                        <outlet property="startDateLabel" destination="o8G-as-k94" id="JOp-vP-JZE"/>
+                        <outlet property="startLocationLabel" destination="36e-UN-2gM" id="NcG-Y4-jIo"/>
+                        <outlet property="startTimeLabel" destination="4Ci-Ua-bWW" id="dgQ-Vy-zKS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BEW-fa-BIu" userLabel="First Responder" sceneMemberID="firstResponder"/>

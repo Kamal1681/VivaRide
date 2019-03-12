@@ -94,8 +94,7 @@ class RidesBookedViewController: UIViewController, UITableViewDelegate, UITableV
                         self.bookingsArray.append(booking)
                     }
                     //Get rides and drivers infromation from Firestore Rides and Users collections
-                    self.getRidesInfo()
-                    self.getDriverInfo()
+                    self.getRidesInfo() {self.getDriverInfo()}
                     
                     self.ridesBookedTableView.reloadData()
                 }
@@ -103,7 +102,7 @@ class RidesBookedViewController: UIViewController, UITableViewDelegate, UITableV
         }
     }
     
-    func getRidesInfo() {
+    func getRidesInfo(completionHandler: @escaping () -> Void) {
         for index in 0..<self.bookingsArray.count {
             var ride: Ride?
             guard let rideID = self.bookingsArray[index].rideID
@@ -141,6 +140,7 @@ class RidesBookedViewController: UIViewController, UITableViewDelegate, UITableV
                     
                     self.bookingsArray[index].rideInfo = ride
                 }
+                completionHandler()
                 self.ridesBookedTableView.reloadData()
             }
         }
