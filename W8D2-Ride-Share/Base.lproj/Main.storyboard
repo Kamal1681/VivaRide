@@ -229,7 +229,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="dateLabel" destination="5M8-3v-4tG" id="9CB-8y-XiO"/>
-                                            <outlet property="driverName" destination="y8q-aw-Mz5" id="MDb-SX-oBE"/>
+                                            <outlet property="driverNameLabel" destination="y8q-aw-Mz5" id="anY-Mg-OK7"/>
                                             <outlet property="endPointLabel" destination="GPn-ha-33G" id="BXi-Te-jr0"/>
                                             <outlet property="estimatedArrivalTimeLabel" destination="0XK-Mv-fFO" id="iE7-vt-sco"/>
                                             <outlet property="priceLabel" destination="gnf-au-SmD" id="daj-Ke-Nlz"/>
@@ -276,6 +276,7 @@
                     </view>
                     <connections>
                         <outlet property="ridesBookedTableView" destination="qID-Mw-4Ly" id="0BR-Zs-JO6"/>
+                        <segue destination="qw6-o4-Ytn" kind="show" identifier="goToBookedRideDetails" id="LFF-Ce-reZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7by-mA-2Vw" userLabel="First Responder" sceneMemberID="firstResponder"/>

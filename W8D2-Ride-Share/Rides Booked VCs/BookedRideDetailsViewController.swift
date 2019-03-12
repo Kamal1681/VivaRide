@@ -10,6 +10,10 @@ import UIKit
 
 class BookedRideDetailsViewController: UIViewController {
 
+    //Passing data from previous VC
+    var booking: Booking?
+    
+    //UI Properties
     @IBOutlet weak var contactTheDriverButton: UIButton!
     
     @IBOutlet weak var cancelButton: UIButton!

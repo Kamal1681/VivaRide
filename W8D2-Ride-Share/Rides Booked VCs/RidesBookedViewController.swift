@@ -21,7 +21,7 @@ class RidesBookedViewController: UIViewController, UITableViewDelegate, UITableV
     var handle: AuthStateDidChangeListenerHandle? = nil
     
     //Other properties
-    var ride: Ride?
+//    var ride: Ride?
     var booking: Booking?
     
     //Booked rides array
@@ -39,6 +39,7 @@ class RidesBookedViewController: UIViewController, UITableViewDelegate, UITableV
         db = Firestore.firestore()
         // END setup for Firestore
         
+        ridesBookedTableView.delegate = self
         ridesBookedTableView.dataSource = self
         ridesBookedTableView.rowHeight = 150
 //        ridesBookedTableView.estimatedRowHeight = 200
@@ -88,12 +89,13 @@ class RidesBookedViewController: UIViewController, UITableViewDelegate, UITableV
                                 return
                         }
                         
-                        let booking = Booking(bookingID: bookingID, passengerID: passengerID, rideID: rideID, rideInfo: nil, numberOfBookingSeats: numberOfBookingSeats, status: status)
+                        let booking = Booking(bookingID: bookingID, passengerID: passengerID, rideID: rideID, rideInfo: nil, numberOfBookingSeats: numberOfBookingSeats, status: status, driverInfo: nil)
                         
                         self.bookingsArray.append(booking)
                     }
-                    //Get rides infromation from Firestore Rides collection
+                    //Get rides and drivers infromation from Firestore Rides and Users collections
                     self.getRidesInfo()
+                    self.getDriverInfo()
                     
                     self.ridesBookedTableView.reloadData()
                 }
@@ -139,8 +141,47 @@ class RidesBookedViewController: UIViewController, UITableViewDelegate, UITableV
                     
                     self.bookingsArray[index].rideInfo = ride
                 }
+                self.ridesBookedTableView.reloadData()
             }
         }
+    }
+    
+    func getDriverInfo() {
+        
+        //Get driver infromation from Firestore user collection
+        for index in 0..<self.bookingsArray.count {
+            var userInfo: UserInfo?
+            guard let userID = self.bookingsArray[index].rideInfo?.userID else {
+                print("Error! Can not get userID from Rides collection")
+                return
+            }
+            
+            let driver = self.db.collection("users").whereField("uid", isEqualTo: userID)
+            
+            driver.getDocuments { snapshot, error in
+                if let error = error {
+                    print("Error getting documents: \(error)")
+                } else {
+                    guard
+                        let userUID = snapshot!.documents.first?.get("uid") as? String,
+                        let name = snapshot!.documents.first?.get("name") as? String,
+                        let phoneNumber = snapshot!.documents.first?.get("phoneNumber") as? String,
+                        let carModel = snapshot!.documents.first?.get("carModel") as? String,
+                        let carColor = snapshot!.documents.first?.get("carColor") as? String,
+                        let pushNotificationToken = snapshot!.documents.first?.get("pushNotificationToken") as? String
+                        else {
+                            print("Error! Can not get information about the driver from Firestore document in Find Ride VC.")
+                            return
+                    }
+                    
+                    userInfo = UserInfo(userID: userUID, name: name, phoneNumber: phoneNumber, carModel: carModel, carColor: carColor, photo: nil, pushNotificationToken: pushNotificationToken)
+   
+                    self.bookingsArray[index].driverInfo = userInfo
+                }
+                self.ridesBookedTableView.reloadData()
+            }
+        }
+        
     }
     
     //MARK: - Table View
@@ -165,6 +206,24 @@ class RidesBookedViewController: UIViewController, UITableViewDelegate, UITableV
 
     
     //MARK: - Navigation
+    
+    // method to run when table view cell is tapped
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        // Segue to the second view controller
+        self.performSegue(withIdentifier: "goToBookedRideDetails", sender: self)
+    }
+    
+    // This function is called before the segue
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "goToBookedRideDetails", let destinationVC = segue.destination as? BookedRideDetailsViewController {
+            if let indexPath = ridesBookedTableView.indexPathForSelectedRow {
+                destinationVC.booking = bookingsArray[indexPath.row]
+            }
+            
+        }
+    }
     
     @IBAction func backButton(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)

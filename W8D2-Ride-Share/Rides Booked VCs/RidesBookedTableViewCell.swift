@@ -21,7 +21,7 @@ class RidesBookedTableViewCell: UITableViewCell {
     
     @IBOutlet weak var endPointLabel: UILabel!
     
-    @IBOutlet weak var driverName: UILabel!
+    @IBOutlet weak var driverNameLabel: UILabel!
 
     @IBOutlet weak var priceLabel: UILabel!
     
@@ -57,24 +57,20 @@ class RidesBookedTableViewCell: UITableViewCell {
         }
         else {
             print("Error! Unable to get tripStartTime")
-            return
         }
         
-//        guard let driverName = booking.userInfo?.name else {
-//            print("Error! Unable to get tripStartTime")
-//            return
-//        }
-//        driverName.text = driverName
+        if let driverName = booking.driverInfo?.name {
+            driverNameLabel.text = "Driver name: \(driverName)"
+        } else {
+            print("Error! Unable to get driverName")
+        }
         
         if let estimatedArrivalTime = booking.rideInfo?.estimatedArrivalTime {
             estimatedArrivalTimeLabel.text = stringHoursMinutesFormat(from: estimatedArrivalTime)
         }
         else {
             print("Error! Unable to get estimatedArrivalTimeLabel")
-            return
         }
-
-        
 
         if let price = booking.rideInfo?.price {
             let priceFormated = String(format:"%.2f", price)
@@ -82,7 +78,6 @@ class RidesBookedTableViewCell: UITableViewCell {
         }
         else {
             print("Error! Unable to get price")
-            return
         }
         
     }
