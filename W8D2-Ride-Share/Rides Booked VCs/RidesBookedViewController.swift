@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 import GoogleMaps
 
-class RidesBookedViewController: UIViewController {
+class RidesBookedViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     //Setting Firestore
     var db: Firestore!
@@ -25,8 +25,10 @@ class RidesBookedViewController: UIViewController {
     var booking: Booking?
     
     //Booked rides array
-    var ridesArray = [Ride]()
     var bookingsArray = [Booking]()
+    
+    //UI elements
+    @IBOutlet weak var ridesBookedTableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,7 +38,11 @@ class RidesBookedViewController: UIViewController {
         Firestore.firestore().settings = settings
         db = Firestore.firestore()
         // END setup for Firestore
-
+        
+        ridesBookedTableView.dataSource = self
+        ridesBookedTableView.rowHeight = 150
+//        ridesBookedTableView.estimatedRowHeight = 200
+//        ridesBookedTableView.rowHeight = UITableView.automaticDimension
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -46,7 +52,6 @@ class RidesBookedViewController: UIViewController {
             self.user = user
             
             //Make arrays empty when view appear in case user came from ride details VC
-            self.ridesArray = []
             self.bookingsArray = []
             
             //Get bookings infromation from Firestore
@@ -90,7 +95,7 @@ class RidesBookedViewController: UIViewController {
                     //Get rides infromation from Firestore Rides collection
                     self.getRidesInfo()
                     
-//                    self.tableView.reloadData()
+                    self.ridesBookedTableView.reloadData()
                 }
             }
         }
@@ -133,13 +138,39 @@ class RidesBookedViewController: UIViewController {
                     ride = Ride(startLocation: CLLocationCoordinate2D(latitude: startLocationGeoPoint.latitude, longitude: startLocationGeoPoint.longitude), endLocation: CLLocationCoordinate2D(latitude: endLocationGeoPoint.latitude, longitude: endLocationGeoPoint.longitude), tripStartTime: tripStartTime.dateValue(), estimatedArrivalTime: estimatedArrivalTime.dateValue(), tripDuration: tripDuration, distance: distance, userID: userID, rideID: rideID, userInfo: nil, price: price, numberOfSeats: numberOfSeats, numberOfAvailableSeats: numberOfAvailableSeats, tripStatus: tripStatus)
                     
                     self.bookingsArray[index].rideInfo = ride
-                    
                 }
             }
         }
     }
     
+    //MARK: - Table View
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return bookingsArray.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ridesBookedTableViewCell", for: indexPath) as! RidesBookedTableViewCell
+        
+        booking = self.bookingsArray[indexPath.row]
+        
+        guard let booking = booking else {
+            return cell
+        }
+        
+        cell.configureCell(booking: booking)
+        return cell
+    
+    }
 
+    
+    //MARK: - Navigation
+    
+    @IBAction func backButton(_ sender: UIButton) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    
     /*
     // MARK: - Navigation
 

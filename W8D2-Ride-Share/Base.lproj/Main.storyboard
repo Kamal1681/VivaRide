@@ -126,7 +126,7 @@
                                 <rect key="frame" x="20" y="65" width="335" height="582"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="133" id="AZl-z0-eJz" customClass="RidesBookedTableViewCell" customModule="W8D2_Ride_Share" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ridesBookedTableViewCell" rowHeight="133" id="AZl-z0-eJz" customClass="RidesBookedTableViewCell" customModule="W8D2_Ride_Share" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="335" height="133"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="AZl-z0-eJz" id="DZH-Uh-Occ">
@@ -227,6 +227,15 @@
                                                 <constraint firstItem="5M8-3v-4tG" firstAttribute="leading" secondItem="DZH-Uh-Occ" secondAttribute="leading" id="z3g-k9-cKf"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="dateLabel" destination="5M8-3v-4tG" id="9CB-8y-XiO"/>
+                                            <outlet property="driverName" destination="y8q-aw-Mz5" id="MDb-SX-oBE"/>
+                                            <outlet property="endPointLabel" destination="GPn-ha-33G" id="BXi-Te-jr0"/>
+                                            <outlet property="estimatedArrivalTimeLabel" destination="0XK-Mv-fFO" id="iE7-vt-sco"/>
+                                            <outlet property="priceLabel" destination="gnf-au-SmD" id="daj-Ke-Nlz"/>
+                                            <outlet property="startPointLabel" destination="8n2-9F-5mC" id="vfK-bo-2Ie"/>
+                                            <outlet property="startTimeLabel" destination="aJG-B0-Wtp" id="uaf-vo-oP0"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -240,6 +249,9 @@
                                             <constraint firstAttribute="width" constant="30" id="xoo-6R-alz"/>
                                         </constraints>
                                         <state key="normal" title="Back" image="backButton"/>
+                                        <connections>
+                                            <action selector="backButton:" destination="1kQ-kt-bpc" eventType="touchUpInside" id="g3I-ko-825"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rides booked" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kl7-dd-hZH">
                                         <rect key="frame" x="40" y="2.5" width="295" height="25.5"/>
@@ -262,6 +274,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="iql-mF-Scs"/>
                     </view>
+                    <connections>
+                        <outlet property="ridesBookedTableView" destination="qID-Mw-4Ly" id="0BR-Zs-JO6"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7by-mA-2Vw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
