@@ -64,6 +64,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // [END register_for_notifications]
         
+        //Update user's token for push notification in Firestore when user login
+        PushNotification.updateUserToken()
+        
         return true
     }
 

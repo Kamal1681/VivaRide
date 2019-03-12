@@ -75,14 +75,17 @@ class UserInfo {
     var carModel: String?
     var carColor: String?
     var photo: String?
+    var pushNotificationToken: String?
     
-    init(userID: String, name: String, phoneNumber: String, carModel: String?, carColor: String?, photo: String?) {
+    
+    init(userID: String, name: String, phoneNumber: String, carModel: String?, carColor: String?, photo: String?, pushNotificationToken: String?) {
         self.userID = userID
         self.name = name
         self.phoneNumber = phoneNumber
         self.carModel = carModel
         self.carColor = carColor
         self.photo = photo
+        self.pushNotificationToken = pushNotificationToken
     }
     
 }

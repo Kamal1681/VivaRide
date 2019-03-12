@@ -62,7 +62,9 @@ extension UIButton {
     func configure(button: UIButton) {
         let cGColorBlack = UIColor.black
         let cGColorGray = UIColor.gray
-        let buttonColor = UIColor(red: 0.5333, green: 0.6431, blue: 0.7255, alpha: 1)
+//        let buttonColor = UIColor(red: 0.5333, green: 0.6431, blue: 0.7255, alpha: 1)
+//        let buttonColor = UIColor(red: 0.52, green: 0.152, blue: 0.219, alpha: 1)
+        let buttonColor = UIColor(rgb: 0x54a0ff, a: 1)
         button.backgroundColor = buttonColor
         button.tintColor = UIColor.white
         button.layer.cornerRadius = 7
@@ -70,11 +72,34 @@ extension UIButton {
         //button.layer.borderColor = cGColorBlack.cgColor
         
         button.layer.shadowColor = cGColorBlack.cgColor
-        button.layer.shadowOffset = CGSize(width: 5, height: 5)
-        button.layer.shadowOpacity = 0.8
+        button.layer.shadowOffset = CGSize(width: 4, height: 4)
+        button.layer.shadowOpacity = 0.5
         
     }
 }
+
+//MARK: - UIColor extension
+extension UIColor {
+    convenience init(red: Int, green: Int, blue: Int, a: CGFloat = 1.0) {
+        self.init(
+            red: CGFloat(red) / 255.0,
+            green: CGFloat(green) / 255.0,
+            blue: CGFloat(blue) / 255.0,
+            alpha: a
+        )
+    }
+    
+    convenience init(rgb: Int, a: CGFloat = 1.0) {
+        self.init(
+            red: (rgb >> 16) & 0xFF,
+            green: (rgb >> 8) & 0xFF,
+            blue: rgb & 0xFF,
+            a: a
+        )
+    }
+}
+
+
 //
 //// Example
 //

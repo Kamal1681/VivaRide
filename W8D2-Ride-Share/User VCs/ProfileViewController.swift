@@ -67,6 +67,8 @@ class ProfileViewController: UIViewController {
             self.view.layoutIfNeeded()
         }
         // END auth_listener
+        
+        PushNotification.updateUserToken()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -82,13 +84,20 @@ class ProfileViewController: UIViewController {
     
     @IBAction func signOutButtonDidTap(_ sender: UIButton) {
         sender.pressed()
-        let firebaseAuth = Auth.auth()
-        do {
-            try firebaseAuth.signOut()
-        } catch let signOutError as NSError {
-            print ("Error signing out: %@", signOutError)
+        
+        //Delete user's push notification token from Firestore after that trying user sign out
+        
+        PushNotification.deleteUserToken {
+            let firebaseAuth = Auth.auth()
+            do {
+                try firebaseAuth.signOut()
+                self.dismiss(animated: true, completion: nil)
+            } catch let signOutError as NSError {
+                print ("Error signing out: %@", signOutError.localizedDescription)
+                self.errorAlert(errorMessage: signOutError.localizedDescription)
+                PushNotification.updateUserToken()
+            }
         }
-        self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func changePasswordButtonDidTap(_ sender: UIButton) {

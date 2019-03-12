@@ -59,6 +59,7 @@ class LoginViewController: UIViewController {
         
         Auth.auth().signIn(withEmail: email, password: password) { (authDataResult, errorCurrent) in
                 if authDataResult != nil {
+                    PushNotification.updateUserToken()
                     self.dismiss(animated: true, completion: nil)
                 }
                 else {

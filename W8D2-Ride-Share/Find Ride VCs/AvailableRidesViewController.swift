@@ -165,13 +165,19 @@ class AvailableRidesViewController: UIViewController, UITableViewDelegate, UITab
                         if let error = error {
                             print("Error getting documents: \(error)")
                         } else {
-                            let userUID = snapshot!.documents.first?.get("uid") as! String
-                            let name = snapshot!.documents.first?.get("name") as! String
-                            let phoneNumber = snapshot!.documents.first?.get("phoneNumber") as! String
-                            let carModel = snapshot!.documents.first?.get("carModel") as! String
-                            let carColor = snapshot!.documents.first?.get("carColor") as! String
+                            guard
+                            let userUID = snapshot!.documents.first?.get("uid") as? String,
+                            let name = snapshot!.documents.first?.get("name") as? String,
+                            let phoneNumber = snapshot!.documents.first?.get("phoneNumber") as? String,
+                            let carModel = snapshot!.documents.first?.get("carModel") as? String,
+                            let carColor = snapshot!.documents.first?.get("carColor") as? String,
+                            let pushNotificationToken = snapshot!.documents.first?.get("pushNotificationToken") as? String
+                            else {
+                                print("Error! Can not get information about the driver from Firestore document in Find Ride VC.")
+                                return
+                            }
                             
-                            userInfo = UserInfo(userID: userUID, name: name, phoneNumber: phoneNumber, carModel: carModel, carColor: carColor, photo: nil)
+                            userInfo = UserInfo(userID: userUID, name: name, phoneNumber: phoneNumber, carModel: carModel, carColor: carColor, photo: nil, pushNotificationToken: pushNotificationToken)
                             
                             print(snapshot!.documents.first?.get("name") as! String)
                             print(userInfo?.name as! String)
@@ -201,7 +207,7 @@ class AvailableRidesViewController: UIViewController, UITableViewDelegate, UITab
                 
                 //Reload Table View with results from Firebase
                 if self.filteredArrayByStatus.count == 0 {
-                    let alert = UIAlertController(title: "No Rides", message: "No rides Available", preferredStyle: UIAlertController.Style.alert)
+                    let alert = UIAlertController(title: "No Rides", message: "No rides available for that search request", preferredStyle: UIAlertController.Style.alert)
                     alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: {(alert: UIAlertAction!) in
                         self.dismiss(animated: true, completion: nil)
                     }))

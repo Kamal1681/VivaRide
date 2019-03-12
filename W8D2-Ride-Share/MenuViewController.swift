@@ -76,47 +76,14 @@ class MenuViewController: UIViewController {
     @IBAction func ridesOffered(_ sender: UIButton) {
         sender.pressed()
         
-        sendPushNotification()
+        let token = "eKUBk_ra58Q:APA91bGKXmQbkwR73haVgvX0LPILpKoQEuwDxQzebmTGuKkNcWQRWvWtRQaOFm1XMiSNeCqQ4E97yy9D8U6KhujfuGmX-fJqXExwz9EZppBr_DF0s2vPSE7xlhdiw_UGlaDGacbnoC1L"
+        let title = "Title"
+        let body = "Message body"
+        
+        PushNotification.sendTo(token: token, title: title, body: body)
 
     }
     
-    func sendPushNotification() {
-        let webAPI = "AAAAanCx2gY:APA91bGnjSawGhpNZua0NTRAUJYJHM2tnTiSG7wHpeXDrLbHGz9_EfDb9jsSPAb-qzixTKauTZ3P_oQOBINfAZDL7oJhb5QqIrnJc8hUhppzFrHBiXSx35JEBKLDiTuRlM0LSLODcTmn"
-        
-        let token = Messaging.messaging().fcmToken
-        
-        let url = URL(string: "https://fcm.googleapis.com/fcm/send")!
-        var request = URLRequest(url: url)
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.setValue("key=\(webAPI)", forHTTPHeaderField: "Authorization")
-        request.httpMethod = "POST"
-        
-        var notData: [String: Any] = [
-            "to" : "eKUBk_ra58Q:APA91bGKXmQbkwR73haVgvX0LPILpKoQEuwDxQzebmTGuKkNcWQRWvWtRQaOFm1XMiSNeCqQ4E97yy9D8U6KhujfuGmX-fJqXExwz9EZppBr_DF0s2vPSE7xlhdiw_UGlaDGacbnoC1L",
-            "notification": [
-                "title" : "Test from app",
-                "body"  : "Working!",
-                "icon"  : "not icon"
-            ]
-        ]
-        
-        request.httpBody = try? JSONSerialization.data(withJSONObject: notData, options: [])
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            guard let data = data, error == nil else {                                                 // check for fundamental networking error
-                print("error=\(error)")
-                return
-            }
-            
-            if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {           // check for http errors
-                print("statusCode should be 200, but is \(httpStatus.statusCode)")
-                print("response = \(response)")
-            }
-            
-            let responseString = String(data: data, encoding: .utf8)
-            print("responseString = \(responseString)")
-        }
-        task.resume()
-    }
     func configureButtons() {
         findARide.configure(button: findARide)
         offerARide.configure(button: offerARide)
