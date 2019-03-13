@@ -516,6 +516,7 @@
                     </view>
                     <connections>
                         <outlet property="additionalInfoLabel" destination="8E6-t7-XJp" id="DiN-qh-d11"/>
+                        <outlet property="bookingStatusLabel" destination="D45-Ls-GFe" id="tFg-y7-GF3"/>
                         <outlet property="cancelButton" destination="wiY-wD-uii" id="3c9-RZ-7I3"/>
                         <outlet property="carColorLabel" destination="ADg-4u-8vF" id="i8a-X8-Fnr"/>
                         <outlet property="carModelLabel" destination="Jyo-sn-3pK" id="QGV-cY-gns"/>

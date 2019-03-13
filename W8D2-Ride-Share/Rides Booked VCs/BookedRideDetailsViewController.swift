@@ -17,6 +17,7 @@ class BookedRideDetailsViewController: UIViewController {
     //UI Properties
     
     @IBOutlet weak var startDateLabel: UILabel!
+    @IBOutlet weak var bookingStatusLabel: UILabel!
     @IBOutlet weak var startTimeLabel: UILabel!
     @IBOutlet weak var startLocationLabel: UILabel!
     @IBOutlet weak var endTimeLabel: UILabel!
@@ -137,6 +138,30 @@ class BookedRideDetailsViewController: UIViewController {
         }
         else {
             print("Error! Unable to get carColor")
+        }
+        
+        if let bookingStatus = BookingStatus(rawValue: booking.status!) {
+            
+            switch bookingStatus {
+            case .cancelled:
+                bookingStatusLabel.text = bookingStatus.rawValue
+                bookingStatusLabel.textColor = .red
+            case .unconfirmed:
+                bookingStatusLabel.text = bookingStatus.rawValue
+                bookingStatusLabel.textColor = .yellow
+            case .confirmed:
+                bookingStatusLabel.text = bookingStatus.rawValue
+                bookingStatusLabel.textColor = .green
+            case .started:
+                bookingStatusLabel.text = bookingStatus.rawValue
+                bookingStatusLabel.textColor = .blue
+            case .finished:
+                bookingStatusLabel.text = bookingStatus.rawValue
+                bookingStatusLabel.textColor = .darkGray
+            }
+        }
+        else {
+            print("Error! Unable to get bookingStatus")
         }
         
     }
