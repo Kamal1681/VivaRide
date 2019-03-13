@@ -25,6 +25,8 @@ class RidesBookedTableViewCell: UITableViewCell {
 
     @IBOutlet weak var priceLabel: UILabel!
     
+    @IBOutlet weak var bookingStatusLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -79,6 +81,30 @@ class RidesBookedTableViewCell: UITableViewCell {
         }
         else {
             print("Error! Unable to get price")
+        }
+
+        if let bookingStatus = BookingStatus(rawValue: booking.status!) {
+            
+            switch bookingStatus {
+            case .cancelled:
+                bookingStatusLabel.text = bookingStatus.rawValue
+                bookingStatusLabel.textColor = .red
+            case .unconfirmed:
+                bookingStatusLabel.text = bookingStatus.rawValue
+                bookingStatusLabel.textColor = .yellow
+            case .confirmed:
+                bookingStatusLabel.text = bookingStatus.rawValue
+                bookingStatusLabel.textColor = .green
+            case .started:
+                bookingStatusLabel.text = bookingStatus.rawValue
+                bookingStatusLabel.textColor = .blue
+            case .finished:
+                bookingStatusLabel.text = bookingStatus.rawValue
+                bookingStatusLabel.textColor = .darkGray
+            }
+        }
+        else {
+           print("Error! Unable to get bookingStatus")
         }
         
     }

@@ -41,7 +41,7 @@ class RidesBookedViewController: UIViewController, UITableViewDelegate, UITableV
         
         ridesBookedTableView.delegate = self
         ridesBookedTableView.dataSource = self
-        ridesBookedTableView.rowHeight = 150
+        ridesBookedTableView.rowHeight = 140
 //        ridesBookedTableView.estimatedRowHeight = 200
 //        ridesBookedTableView.rowHeight = UITableView.automaticDimension
     }
