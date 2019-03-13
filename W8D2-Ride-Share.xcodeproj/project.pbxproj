@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1508113E2235990000499CD6 /* 022215-commute-thumb.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1508113D2235990000499CD6 /* 022215-commute-thumb.jpg */; };
-		15B2CA3C2229CC2700ADFF46 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15B2CA3B2229CC2700ADFF46 /* UserProfile.swift */; };
+		15B2CA3C2229CC2700ADFF46 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15B2CA3B2229CC2700ADFF46 /* UserInfo.swift */; };
 		15B2CA3E2229CC3A00ADFF46 /* Ride.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15B2CA3D2229CC3A00ADFF46 /* Ride.swift */; };
 		15B2CA402229FEB300ADFF46 /* SearchResultsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15B2CA3F2229FEB300ADFF46 /* SearchResultsController.swift */; };
 		15C1DE232235C5D500D7F586 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 15C1DE222235C5D500D7F586 /* GoogleService-Info.plist */; };
@@ -34,6 +34,11 @@
 		E90D3D31222865480083BAB8 /* RidesOfferedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90D3D30222865480083BAB8 /* RidesOfferedTableViewCell.swift */; };
 		E90D3D332228656B0083BAB8 /* PassengersListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90D3D322228656B0083BAB8 /* PassengersListTableViewCell.swift */; };
 		E995BA81222A215F00E9CA40 /* RegisterEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E995BA80222A215F00E9CA40 /* RegisterEmailViewController.swift */; };
+		E9A7390F2238793600EE1C4A /* CancelBookedRide.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A7390E2238793600EE1C4A /* CancelBookedRide.swift */; };
+		E9A739112238810800EE1C4A /* Booking.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A739102238810800EE1C4A /* Booking.swift */; };
+		E9A739132238B01300EE1C4A /* GeoPlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A739122238B01300EE1C4A /* GeoPlace.swift */; };
+		E9A739152238B16400EE1C4A /* StringFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A739142238B16400EE1C4A /* StringFormat.swift */; };
+		E9A739172238B32500EE1C4A /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A739162238B32500EE1C4A /* Alert.swift */; };
 		E9C701DD22320F9D00607639 /* Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C701DC22320F9D00607639 /* Extentions.swift */; };
 		E9EAEE4B2225A4AD001DB057 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9EAEE4A2225A4AD001DB057 /* AppDelegate.swift */; };
 		E9EAEE502225A4AD001DB057 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E9EAEE4E2225A4AD001DB057 /* Main.storyboard */; };
@@ -45,7 +50,7 @@
 
 /* Begin PBXFileReference section */
 		1508113D2235990000499CD6 /* 022215-commute-thumb.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "022215-commute-thumb.jpg"; sourceTree = "<group>"; };
-		15B2CA3B2229CC2700ADFF46 /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
+		15B2CA3B2229CC2700ADFF46 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		15B2CA3D2229CC3A00ADFF46 /* Ride.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ride.swift; sourceTree = "<group>"; };
 		15B2CA3F2229FEB300ADFF46 /* SearchResultsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsController.swift; sourceTree = "<group>"; };
 		15C1DE222235C5D500D7F586 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -75,6 +80,11 @@
 		E90D3D322228656B0083BAB8 /* PassengersListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassengersListTableViewCell.swift; sourceTree = "<group>"; };
 		E989D407223507CD0090664C /* W8D2-Ride-Share.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "W8D2-Ride-Share.entitlements"; sourceTree = "<group>"; };
 		E995BA80222A215F00E9CA40 /* RegisterEmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterEmailViewController.swift; sourceTree = "<group>"; };
+		E9A7390E2238793600EE1C4A /* CancelBookedRide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelBookedRide.swift; sourceTree = "<group>"; };
+		E9A739102238810800EE1C4A /* Booking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Booking.swift; sourceTree = "<group>"; };
+		E9A739122238B01300EE1C4A /* GeoPlace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoPlace.swift; sourceTree = "<group>"; };
+		E9A739142238B16400EE1C4A /* StringFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringFormat.swift; sourceTree = "<group>"; };
+		E9A739162238B32500EE1C4A /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		E9C701DC22320F9D00607639 /* Extentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extentions.swift; sourceTree = "<group>"; };
 		E9EAEE472225A4AD001DB057 /* W8D2-Ride-Share.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "W8D2-Ride-Share.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9EAEE4A2225A4AD001DB057 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -153,6 +163,7 @@
 				E90D3D1E222860640083BAB8 /* RidesBookedViewController.swift */,
 				E90D3D2E222865270083BAB8 /* RidesBookedTableViewCell.swift */,
 				E90D3D20222860ED0083BAB8 /* BookedRideDetailsViewController.swift */,
+				E9A7390E2238793600EE1C4A /* CancelBookedRide.swift */,
 			);
 			path = "Rides Booked VCs";
 			sourceTree = "<group>";
@@ -201,10 +212,14 @@
 				E989D407223507CD0090664C /* W8D2-Ride-Share.entitlements */,
 				E9EAEE4A2225A4AD001DB057 /* AppDelegate.swift */,
 				E9EAEE4E2225A4AD001DB057 /* Main.storyboard */,
-				15B2CA3B2229CC2700ADFF46 /* UserProfile.swift */,
 				15B2CA3D2229CC3A00ADFF46 /* Ride.swift */,
+				E9A739102238810800EE1C4A /* Booking.swift */,
+				15B2CA3B2229CC2700ADFF46 /* UserInfo.swift */,
 				E90D3D0C22285EFB0083BAB8 /* MenuViewController.swift */,
 				E9FB0BBF2237017E0002B428 /* PushNotification.swift */,
+				E9A739122238B01300EE1C4A /* GeoPlace.swift */,
+				E9A739142238B16400EE1C4A /* StringFormat.swift */,
+				E9A739162238B32500EE1C4A /* Alert.swift */,
 				E9BBA8D122347D920023452C /* Find Ride VCs */,
 				E9BBA8D222347E070023452C /* Offer Ride VCs */,
 				E9BBA8D422347E920023452C /* User VCs */,
@@ -402,9 +417,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				E9FB0BC02237017E0002B428 /* PushNotification.swift in Sources */,
+				E9A7390F2238793600EE1C4A /* CancelBookedRide.swift in Sources */,
 				E90D3D23222861080083BAB8 /* RidesOfferedViewController.swift in Sources */,
 				E90D3D0B22285D280083BAB8 /* LoginViewController.swift in Sources */,
 				E90D3D21222860ED0083BAB8 /* BookedRideDetailsViewController.swift in Sources */,
+				E9A739172238B32500EE1C4A /* Alert.swift in Sources */,
 				E90D3D31222865480083BAB8 /* RidesOfferedTableViewCell.swift in Sources */,
 				E90D3D1922285FE20083BAB8 /* OfferRideDetailsViewController.swift in Sources */,
 				E90D3D332228656B0083BAB8 /* PassengersListTableViewCell.swift in Sources */,
@@ -413,17 +430,20 @@
 				E995BA81222A215F00E9CA40 /* RegisterEmailViewController.swift in Sources */,
 				15B2CA3E2229CC3A00ADFF46 /* Ride.swift in Sources */,
 				E90D3D0F22285F3B0083BAB8 /* FindRideViewController.swift in Sources */,
+				E9A739152238B16400EE1C4A /* StringFormat.swift in Sources */,
 				E90D3D2D222865050083BAB8 /* StopoversTableViewCell.swift in Sources */,
 				E90D3D272228614B0083BAB8 /* ProfileViewController.swift in Sources */,
 				E90D3D0D22285EFB0083BAB8 /* MenuViewController.swift in Sources */,
 				E90D3D1322285F700083BAB8 /* RideDetailsViewController.swift in Sources */,
 				E9EAEE532225A4AE001DB057 /* W8D2_Ride_Share.xcdatamodeld in Sources */,
 				E90D3D2B222864C40083BAB8 /* AvailableRidesTableViewCell.swift in Sources */,
+				E9A739112238810800EE1C4A /* Booking.swift in Sources */,
 				E90D3D1F222860640083BAB8 /* RidesBookedViewController.swift in Sources */,
 				E90D3D1122285F570083BAB8 /* AvailableRidesViewController.swift in Sources */,
 				E90D3D1B222860030083BAB8 /* OfferRideConfirmationViewController.swift in Sources */,
 				E9EAEE4B2225A4AD001DB057 /* AppDelegate.swift in Sources */,
-				15B2CA3C2229CC2700ADFF46 /* UserProfile.swift in Sources */,
+				E9A739132238B01300EE1C4A /* GeoPlace.swift in Sources */,
+				15B2CA3C2229CC2700ADFF46 /* UserInfo.swift in Sources */,
 				E90D3D29222864A30083BAB8 /* SearchHistoryTableViewCell.swift in Sources */,
 				E90D3D2F222865270083BAB8 /* RidesBookedTableViewCell.swift in Sources */,
 				15B2CA402229FEB300ADFF46 /* SearchResultsController.swift in Sources */,

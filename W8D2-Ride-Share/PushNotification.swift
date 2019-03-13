@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import GoogleMaps
 
 class PushNotification: NSObject {
     //Setting Firestore
@@ -127,6 +128,43 @@ class PushNotification: NSObject {
         // END setup for Firestore
     }
 
+    //MARK: - Push Notification Message format functions
+    
+    static func cancelationMessage(numberOfBookingSeats: Int, startLocation: CLLocationCoordinate2D, endLocation: CLLocationCoordinate2D, rideStartDate: Date, completion: @escaping (String) -> Void) {
+        var stringResult = ""
+        startEndDateMessage(startLocation: startLocation, endLocation: endLocation, rideStartDate: rideStartDate, completion: { (messageTail) in
+            stringResult = "\(StringFormat.Seats(for: numberOfBookingSeats)) canceled \(messageTail)"
+            completion(stringResult)
+        })
+    }
+    
+    static func confirmationMessage(numberOfBookingSeats: Int, startLocation: CLLocationCoordinate2D, endLocation: CLLocationCoordinate2D, rideStartDate: Date, completion: @escaping (String) -> Void) {
+        var stringResult = ""
+        startEndDateMessage(startLocation: startLocation, endLocation: endLocation, rideStartDate: rideStartDate, completion: { (messageTail) in
+            stringResult = "\(StringFormat.Seats(for: numberOfBookingSeats)) booked \(messageTail)"
+            completion(stringResult)
+        })
+    }
+    
+    static func startEndDateMessage(startLocation: CLLocationCoordinate2D, endLocation: CLLocationCoordinate2D, rideStartDate: Date, completion: @escaping (String) -> Void) {
+        var stringResult = ""
+        var startLocationCity = ""
+        var endLocationCity = ""
+        let rideStartDateFormated = StringFormat.Date(from: rideStartDate)
+        
+        GeoPlace.getAddressFromLocation(location: startLocation, complete: { (city) in
+            OperationQueue.main.addOperation {
+                startLocationCity = city
+                GeoPlace.getAddressFromLocation(location: endLocation, complete: { (city) in
+                    OperationQueue.main.addOperation {
+                        endLocationCity = city
+                        stringResult = "from \(startLocationCity) to \(endLocationCity) on \(rideStartDateFormated)"
+                        completion(stringResult)
+                    }
+                })
+            }
+        })
+    }
 }
 
 
