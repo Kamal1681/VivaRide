@@ -68,28 +68,6 @@ class Ride {
     
 }
 
-class UserInfo {
-    var userID: String?
-    var name: String?
-    var phoneNumber: String?
-    var carModel: String?
-    var carColor: String?
-    var photo: String?
-    var pushNotificationToken: String?
-    
-    
-    init(userID: String, name: String, phoneNumber: String, carModel: String?, carColor: String?, photo: String?, pushNotificationToken: String?) {
-        self.userID = userID
-        self.name = name
-        self.phoneNumber = phoneNumber
-        self.carModel = carModel
-        self.carColor = carColor
-        self.photo = photo
-        self.pushNotificationToken = pushNotificationToken
-    }
-    
-}
-
 class StopOver {
     let location: CLLocation?
     let pickUpTime: Date?
@@ -98,25 +76,5 @@ class StopOver {
         
         self.location = location
         self.pickUpTime = pickUpTime
-    }
-}
-
-class Booking {
-    var bookingID: String?
-    var passengerID: String?
-    var rideID: String?
-    var numberOfBookingSeats: Int?
-    var status: String?
-    var rideInfo: Ride?
-    var driverInfo: UserInfo?
-    
-    init(bookingID: String?, passengerID: String?, rideID: String?, rideInfo: Ride?, numberOfBookingSeats: Int?, status: String?, driverInfo: UserInfo?) {
-        self.bookingID = bookingID
-        self.passengerID = passengerID
-        self.rideID = rideID
-        self.rideInfo = rideInfo
-        self.numberOfBookingSeats = numberOfBookingSeats
-        self.status = status
-        self.driverInfo = driverInfo
     }
 }

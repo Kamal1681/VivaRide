@@ -46,10 +46,19 @@ class BookedRideDetailsViewController: UIViewController {
     }
     
     //MARK: - UI Actions
-    @IBAction func cancelPressed(_ sender: UIButton) {
+    @IBAction func cancelButton(_ sender: UIButton) {
         sender.pressed()
+        
+        if
+            let booking = booking,
+            let ride = booking.rideInfo,
+            let driver = booking.driverInfo
+        {
+            CancelBookedRide.cancelRide(for: booking, ride: ride, driver: driver, viewController: self)
+        }
+
     }
-    @IBAction func contactDriverPressed(_ sender: UIButton) {
+    @IBAction func contactDriverButton(_ sender: UIButton) {
         sender.pressed()
         if let phoneNumber = booking?.driverInfo?.phoneNumber {
             makePhoneCall(to: phoneNumber)
@@ -132,6 +141,21 @@ class BookedRideDetailsViewController: UIViewController {
         
     }
     
+    //MARK: - Alert functions
+    
+    func makePhoneCall(to phoneNumber: String) {
+        if let phoneURL = NSURL(string: ("tel://" + phoneNumber)) {
+            let alert = UIAlertController(title: ("Do you want to call the driver?"), message: nil, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Call", style: .default, handler: { (action) in
+                UIApplication.shared.open(phoneURL as URL, options: [:], completionHandler: nil)
+            }))
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+    
+    //MARK: - String formated functions
+    
     func getAddressFromLocation (location: CLLocationCoordinate2D, complete: @escaping (String) -> Void) {
         
         var city: String? = ""
@@ -188,17 +212,6 @@ class BookedRideDetailsViewController: UIViewController {
         }
         
         return resultString
-    }
-    
-    func makePhoneCall(to phoneNumber: String) {
-        if let phoneURL = NSURL(string: ("tel://" + phoneNumber)) {
-            let alert = UIAlertController(title: ("Do you want to call the driver?"), message: nil, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Call", style: .default, handler: { (action) in
-                UIApplication.shared.open(phoneURL as URL, options: [:], completionHandler: nil)
-            }))
-            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-            self.present(alert, animated: true, completion: nil)
-        }
     }
 
     /*

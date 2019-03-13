@@ -23,9 +23,9 @@ class RideDetailsViewController: UIViewController {
     var ride: Ride!
     
     //Push Notification properties
-    var startLocation: String = "start location"
-    var endLocation: String = "end location"
-    var rideStartDate: String = "someday"
+    var startLocation: CLLocationCoordinate2D?
+    var endLocation: CLLocationCoordinate2D?
+    var rideStartDate: Date?
     
     //IBOutlet properties
     @IBOutlet weak var dateLabel: UILabel!
@@ -54,20 +54,20 @@ class RideDetailsViewController: UIViewController {
         Firestore.firestore().settings = settings
         db = Firestore.firestore()
         // END setup for Firestore
+
+        //Setting push notification arguments
+        self.startLocation = ride.startLocation
+        self.endLocation = ride.endLocation
+        self.rideStartDate = ride.tripStartTime
         
-        print("Distance is: \(ride!.distance)")
-        print("Name is \(ride!.userInfo?.name)")
-         print(ride.userInfo?.name ?? "Did not pass driver name throuht sefue")
         //Setting labels and other UI
-        getAddressFromLocation(location: ride.startLocation!, complete: { (city) in
+        GeoPlace.getAddressFromLocation(location: ride.startLocation!, complete: { (city) in
             OperationQueue.main.addOperation {
-                self.startLocation = city
                 self.startLocationLabel.text = city
             }
         })
-        getAddressFromLocation(location: ride.endLocation!, complete: { (city) in
+        GeoPlace.getAddressFromLocation(location: ride.endLocation!, complete: { (city) in
             OperationQueue.main.addOperation {
-                self.endLocation = city
                 self.endLocationLabel.text = city
             }
             
@@ -84,10 +84,9 @@ class RideDetailsViewController: UIViewController {
         }
         
         //Date and Time labels
-        dateLabel.text = stringDateFormat(from: ride.tripStartTime!)
-        tripStartTimeLabel.text = stringHoursMinutesFormat(from: ride.tripStartTime!)
-        estimatedArrivalTimeLabel.text = stringHoursMinutesFormat(from: ride.estimatedArrivalTime!)
-        rideStartDate = stringDateFormat(from: ride.tripStartTime!)
+        dateLabel.text = StringFormat.Date(from: ride.tripStartTime!)
+        tripStartTimeLabel.text = StringFormat.HoursMinutes(from: ride.tripStartTime!)
+        estimatedArrivalTimeLabel.text = StringFormat.HoursMinutes(from: ride.estimatedArrivalTime!)
         
         //Driver name label
         driverNameLabel.text = ride.userInfo?.name
@@ -144,52 +143,6 @@ class RideDetailsViewController: UIViewController {
                 self.numberOfAvailableSeats.text = "Available seats: \(numberOfAvailableSeats) out of \(numberOfSeats)"
             }
         }
-    }
-    
-    //MARK: - Functions
-    func getAddressFromLocation (location: CLLocationCoordinate2D, complete: @escaping (String) -> Void) {
-        
-        var city: String? = ""
-        let url = NSURL(string: "https://maps.googleapis.com/maps/api/geocode/json?latlng=\(String(describing: location.latitude)),\(String(describing: location.longitude))&location_type=APPROXIMATE&result_type=locality&language=en&key=\(Constants.googleApiKey)")
-        
-        let task = URLSession.shared.dataTask(with: url! as URL) { (data, response, error) -> Void in
-            
-            do {
-                if data != nil{
-                    let dict = try JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.mutableLeaves) as!  NSDictionary
-                    let results = dict["results"] as! NSArray
-                    let addressComponents = results.value(forKey: "address_components") as! NSArray
-                    let components = (addressComponents[0] as! NSArray)[0] as! NSDictionary
-                    city = (components.value(forKey: "long_name") as! String)
-                    
-                    complete(city ?? "")
-                }
-            }catch {
-                print("Error request")
-            }
-        }
-        task.resume()
-        
-    }
-    
-    func stringDateFormat(from date: Date) -> String {
-        let formatter = DateFormatter()
-        // initially set the format based on your datepicker date / server String
-        formatter.dateFormat = "E - MMMM dd, yyyy"
-        // convert date to string
-        let myString = formatter.string(from: date)
-        
-        return myString
-    }
-    
-    func stringHoursMinutesFormat(from date: Date) -> String {
-        let formatter = DateFormatter()
-        // initially set the format based on your datepicker date / server String
-        formatter.dateFormat = "hh:mm a"
-        // convert date to string
-        let myString = formatter.string(from: date)
-        
-        return myString
     }
 
     // MARK: - Navigation
@@ -273,10 +226,10 @@ class RideDetailsViewController: UIViewController {
                 self.bookRide(rideID: rideID, numberOfBookingSeats: numberOfBookingSeats, numberOfAvailableSeats: numberOfAvailableSeats, bookingStatus: status, driverToken: driverToken)
             }
             else if numberOfAvailableSeats == 0 {
-                self.errorAlert(errorMessage: "Sorry, but there are not available seats for this ride! Please, look for another ride.")
+                Alert.error(errorMessage: "Sorry, but there are not available seats for this ride! Please, look for another ride.", viewController: self)
             }
             else if numberOfBookingSeats > numberOfAvailableSeats {
-                self.errorAlert(errorMessage: "Number of seats that you are trying to book is bigger than number of available seats. Please, reduce number of booking seats or find another ride.")
+                Alert.error(errorMessage: "Number of seats that you are trying to book is bigger than number of available seats. Please, reduce number of booking seats or find another ride.", viewController: self)
             }
         }))
         
@@ -291,7 +244,7 @@ class RideDetailsViewController: UIViewController {
         sender.pressed()
         
         if let phoneNumber = ride.userInfo?.phoneNumber {
-            makePhoneCall(to: phoneNumber)
+            Alert.makePhoneCall(to: phoneNumber, viewController: self)
         }
     }
     //MARK: Book the ride function
@@ -358,30 +311,24 @@ class RideDetailsViewController: UIViewController {
             } else {
                 print("Ride for rideID \(rideID) successfully updated!")
                 
-                //Send push notification for the driver
-                PushNotification.sendTo(token: driverToken, title: "New booking", body: "\(self.correctString(for: numberOfBookingSeats)) booked for the ride from \(self.startLocation) to \(self.endLocation) on \(self.rideStartDate)")
+                guard let startLocation = self.startLocation, let endLocation = self.endLocation, let rideStartDate = self.rideStartDate else {
+                    print("Error! Start location, End location or Ride start date is nil.")
+                    return
+                }
                 
-                self.infoAlert(title: "Confirmation", message: "Your ride was successfully booked!", dismissVC: true)
+                //Send push notification for the driver
+                PushNotification.confirmationMessage(numberOfBookingSeats: numberOfBookingSeats, startLocation: startLocation, endLocation: endLocation, rideStartDate: rideStartDate, completion: { (message) in
+                    PushNotification.sendTo(token: driverToken, title: "New booking", body: message)
+                })
+                
+                Alert.info(title: "Confirmation", message: "Your ride was successfully booked!", viewController: self, dismissVC: true)
             }
         }
     }
     
-    //MARK: - Alerts functions
-    func errorAlert(errorMessage: String) {
-        let alert = UIAlertController(title: "Error", message: errorMessage, preferredStyle: UIAlertController.Style.alert)
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
-        self.present(alert, animated: true, completion: nil)
-    }
     
-    func infoAlert(title: String, message: String, dismissVC: Bool) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: {(alert: UIAlertAction!) in
-            if dismissVC {
-                self.dismiss(animated: true, completion: nil)
-            }
-        }))
-        self.present(alert, animated: true, completion: nil)
-    }
+    
+    
     
     func correctString(for numberOfBookingSeats: Int) -> String {
         var resultString: String = ""
@@ -396,16 +343,7 @@ class RideDetailsViewController: UIViewController {
         return resultString
     }
     
-    func makePhoneCall(to phoneNumber: String) {
-        if let phoneURL = NSURL(string: ("tel://" + phoneNumber)) {
-            let alert = UIAlertController(title: ("Do you want to call the driver?"), message: nil, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Call", style: .default, handler: { (action) in
-                UIApplication.shared.open(phoneURL as URL, options: [:], completionHandler: nil)
-            }))
-            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-            self.present(alert, animated: true, completion: nil)
-        }
-    }
+
     
     /*
     // MARK: - Navigation

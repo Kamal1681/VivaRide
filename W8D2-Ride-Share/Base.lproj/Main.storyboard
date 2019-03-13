@@ -437,7 +437,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="Cancel the ride"/>
                                 <connections>
-                                    <action selector="cancelPressed:" destination="qw6-o4-Ytn" eventType="touchUpInside" id="alu-u6-61W"/>
+                                    <action selector="cancelButton:" destination="qw6-o4-Ytn" eventType="touchUpInside" id="QfN-ue-sqi"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B3y-Q1-Oss">
@@ -448,7 +448,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                 <state key="normal" title="Contact the driver"/>
                                 <connections>
-                                    <action selector="contactDriverPressed:" destination="qw6-o4-Ytn" eventType="touchUpInside" id="Pf2-ep-9RR"/>
+                                    <action selector="contactDriverButton:" destination="qw6-o4-Ytn" eventType="touchUpInside" id="WI8-mV-IbI"/>
                                 </connections>
                             </button>
                         </subviews>
