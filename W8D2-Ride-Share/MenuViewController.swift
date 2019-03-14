@@ -76,13 +76,7 @@ class MenuViewController: UIViewController {
     
     @IBAction func ridesOffered(_ sender: UIButton) {
         sender.pressed()
-        
-        let token = "eKUBk_ra58Q:APA91bGKXmQbkwR73haVgvX0LPILpKoQEuwDxQzebmTGuKkNcWQRWvWtRQaOFm1XMiSNeCqQ4E97yy9D8U6KhujfuGmX-fJqXExwz9EZppBr_DF0s2vPSE7xlhdiw_UGlaDGacbnoC1L"
-        let title = "Title"
-        let body = "Message body"
-        
-        PushNotification.sendTo(token: token, title: title, body: body)
-
+        performSegue(withIdentifier: "goToRidesOfferedVC", sender: nil)
     }
     
     func configureButtons() {
@@ -92,6 +86,15 @@ class MenuViewController: UIViewController {
         ridesOffered.configure(button: ridesOffered)
     }
     
+    
+//    let token = "eKUBk_ra58Q:APA91bGKXmQbkwR73haVgvX0LPILpKoQEuwDxQzebmTGuKkNcWQRWvWtRQaOFm1XMiSNeCqQ4E97yy9D8U6KhujfuGmX-fJqXExwz9EZppBr_DF0s2vPSE7xlhdiw_UGlaDGacbnoC1L"
+//    let title = "Title"
+//    let body = "Message body"
+//
+//    PushNotification.sendTo(token: token, title: title, body: body)
+//
+//
+//
 //    func sendUpstreamPushNotification() {
 //        let message = [
 //            "to" : "eKUBk_ra58Q:APA91bGKXmQbkwR73haVgvX0LPILpKoQEuwDxQzebmTGuKkNcWQRWvWtRQaOFm1XMiSNeCqQ4E97yy9D8U6KhujfuGmX-fJqXExwz9EZppBr_DF0s2vPSE7xlhdiw_UGlaDGacbnoC1L",

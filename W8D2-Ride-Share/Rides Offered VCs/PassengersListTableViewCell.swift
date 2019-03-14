@@ -9,7 +9,11 @@
 import UIKit
 
 class PassengersListTableViewCell: UITableViewCell {
-
+    
+    //UI Properties
+    @IBOutlet weak var passengerNameLabel: UILabel!
+    @IBOutlet weak var numberOfBookedSeatsLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -19,6 +23,16 @@ class PassengersListTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    func configureCell(booking: Booking) {
+        
+        if let numberOfBookedSeats = booking.numberOfBookingSeats {
+            numberOfBookedSeatsLabel.text = "\(numberOfBookedSeats)"
+        }
+        else {
+            print("Error! Unable to get number of booked seats")
+        }
     }
 
 }

@@ -42,4 +42,21 @@ class StringFormat {
         
         return resultString
     }
+    
+    static func numberOfBookedSeats(from numberOfSeats: Int, numberOfAvailableSeats: Int) -> String {
+        var stringResult: String = ""
+        let numberOfBookedSeats = numberOfSeats - numberOfAvailableSeats
+        
+        if numberOfBookedSeats == 0 {
+            stringResult = "No passengers"
+        }
+        else if numberOfBookedSeats == 1 {
+            stringResult = "\(numberOfBookedSeats) seat booked out of \(numberOfSeats)"
+        }
+        else if numberOfBookedSeats > 1 {
+            stringResult = "\(numberOfBookedSeats) seats booked out of \(numberOfSeats)"
+        }
+        
+        return stringResult
+    }
 }
