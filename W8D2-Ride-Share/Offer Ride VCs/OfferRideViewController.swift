@@ -108,7 +108,7 @@ class OfferRideViewController: UIViewController, UISearchBarDelegate, LocateOnTh
         if segue.identifier == "showNextSteps"
         {
 
-            let ride = Ride.init(startLocation: startPoint, endLocation: endPoint, tripStartTime: tripStartTime, estimatedArrivalTime: estimatedArrivalTime, tripDuration: tripDuration, distance: distance, userID: nil, rideID: nil, userInfo: nil, price: nil, numberOfSeats: nil, numberOfAvailableSeats: nil, tripStatus: nil)
+            let ride = Ride.init(startLocation: startPoint, endLocation: endPoint, tripStartTime: tripStartTime, estimatedArrivalTime: estimatedArrivalTime, tripDuration: tripDuration, distance: distance, userID: nil, rideID: nil, userInfo: nil, price: nil, numberOfSeats: nil, numberOfAvailableSeats: nil, tripStatus: nil, bookings: nil)
         
             let offerRideDetailViewController: OfferRideDetailsViewController = segue.destination as! OfferRideDetailsViewController
             

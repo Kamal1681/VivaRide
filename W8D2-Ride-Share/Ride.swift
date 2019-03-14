@@ -38,6 +38,7 @@ class Ride {
     var rideID: String?
     
     var userInfo: UserInfo?
+    var bookings: [Booking]?
     
     var distance: String = ""
     var numberOfSeats: Int? = 10
@@ -47,7 +48,7 @@ class Ride {
     var price: Float?
     
     
-    init(startLocation: CLLocationCoordinate2D, endLocation: CLLocationCoordinate2D, tripStartTime: Date, estimatedArrivalTime: Date, tripDuration: String, distance: String, userID: String?, rideID: String?, userInfo: UserInfo?, price:Float?, numberOfSeats: Int?, numberOfAvailableSeats: Int?, tripStatus: TripStatus?) {
+    init(startLocation: CLLocationCoordinate2D, endLocation: CLLocationCoordinate2D, tripStartTime: Date, estimatedArrivalTime: Date, tripDuration: String, distance: String, userID: String?, rideID: String?, userInfo: UserInfo?, price:Float?, numberOfSeats: Int?, numberOfAvailableSeats: Int?, tripStatus: TripStatus?, bookings: [Booking]?) {
         self.startLocation = startLocation
         self.endLocation = endLocation
         self.tripStartTime = tripStartTime
@@ -61,6 +62,7 @@ class Ride {
         self.numberOfSeats = numberOfSeats
         self.numberOfAvailableSeats = numberOfAvailableSeats
         self.tripStatus = tripStatus
+        self.bookings = bookings
  
         //self.stopOvers = stopOvers ?? []
 
