@@ -137,6 +137,10 @@ class OfferedRideDetailsViewController: UIViewController, UITableViewDelegate, U
     //MARK: - Ride cancelation
     @IBAction func cancelButtonPressed(_ sender: UIButton) {
         sender.pressed()
+        
+        if let ride = ride {
+            CancelOfferedRide.cancelOfferedRide(for: ride, viewController: self)
+        }
     }
     
     //MARK: - Navigation

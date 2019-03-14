@@ -62,6 +62,9 @@ class VRFirestoreQuery {
                     getRideDetails(from: document, completion: { rideResult in
                         if let rideResult = rideResult {
                             ridesArray.append(rideResult)
+                            if ridesArray.count == snapshot?.documents.count {
+                                completion(ridesArray)
+                            }
                         }
                         else
                         {
@@ -69,7 +72,7 @@ class VRFirestoreQuery {
                         }
                     })
                 }
-                completion(ridesArray)
+                
                 
                 //Get rides and drivers infromation from Firestore Rides and Users collections
 //                self.getRidesInfo() {self.getDriverInfo()}
@@ -103,7 +106,9 @@ class VRFirestoreQuery {
         
         let ride = Ride(startLocation: CLLocationCoordinate2D(latitude: startLocationGeoPoint.latitude, longitude: startLocationGeoPoint.longitude), endLocation: CLLocationCoordinate2D(latitude: endLocationGeoPoint.latitude, longitude: endLocationGeoPoint.longitude), tripStartTime: tripStartTime.dateValue(), estimatedArrivalTime: estimatedArrivalTime.dateValue(), tripDuration: tripDuration, distance: distance, userID: userID, rideID: rideID, userInfo: nil, price: price, numberOfSeats: numberOfSeats, numberOfAvailableSeats: numberOfAvailableSeats, tripStatus: tripStatus, bookings: nil)
      
-        completion(ride)
+        getDriverInfo(for: ride) {rideResult in
+            completion(rideResult)
+        }
     }
     
     static func createQueryRides(for driverID: String) -> Query {
@@ -176,32 +181,15 @@ class VRFirestoreQuery {
         completion(query)
     }
     
-    //MARK: - SetUp Firestore and Auth listener
-    static func setUpFirestore() {
-        // START setup for Firestore
-        settings = FirestoreSettings()
-        Firestore.firestore().settings = settings
-        db = Firestore.firestore()
-        // END setup for Firestore
-    }
-    
-    static func setUpAuthListener() {
-        // START auth_listener
-        handle = Auth.auth().addStateDidChangeListener { (auth, user) in
-            self.user = user
-        }
-        // END auth_listener
-    }
-    
     //MARK: - Passenger info
     
     static func getPasengerInfo(for bookingsArray: [Booking], completion:@escaping ([Booking]) -> Void) {
 
-        //Get driver infromation from Firestore user collection
+        //Get passenger infromation from Firestore user collection
         for index in 0..<bookingsArray.count {
             var passengerInfo: UserInfo?
             guard let passengerID = bookingsArray[index].passengerID else {
-                print("Error! Can not get userID from Rides collection")
+                print("Error! Can not get passengerID from Booking array")
                 return
             }
 
@@ -234,4 +222,59 @@ class VRFirestoreQuery {
         }
 
     }
+    
+    //MARK: - Driver info
+    
+    static func getDriverInfo(for ride: Ride, completion:@escaping (Ride) -> Void) {
+        
+        //Get driver infromation from Firestore user collection
+            var driverInfo: UserInfo?
+            guard let driverID = ride.userID else {
+                print("Error! Can not get driverID from Rides collection")
+                return
+            }
+            
+            let driver = db.collection("users").whereField("uid", isEqualTo: driverID)
+            
+            driver.getDocuments { snapshot, error in
+                if let error = error {
+                    print("Error getting documents: \(error)")
+                } else {
+                    guard
+                        let driverUID = snapshot!.documents.first?.get("uid") as? String,
+                        let name = snapshot!.documents.first?.get("name") as? String,
+                        let phoneNumber = snapshot!.documents.first?.get("phoneNumber") as? String,
+                        let carModel = snapshot!.documents.first?.get("carModel") as? String,
+                        let carColor = snapshot!.documents.first?.get("carColor") as? String,
+                        let pushNotificationToken = snapshot!.documents.first?.get("pushNotificationToken") as? String
+                        else {
+                            print("Error! Can not get information about the driver from Firestore document in Find Ride VC.")
+                            return
+                    }
+                    
+                    driverInfo = UserInfo(userID: driverUID, name: name, phoneNumber: phoneNumber, carModel: carModel, carColor: carColor, photo: nil, pushNotificationToken: pushNotificationToken)
+                    ride.userInfo = driverInfo
+                    
+                }
+                completion(ride)
+            }
+    }
+
+    //MARK: - SetUp Firestore and Auth listener
+    static func setUpFirestore() {
+        // START setup for Firestore
+        settings = FirestoreSettings()
+        Firestore.firestore().settings = settings
+        db = Firestore.firestore()
+        // END setup for Firestore
+    }
+    
+    static func setUpAuthListener() {
+        // START auth_listener
+        handle = Auth.auth().addStateDidChangeListener { (auth, user) in
+            self.user = user
+        }
+        // END auth_listener
+    }
+
 }

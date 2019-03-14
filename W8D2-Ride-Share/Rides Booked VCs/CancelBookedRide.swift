@@ -60,7 +60,7 @@ class CancelBookedRide {
         }
         else {
             print("Error! User do not login")
-            errorAlert(errorMessage: "Your booking has not canceled. Please try again or contact Viva Ride Team.", viewController: viewController)
+            errorAlert(errorMessage: "Your booking has not been canceled. Please try again or contact Viva Ride Team.", viewController: viewController)
         }
     }
 
