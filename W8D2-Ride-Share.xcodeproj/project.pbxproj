@@ -14,6 +14,7 @@
 		15C1DE232235C5D500D7F586 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 15C1DE222235C5D500D7F586 /* GoogleService-Info.plist */; };
 		67C677BD2B3304C9352D604E /* Pods_W8D2_Ride_Share.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 440F169039B18D25F1EAF42E /* Pods_W8D2_Ride_Share.framework */; };
 		E90B3C6122399AC60032113E /* VRFirestoreQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90B3C6022399AC60032113E /* VRFirestoreQuery.swift */; };
+		E90B3C63223A32280032113E /* CancelOfferedRide.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90B3C62223A32280032113E /* CancelOfferedRide.swift */; };
 		E90D3D0B22285D280083BAB8 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90D3D0A22285D280083BAB8 /* LoginViewController.swift */; };
 		E90D3D0D22285EFB0083BAB8 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90D3D0C22285EFB0083BAB8 /* MenuViewController.swift */; };
 		E90D3D0F22285F3B0083BAB8 /* FindRideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90D3D0E22285F3B0083BAB8 /* FindRideViewController.swift */; };
@@ -60,6 +61,7 @@
 		9338C7A9C089044CE4207DD5 /* Pods-W8D2-Ride-Share.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-W8D2-Ride-Share.debug.xcconfig"; path = "Target Support Files/Pods-W8D2-Ride-Share/Pods-W8D2-Ride-Share.debug.xcconfig"; sourceTree = "<group>"; };
 		E9088D512235CF5C004ECF9A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E90B3C6022399AC60032113E /* VRFirestoreQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VRFirestoreQuery.swift; sourceTree = "<group>"; };
+		E90B3C62223A32280032113E /* CancelOfferedRide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelOfferedRide.swift; sourceTree = "<group>"; };
 		E90D3D0A22285D280083BAB8 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		E90D3D0C22285EFB0083BAB8 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		E90D3D0E22285F3B0083BAB8 /* FindRideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindRideViewController.swift; sourceTree = "<group>"; };
@@ -177,6 +179,7 @@
 				E90D3D30222865480083BAB8 /* RidesOfferedTableViewCell.swift */,
 				E90D3D24222861340083BAB8 /* OfferedRideDetailsViewController.swift */,
 				E90D3D322228656B0083BAB8 /* PassengersListTableViewCell.swift */,
+				E90B3C62223A32280032113E /* CancelOfferedRide.swift */,
 			);
 			path = "Rides Offered VCs";
 			sourceTree = "<group>";
@@ -423,6 +426,7 @@
 				E9A7390F2238793600EE1C4A /* CancelBookedRide.swift in Sources */,
 				E90D3D23222861080083BAB8 /* RidesOfferedViewController.swift in Sources */,
 				E90D3D0B22285D280083BAB8 /* LoginViewController.swift in Sources */,
+				E90B3C63223A32280032113E /* CancelOfferedRide.swift in Sources */,
 				E90D3D21222860ED0083BAB8 /* BookedRideDetailsViewController.swift in Sources */,
 				E9A739172238B32500EE1C4A /* Alert.swift in Sources */,
 				E90D3D31222865480083BAB8 /* RidesOfferedTableViewCell.swift in Sources */,

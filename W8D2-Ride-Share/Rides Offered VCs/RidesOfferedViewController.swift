@@ -47,10 +47,10 @@ class RidesOfferedViewController: UIViewController, UITableViewDelegate, UITable
             //User as a driver will see all rides that he was offered
             if let user = user {
                 //Make arrays empty when view appear in case user came from ride details VC
-                self.ridesArray = []
+//                self.ridesArray = []
                 
                 //Get rides infromation from Firestore
-                VRFirestoreQuery.getRides(for: (user.uid), completion: {rideArrayResult in
+                VRFirestoreQuery.getRidesWithPassengerInfo(for: user.uid, completion: {rideArrayResult in
                     self.ridesArray = rideArrayResult
                     self.ridesOfferedTableView.reloadData()
                 })
@@ -95,7 +95,12 @@ class RidesOfferedViewController: UIViewController, UITableViewDelegate, UITable
         
         if segue.identifier == "goToOfferedRideDetailsVC", let destinationVC = segue.destination as? OfferedRideDetailsViewController {
             if let indexPath = ridesOfferedTableView.indexPathForSelectedRow {
-                destinationVC.ride = ridesArray[indexPath.row]
+                if ridesArray != nil {
+                    destinationVC.ride = ridesArray[indexPath.row]
+                }
+                else {
+                    return
+                }
             }
             
         }

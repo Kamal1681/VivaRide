@@ -137,9 +137,35 @@ class OfferedRideDetailsViewController: UIViewController, UITableViewDelegate, U
     //MARK: - Ride cancelation
     @IBAction func cancelButtonPressed(_ sender: UIButton) {
         sender.pressed()
+        
+        if let ride = ride {
+            CancelOfferedRide.cancelOfferedRide(for: ride, viewController: self)
+        }
     }
     
     //MARK: - Navigation
+    
+    // method to run when table view cell is tapped
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let phoneNumber = ride?.bookings?[indexPath.row].passengerInfo?.phoneNumber {
+            Alert.makePhoneCall(to: phoneNumber, viewController: self)
+        }
+        else {
+            Alert.error(errorMessage: "Sorry, but you can not call to the passenger. Please contact Viva Ride Support Team.", viewController: self)
+        }
+    }
+    
+    // This function is called before the segue
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//
+//        if segue.identifier == "goToOfferedRideDetailsVC", let destinationVC = segue.destination as? OfferedRideDetailsViewController {
+//            if let indexPath = ridesOfferedTableView.indexPathForSelectedRow {
+//                destinationVC.ride = ridesArray[indexPath.row]
+//            }
+//
+//        }
+//    }
+    
     @IBAction func backButton(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
     }

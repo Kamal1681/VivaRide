@@ -25,8 +25,9 @@ class Booking {
     var status: String?
     var rideInfo: Ride?
     var driverInfo: UserInfo?
+    var passengerInfo: UserInfo?
     
-    init(bookingID: String?, passengerID: String?, rideID: String?, rideInfo: Ride?, numberOfBookingSeats: Int?, status: String?, driverInfo: UserInfo?) {
+    init(bookingID: String?, passengerID: String?, rideID: String?, rideInfo: Ride?, numberOfBookingSeats: Int?, status: String?, driverInfo: UserInfo?, passengerInfo: UserInfo?) {
         self.bookingID = bookingID
         self.passengerID = passengerID
         self.rideID = rideID
@@ -34,5 +35,6 @@ class Booking {
         self.numberOfBookingSeats = numberOfBookingSeats
         self.status = status
         self.driverInfo = driverInfo
+        self.passengerInfo = passengerInfo
     }
 }
