@@ -229,7 +229,7 @@ class RideDetailsViewController: UIViewController {
                 Alert.error(errorMessage: "Sorry, but there are not available seats for this ride! Please, look for another ride.", viewController: self)
             }
             else if numberOfBookingSeats > numberOfAvailableSeats {
-                Alert.error(errorMessage: "Number of seats that you are trying to book is bigger than number of available seats. Please, reduce number of booking seats or find another ride.", viewController: self)
+                Alert.error(errorMessage: "Number of seats that you are trying to book is greater than number of available seats. Please, reduce number of booking seats or find another ride.", viewController: self)
             }
         }))
         

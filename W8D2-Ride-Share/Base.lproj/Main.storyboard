@@ -70,7 +70,7 @@
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iaf-4h-Itc">
                                                 <rect key="frame" x="172.5" y="0.0" width="162.5" height="30"/>
-                                                <state key="normal" title="Fogot your password?"/>
+                                                <state key="normal" title="Forgot your password?"/>
                                                 <connections>
                                                     <action selector="fogotPassButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="kFd-96-zp0"/>
                                                 </connections>
