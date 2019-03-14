@@ -7,9 +7,14 @@
 //
 
 import UIKit
+import Firebase
 import GoogleMaps
 
 class OfferedRideDetailsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
+    //Setting Firestore
+    var db: Firestore!
+    var settings: FirestoreSettings!
     
     //Passing data from previous VC
     var ride: Ride?
@@ -34,6 +39,16 @@ class OfferedRideDetailsViewController: UIViewController, UITableViewDelegate, U
         
         passengersTableVIew.delegate = self
         passengersTableVIew.dataSource = self
+        
+        // START setup for Firestore
+        settings = FirestoreSettings()
+        Firestore.firestore().settings = settings
+        db = Firestore.firestore()
+        // END setup for Firestore
+        
+        if let bookings = ride?.bookings {
+            getDriverInfo(bookings: bookings)
+        }
         
         //Load information to the View Controller
         if let ride = ride {
@@ -82,7 +97,17 @@ class OfferedRideDetailsViewController: UIViewController, UITableViewDelegate, U
             numberOfBookedSeatsLabel.text = StringFormat.numberOfBookedSeats(from: numberOfSeats, numberOfAvailableSeats: numberOfAvailableSeats)
         }
         else {
-            print("Error! Unable to get estimatedArrivalTimeLabel")
+            print("Error! Unable to get number of seats")
+        }
+        
+        if
+            let price = ride.price
+        {
+            let priceFormated = String(format:"%.2f", price)
+            priceLabel.text = "CAD \(priceFormated)"
+        }
+        else {
+            print("Error! Unable to get price")
         }
         
         if let rideStatus = TripStatus(rawValue: ride.tripStatus!.rawValue) {
@@ -171,6 +196,52 @@ class OfferedRideDetailsViewController: UIViewController, UITableViewDelegate, U
     }
     
 
+    //MARK: - Add user info for ride
+    
+    func getDriverInfo(bookings: [Booking]?) {
+        
+        guard let bookings = bookings else {
+            return
+        }
+        
+        //Get driver infromation from Firestore user collection
+        for index in 0..<bookings.count {
+            var passengerInfo: UserInfo?
+            guard let passengerID = bookings[index].passengerID else {
+                print("Error! Can not get userID from Rides collection")
+                return
+            }
+            
+            let passenger = self.db.collection("users").whereField("uid", isEqualTo: passengerID)
+            
+            passenger.getDocuments { snapshot, error in
+                if let error = error {
+                    print("Error getting documents: \(error)")
+                } else {
+                    guard
+                        let userUID = snapshot!.documents.first?.get("uid") as? String,
+                        let name = snapshot!.documents.first?.get("name") as? String,
+                        let phoneNumber = snapshot!.documents.first?.get("phoneNumber") as? String,
+                        let carModel = snapshot!.documents.first?.get("carModel") as? String,
+                        let carColor = snapshot!.documents.first?.get("carColor") as? String,
+                        let pushNotificationToken = snapshot!.documents.first?.get("pushNotificationToken") as? String
+                        else {
+                            print("Error! Can not get information about the driver from Firestore document in Find Ride VC.")
+                            return
+                    }
+                    
+                    passengerInfo = UserInfo(userID: userUID, name: name, phoneNumber: phoneNumber, carModel: carModel, carColor: carColor, photo: nil, pushNotificationToken: pushNotificationToken)
+                    
+                    if self.ride?.bookings?[index] != nil {
+                        self.ride?.bookings?[index].passengerInfo = passengerInfo
+                    }
+                    
+                }
+                self.passengersTableVIew.reloadData()
+            }
+        }
+        
+    }
     
     /*
     // MARK: - Navigation
