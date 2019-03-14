@@ -27,12 +27,28 @@ class PassengersListTableViewCell: UITableViewCell {
     
     func configureCell(booking: Booking) {
         
-        if let numberOfBookedSeats = booking.numberOfBookingSeats {
-            numberOfBookedSeatsLabel.text = "\(numberOfBookedSeats)"
+        if let passengerName = booking.passengerInfo?.name {
+            passengerNameLabel.text = passengerName
         }
         else {
             print("Error! Unable to get number of booked seats")
         }
+        
+        if let numberOfBookedSeats = booking.numberOfBookingSeats {
+            if numberOfBookedSeats == 1 {
+                numberOfBookedSeatsLabel.text = "\(numberOfBookedSeats) seat"
+            }
+            else if numberOfBookedSeats > 1 {
+                numberOfBookedSeatsLabel.text = "\(numberOfBookedSeats) seats"
+            }
+            else {
+                numberOfBookedSeatsLabel.text = "no seats"
+            }
+        }
+        else {
+            print("Error! Unable to get number of booked seats")
+        }
+        
     }
 
 }

@@ -88,7 +88,7 @@ class RidesBookedViewController: UIViewController, UITableViewDelegate, UITableV
                                 return
                         }
                         
-                        let booking = Booking(bookingID: bookingID, passengerID: passengerID, rideID: rideID, rideInfo: nil, numberOfBookingSeats: numberOfBookingSeats, status: status, driverInfo: nil)
+                        let booking = Booking(bookingID: bookingID, passengerID: passengerID, rideID: rideID, rideInfo: nil, numberOfBookingSeats: numberOfBookingSeats, status: status, driverInfo: nil, passengerInfo: nil)
                         
                         self.bookingsArray.append(booking)
                     }

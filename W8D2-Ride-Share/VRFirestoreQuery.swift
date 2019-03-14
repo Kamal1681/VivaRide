@@ -123,10 +123,17 @@ class VRFirestoreQuery {
                 if let error = error {
                     print("Error getting documents: \(error)")
                 } else {
+                    var index = -1
                     for document in snapshot!.documents {
+                        index += 1
                         getBookingDetails(from: document, completion: {bookingResult in
                             if let booking = bookingResult {
                                 bookingArray.append(booking)
+                                if index + 1 == snapshot?.documents.count {
+                                    getPasengerInfo(for: bookingArray, completion: { bookingArrayResult in
+                                        completion(bookingArrayResult)
+                                    })
+                                }
                             }
                             else
                             {
@@ -134,7 +141,6 @@ class VRFirestoreQuery {
                             }
                         })
                     }
-                    completion(bookingArray)
                     //Get rides and drivers infromation from Firestore Rides and Users collections
                     //                self.getRidesInfo() {self.getDriverInfo()}
                     
@@ -157,7 +163,7 @@ class VRFirestoreQuery {
                 return
         }
         
-        let booking = Booking(bookingID: bookingID, passengerID: passengerID, rideID: rideID, rideInfo: nil, numberOfBookingSeats: numberOfBookingSeats, status: status, driverInfo: nil)
+        let booking = Booking(bookingID: bookingID, passengerID: passengerID, rideID: rideID, rideInfo: nil, numberOfBookingSeats: numberOfBookingSeats, status: status, driverInfo: nil, passengerInfo: nil)
         
         completion(booking)
     }
@@ -187,5 +193,45 @@ class VRFirestoreQuery {
         // END auth_listener
     }
     
+    //MARK: - Passenger info
     
+    static func getPasengerInfo(for bookingsArray: [Booking], completion:@escaping ([Booking]) -> Void) {
+
+        //Get driver infromation from Firestore user collection
+        for index in 0..<bookingsArray.count {
+            var passengerInfo: UserInfo?
+            guard let passengerID = bookingsArray[index].passengerID else {
+                print("Error! Can not get userID from Rides collection")
+                return
+            }
+
+            let passenger = db.collection("users").whereField("uid", isEqualTo: passengerID)
+
+            passenger.getDocuments { snapshot, error in
+                if let error = error {
+                    print("Error getting documents: \(error)")
+                } else {
+                    guard
+                        let passengerUID = snapshot!.documents.first?.get("uid") as? String,
+                        let name = snapshot!.documents.first?.get("name") as? String,
+                        let phoneNumber = snapshot!.documents.first?.get("phoneNumber") as? String,
+                        let carModel = snapshot!.documents.first?.get("carModel") as? String,
+                        let carColor = snapshot!.documents.first?.get("carColor") as? String,
+                        let pushNotificationToken = snapshot!.documents.first?.get("pushNotificationToken") as? String
+                        else {
+                            print("Error! Can not get information about the driver from Firestore document in Find Ride VC.")
+                            return
+                    }
+
+                    passengerInfo = UserInfo(userID: passengerUID, name: name, phoneNumber: phoneNumber, carModel: carModel, carColor: carColor, photo: nil, pushNotificationToken: pushNotificationToken)
+
+                    bookingsArray[index].passengerInfo = passengerInfo
+                    if index + 1 == bookingsArray.count {
+                        completion(bookingsArray)
+                    }
+                }
+            }
+        }
+
+    }
 }
