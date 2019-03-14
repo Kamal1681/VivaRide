@@ -812,16 +812,16 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="CaS-pR-t3b" userLabel="Passenger Info Stack View">
-                                                    <rect key="frame" x="0.0" y="9.5" width="335" height="20.5"/>
+                                                    <rect key="frame" x="0.0" y="-5.5" width="335" height="50.5"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Passenger name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xV9-RU-Jpn">
-                                                            <rect key="frame" x="0.0" y="0.0" width="255" height="20.5"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xV9-RU-Jpn">
+                                                            <rect key="frame" x="0.0" y="0.0" width="255" height="50.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2 seats" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aVD-bt-wuh">
-                                                            <rect key="frame" x="265" y="0.0" width="70" height="20.5"/>
+                                                            <rect key="frame" x="265" y="0.0" width="70" height="50.5"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="70" id="AHN-tS-i58"/>
                                                             </constraints>
