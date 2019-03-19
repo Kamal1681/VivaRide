@@ -22,10 +22,6 @@ class TestViewController: UIViewController {
             self.ridesArray = ridesArrayResult
             for (index, ride) in self.ridesArray.enumerated() {
                 VRFirestoreQuery.getQBookings(for: ride, completion: { (rideResult) in
-//                    self.ridesArray[index].bookings = []
-//                    for booking in bookingsArrayResult {
-//                        self.ridesArray[index].bookings?.append(booking)
-//                    }
                     self.ridesArray[index] = rideResult
                     if let bookings = self.ridesArray[index].bookings {
                         for booking in bookings {
