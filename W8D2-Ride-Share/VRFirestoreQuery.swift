@@ -20,6 +20,11 @@ class VRFirestoreQuery {
     static var user: FirebaseAuth.User?
     static var handle: AuthStateDidChangeListenerHandle? = nil
     
+    //Class properties
+    static var ridesQArray = [Ride]()
+    static var bookingsQArray = [Booking]()
+    static var passengersQArray = [UserInfo]()
+    
     //MARK: - Rides
     static func getRidesWithPassengerInfo(for driverID: String, completion: @escaping ([Ride]) -> Void) {
         setUpFirestore()
@@ -321,4 +326,118 @@ class VRFirestoreQuery {
         // END auth_listener
     }
 
+
+
+    //MARK: - New query
+    //Query get all rides for the driver
+    
+    static func getQRides(for driverID: String, sortedByDate: Bool, completion: @escaping ([Ride]) -> Void ) {
+        
+        setUpFirestore()
+        
+        //Clear array
+        ridesQArray = []
+        
+        let docRef = db.collection("rides")
+        let query = docRef
+            .whereField("userID", isEqualTo: driverID)
+//            .order(by: "tripStartTime")
+        
+        query.getDocuments { snapshot, error in
+            if let error = error {
+                print("Error getting documents: \(error)")
+            } else {
+                for (index, document) in snapshot!.documents.enumerated() {
+//                    print(index)
+//                    print("\(document.documentID) => \(document.data())")
+                    
+                    guard
+                        let startLocationGeoPoint = document.get("startLocation") as? GeoPoint,//
+                        let endLocationGeoPoint = document.get("endLocation") as? GeoPoint,//
+                        let price = document.get("price") as? Float,//
+                        let tripDuration = document.get("tripDuration") as? String,//
+                        let distance = document.get("distance") as? String,//
+                        let numberOfSeats = document.get("numberOfSeats") as? Int,//
+                        let numberOfAvailableSeats = document.get("numberOfAvailableSeats") as? Int,//
+                        let tripStatusRawValue = document.get("status") as? String,//
+                        let tripStatus = TripStatus(rawValue: tripStatusRawValue),
+                        let tripStartTime = document.get("tripStartTime") as? Timestamp,//
+                        let estimatedArrivalTime = document.get("estimatedArrivalTime") as? Timestamp,//
+                        let driverID = document.get("userID") as? String,//
+                        let rideID = document.get("rideID") as? String//
+                        else {
+                            print("Error! Can not get data from Rides document.")
+                            return
+                    }
+                    
+                    let ride = Ride(startLocation: CLLocationCoordinate2D(latitude: startLocationGeoPoint.latitude, longitude: startLocationGeoPoint.longitude), endLocation: CLLocationCoordinate2D(latitude: endLocationGeoPoint.latitude, longitude: endLocationGeoPoint.longitude), tripStartTime: tripStartTime.dateValue(), estimatedArrivalTime: estimatedArrivalTime.dateValue(), tripDuration: tripDuration, distance: distance, userID: driverID, rideID: rideID, userInfo: nil, price: price, numberOfSeats: numberOfSeats, numberOfAvailableSeats: numberOfAvailableSeats, tripStatus: tripStatus, bookings: [Booking]())
+                    
+                    ridesQArray.append(ride)
+                    
+                    if (index + 1) == snapshot!.documents.count {
+                        if sortedByDate && index > 0 {
+                            ridesQArray = ridesQArray.sorted(by: {
+                                if $0.tripStartTime != nil && $1.tripStartTime != nil {
+                                    print($0.tripStartTime!.compare($1.tripStartTime!) == .orderedDescending)
+                                    return $0.tripStartTime!.compare($1.tripStartTime!) == .orderedDescending
+                                }
+                                else {
+                                    return false
+                                }
+                            })
+                            completion(ridesQArray)
+                        }
+                        else {
+                            completion(ridesQArray)
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    static func getQBookings(for ride: Ride, completion: @escaping (Ride) -> Void) {
+        
+        setUpFirestore()
+        
+        ride.bookings = [Booking]()
+        
+        if let rideID = ride.rideID {
+            
+            let docRef = db.collection("bookings")
+            let query = docRef
+                .whereField("rideID", isEqualTo: rideID)
+            
+            query.getDocuments { snapshot, error in
+                if let error = error {
+                    print("Error getting documents: \(error)")
+                } else {
+                    for (index, document) in snapshot!.documents.enumerated() {
+                        
+                        guard
+                            let bookingID = document.get("bookingID") as? String,
+                            let passengerID = document.get("passengerID") as? String,
+                            let rideID = document.get("rideID") as? String,
+                            let numberOfBookingSeats = document.get("numberOfBookingSeats") as? Int,
+                            let status = document.get("status") as? String
+                            else {
+                                print("Error! Can not get data from Bookings collection.")
+                                return
+                        }
+                        
+                        let booking = Booking(bookingID: bookingID, passengerID: passengerID, rideID: rideID, rideInfo: nil, numberOfBookingSeats: numberOfBookingSeats, status: status, driverInfo: nil, passengerInfo: nil)
+                        
+                        ride.bookings?.append(booking)
+                        
+                        if (index + 1) == snapshot!.documents.count {
+                            completion(ride)
+                        }
+                    }
+                }
+            }
+        }
+        else {
+            completion(ride)
+        }
+    }
 }
